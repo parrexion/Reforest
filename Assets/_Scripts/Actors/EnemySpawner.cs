@@ -12,7 +12,6 @@ public class EnemySpawner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame
@@ -30,6 +29,7 @@ public class EnemySpawner : MonoBehaviour {
 		FireActor fireActor = fire.GetComponent<FireActor>();
 		fireActor.currentCoordinate = pos;
 		fireActor.travelDirection = GetStartingDirection(pos);
+		
 	}
 
 	Direction GetStartingDirection(Vector2 coordinate){
