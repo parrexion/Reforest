@@ -58,9 +58,6 @@ public abstract class Actor : MonoBehaviour {
  		
  	protected Vector2 GetNextPositionFromDirection(Direction nextDir) {
 		switch (nextDirection) {
-			case Direction.NONE:
-				//Do nothing
-				return;
 			case Direction.NORTH:
 				return new Vector2(currentCoordinate.x, currentCoordinate.y+1);
 			case Direction.WEST:

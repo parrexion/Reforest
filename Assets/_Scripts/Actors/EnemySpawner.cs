@@ -41,5 +41,7 @@ public class EnemySpawner : MonoBehaviour {
 			return Direction.WEST;
 		if (coordinate.y == mapRepresentation.size.y-1)
 			return Direction.SOUTH;
+
+		return Direction.NONE;
 	}
 }
