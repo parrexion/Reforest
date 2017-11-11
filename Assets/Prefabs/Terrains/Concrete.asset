@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Name: Concrete
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: d958e2c6b075f5b499a17311177164a3, type: 2}
-  isWalkable: 0
+  isWalkable: 1
+  canHasTrees: 0

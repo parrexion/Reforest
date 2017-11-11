@@ -222,11 +222,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1344524771}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5392f6cac5be74a46902c07307860f1e, type: 3}
+  m_Script: {fileID: 11500000, guid: b4d4528159100ae4eae2127ea05c594d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canMove: 1
   movementCooldown: 2
+  spawnPosition: {x: 0, y: 0}
+  spawnHeight: 5
 --- !u!54 &1344524773
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -345,6 +346,7 @@ MonoBehaviour:
   map: []
   size: {x: 4, y: 4}
   tileSize: {x: 10, y: 10}
+  spawnHeight: 3
 --- !u!114 &1671738632
 MonoBehaviour:
   m_ObjectHideFlags: 0
