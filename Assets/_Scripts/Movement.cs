@@ -27,7 +27,7 @@ public class Movement : MonoBehaviour {
 
 	void MoveActor() {
 		if (Input.GetAxis("Horizontal") > 0f) { //Höger
-			if(mr.IsWalkable())
+			// if(mr.IsWalkable())
 			Debug.Log("H Över 0");
 		} else if(Input.GetAxis("Horizontal") <  0f) { //Vänster
 			Debug.Log("H Under 0");
