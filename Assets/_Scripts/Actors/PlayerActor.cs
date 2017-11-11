@@ -29,7 +29,7 @@ public class PlayerActor : Actor {
 		if (currentCooldown > 0)
 			return;
 
-		if(controllerLeft.upButtonDown || controllerRight.upButtonDown || cameraRig == null) {
+		if(controllerLeft.upButtonDown || controllerRight.upButtonDown || cameraRig != null) {
 
 			float r = cameraRig.transform.eulerAngles.y;
 			if(r < 45 || r > 315) {
