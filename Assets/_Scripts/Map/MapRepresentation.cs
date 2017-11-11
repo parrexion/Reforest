@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapRepesentation : MonoBehaviour {
+public class MapRepresentation : MonoBehaviour {
 
 	[SerializeField]
 	private List<MapTile> map;
@@ -10,6 +10,7 @@ public class MapRepesentation : MonoBehaviour {
 
 	public Vector2 size;
 	public Vector2 tileSize;
+
 
 
 	void Start() {

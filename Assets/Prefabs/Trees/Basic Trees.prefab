@@ -734,5 +734,5 @@ MonoBehaviour:
   hp: 0
   maxGrowthLevel: 5
   growthTime: 3
-  currentGrowthLevel: 0
+  currentGrowthLevel: 4
   trees: []

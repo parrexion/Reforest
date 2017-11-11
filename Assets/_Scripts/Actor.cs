@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour {
 
-	private MapRepesentation mr;
+	private MapRepresentation mr;
 	public bool canMove = true;
 	public float movementCooldown = 2.0f;
 	private float cooldown;
@@ -13,7 +13,7 @@ public class Movement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		mr = GameObject.Find("MapGenerator").GetComponent<MapRepesentation>();
+		mr = GameObject.Find("MapGenerator").GetComponent<MapRepresentation>();
 		transform.position = mr.CalculatePositionFromCoordinate(new Vector2(0,0));
 		cooldown = 0f;
 	}
