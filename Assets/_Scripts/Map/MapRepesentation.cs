@@ -51,7 +51,17 @@ public class MapRepesentation : MonoBehaviour {
 	}
 
 	public bool IsWalkable(Vector2 position){
-		return true;
+		//Out of bounds
+		if (position.x < 0 || position.y < 0 || position.x >= size.x || position.y >= size.y)
+			return false;
+
+		MapTile tile = getTile(position);
+		return tile.terrain.isWalkable;
+	}
+
+	public bool HasTrees(Vector2 position) {
+		MapTile tile = getTile(position);
+		return (tile.tree.currentGrowthLevel > 0);
 	}
 
 	public Vector3 CalculatePositionFromCoordinate(Vector2 position){

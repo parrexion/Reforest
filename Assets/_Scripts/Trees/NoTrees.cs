@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class NoTrees : BaseTree {
 
-
-    protected override void Grow() {
-        
-    }
+    protected override void Grow() {}
+    protected override void DeGrow() {}
+    
 }

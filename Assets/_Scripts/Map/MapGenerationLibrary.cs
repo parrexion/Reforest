@@ -4,6 +4,19 @@ using UnityEngine;
 
 public class MapGenerationLibrary : MonoBehaviour {
 
+#region Singleton
+public static MapGenerationLibrary instance;
+
+	void Awake() {
+		if (instance != null){
+			Destroy(gameObject);
+		}
+		else {
+			instance = this;
+		}
+	}
+#endregion
+
 	public List<TileTerrain> terrainTypes;
 	public List<GameObject> treeTypes;
 	public GameObject tilePrefab;

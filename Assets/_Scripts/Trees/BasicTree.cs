@@ -17,4 +17,12 @@ public class BasicTree : BaseTree {
         transform.localScale = new Vector3(1,(1+currentGrowthLevel),1);
     }
 
+    protected override void DeGrow() {
+        transform.localPosition = new Vector3(0,(1+currentGrowthLevel)*0.25f,0);
+        transform.localScale = new Vector3(1,(currentGrowthLevel),1);
+
+        if (currentGrowthLevel <= 0) {
+            ChangeTreeType(0);
+        }
+    }
 }
