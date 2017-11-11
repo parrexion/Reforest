@@ -4,6 +4,19 @@ using UnityEngine;
 
 public class Stats : MonoBehaviour {
 
+#region Singleton
+
+    public static Stats instance;
+
+    protected void Awake() {
+        if (instance != null) {
+            Destroy(gameObject);
+        }
+        else {
+            instance = this;
+        }
+    }
+    #endregion
 
 
 	float[] resources;
@@ -22,6 +35,7 @@ public class Stats : MonoBehaviour {
 	float resource0 = 0;
 	float resource1 = 0; 
 	// Use this for initialization
+	
 	void Start () 
 	{
 		resources = new float[] { resource0, resource1 };
