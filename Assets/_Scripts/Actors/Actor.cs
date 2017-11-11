@@ -18,13 +18,14 @@ public abstract class Actor : MonoBehaviour {
 
 	protected virtual void Initialize() {
 		mr = GameObject.Find("MapGenerator").GetComponent<MapRepresentation>();
-		currentCoordinate = Vector2.zero;
 		transform.position = mr.CalculatePositionFromCoordinate(currentCoordinate);
+		if (isEnemy)
+			currentCooldown = movementCooldown;
 	}
 	
 	void Update() {
 		currentCooldown -= Time.deltaTime;		
- 		if (currentCooldown > 0) {		
+ 		if (currentCooldown > 0) {
  			return;		
  		}
 		GetInput();
@@ -41,7 +42,7 @@ public abstract class Actor : MonoBehaviour {
 
 	void MoveActor() {
 		if (nextDirection == Direction.NONE)		
- 			return;		
+ 			return;
  		
  		Vector2 nextPosition = GetNextPositionFromDirection(nextDirection);		
  		if (isEnemy && mr.HasTrees(nextPosition)){		

@@ -111,12 +111,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afe82145012a9854f8bb050f10298823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEnemy: 0
+  isEnemy: 1
   currentCoordinate: {x: 0, y: 0}
   movementCooldown: 2
-  currentCooldown: 0
-  travelDirection: 0
-  timeDelay: 0
+  travelDirection: 1
 --- !u!136 &136142178175716126
 CapsuleCollider:
   m_ObjectHideFlags: 1
