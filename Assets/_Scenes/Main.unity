@@ -245,7 +245,7 @@ MonoBehaviour:
   treeTypes:
   - {fileID: 1379145645097458, guid: 0655a9594e8e9e54abde36df692a2d6b, type: 2}
   - {fileID: 1836432282406354, guid: 9aaf3db947d628d4c8be5314136ddcd1, type: 2}
-  tilePrefab: {fileID: 1668950728188870, guid: 36bb973097e7b0a4cb8f3a7d1a1645b2, type: 2}
+  tilePrefab: {fileID: 1586296878241990, guid: 8ca126a6a662b7944b2710672bca1c81, type: 2}
 --- !u!4 &1671738633
 Transform:
   m_ObjectHideFlags: 0
