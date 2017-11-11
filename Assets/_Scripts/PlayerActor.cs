@@ -2,88 +2,51 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerActor : MonoBehaviour {
+public class PlayerActor : Actor {
 
-	private MapRepresentation mr;
-	public bool canMove = true;
 	public float movementCooldown = 2.0f;
-	private float cooldown;
-	private bool hasJustMoved = false;
-	// private Vector3 tempPos = new Vector3(0,0,0);
+	private float currentCooldown;
+	public Vector2 spawnPosition = new Vector2(0,0);
+	public int spawnHeight = 5;
 
 	// Use this for initialization
-	void Start () {
-		mr = GameObject.Find("MapGenerator").GetComponent<MapRepresentation>();
-		transform.position = mr.CalculatePositionFromCoordinate(new Vector2(0,0));
-		cooldown = 0f;
-	}
-	
-	void Update()
-	{
-		Timer();
-		//MoveActor();
+	protected override void Initialize() {
+		base.Initialize();
+		mr.setSpawnHeight(spawnHeight);
 	}
 
-	void FixedUpdate () {
-		
-		//UpdatePos(tempPos);
-		MoveActor();
+    protected override void GetInput() {
 
-		if(Input.GetKey(KeyCode.Space)) {
-			//	
+		currentCooldown -= Time.deltaTime;
+		if (currentCooldown > 0)
+			return;
+
+		Vector2 nextPosition = currentCoordinate;
+
+		if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)){
+			nextPosition = new Vector2(currentCoordinate.x-1, currentCoordinate.y);
+			nextDirection = Direction.WEST;
 		}
-	}
-
-	void UpdatePos(Vector3 pos) {
-		if(pos != new Vector3(0,0,0)) {
-			transform.position = pos;
+		else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)){
+			nextPosition = new Vector2(currentCoordinate.x+1, currentCoordinate.y);
+			nextDirection = Direction.EAST;
 		}
-	}
-
-	void MoveActor() {
-		
-		if(canMove) {	
-			if(Input.GetKey(KeyCode.RightArrow)) {
-				transform.position += Vector3.right * 10;
-				canMove = false;
-				hasJustMoved = true;
-			} else if(Input.GetKey(KeyCode.LeftArrow)) {
-				transform.position += Vector3.left * 10;
-				canMove = false;
-				hasJustMoved = true;
-			} else if(Input.GetKey(KeyCode.UpArrow)) {
-				transform.position += Vector3.forward * 10;
-				canMove = false;
-				hasJustMoved = true;
-			} else if(Input.GetKey(KeyCode.DownArrow)) {
-				transform.position += Vector3.back * 10;
-				canMove = false;
-				hasJustMoved = true;
-			}
-			
+		else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)){
+			nextPosition = new Vector2(currentCoordinate.x, currentCoordinate.y+1);
+			nextDirection = Direction.NORTH;
 		}
-	}
+		else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)){
+			nextPosition = new Vector2(currentCoordinate.x, currentCoordinate.y-1);
+			nextDirection = Direction.SOUTH;
+		}
 
-	Vector2 CurPos() {
-		return mr.CalculatePositionFromCoordinate(transform.position);
-	}
-	Vector2 MoveToPos(Vector2 pos) {
-		return transform.position = mr.CalculatePositionFromCoordinate(pos);
-	}
-	
-	void Timer() {
-		if(!canMove) {
-			if(cooldown <=0 && !hasJustMoved) {
-				hasJustMoved = false;
-				canMove = true;
-			} else if (cooldown <=0){
-				cooldown = movementCooldown;
-				hasJustMoved = false;
-			}
-			if(cooldown > 0) {
-				cooldown -= Time.deltaTime;
-			}
-		}	
-	}
+		if (nextDirection == Direction.NONE)
+			return;
+
+		if (!mr.IsWalkable(nextPosition)){
+			nextDirection = Direction.NONE;
+		}
+		currentCooldown = movementCooldown;
+    }
 }
 
