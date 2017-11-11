@@ -67,6 +67,14 @@ public class PlayerActor : MonoBehaviour {
 		}
 	}
 
+	void MoveForward() {
+		if(canMove){
+			transform.position += Vector3.forward * 10;
+			canMove = false;
+			hasJustMoved = true;
+		}
+	}
+
 	Vector2 CurPos() {
 		return mr.CalculatePositionFromCoordinate(transform.position);
 	}

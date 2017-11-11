@@ -35,6 +35,25 @@ public class WandController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if(controller == null) {
+			Debug.Log("Controller not initialized");
+			return;
+		}
+
+		leftButtonDown = controller.GetPressDown(leftButton);
+		leftButtonUp = controller.GetPressUp(leftButton);
+		leftButtonPressed = controller.GetPress(leftButton);
+
+		rightButtonDown = controller.GetPressDown(rightButton);
+		rightButtonUp = controller.GetPressUp(rightButton);
+		rightButtonPressed = controller.GetPress(rightButton);
+
+		upButtonDown = controller.GetPressDown(upButton);
+		upButtonUp = controller.GetPressUp(upButton);
+		upButtonPressed = controller.GetPress(upButton);
+
+		downButtonDown = controller.GetPressDown(downButton);
+		downButtonUp = controller.GetPressUp(downButton);
+		downButtonPressed = controller.GetPress(downButton);
 	}
 }

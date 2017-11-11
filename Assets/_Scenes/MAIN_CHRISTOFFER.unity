@@ -219,49 +219,16 @@ Prefab:
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 342919152}
+      objectReference: {fileID: 951067313}
     - target: {fileID: 33719774487442724, guid: ad48fad6cffec514d9dbe4c73aef417f,
         type: 2}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 692226335}
+      objectReference: {fileID: 401874359}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ad48fad6cffec514d9dbe4c73aef417f, type: 2}
   m_IsPrefabParent: 0
---- !u!21 &342919152
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Sprites/Default
-  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _AlphaTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - PixelSnap: 0
-    - _EnableExternalAlpha: 0
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
---- !u!43 &692226335
+--- !u!43 &401874359
 Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -389,6 +356,39 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
+--- !u!21 &951067313
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Sprites/Default
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - PixelSnap: 0
+    - _EnableExternalAlpha: 0
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1477688536
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,6 +591,34 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f2d1d83f44f27ff4dbd8dc349fa676e5, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1575663653 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1952225159095490, guid: ad48fad6cffec514d9dbe4c73aef417f,
+    type: 2}
+  m_PrefabInternal: {fileID: 249392146}
+--- !u!114 &1575663654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1575663653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b745760dc7a96f6448747cd74eadb8e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftButtonDown: 0
+  leftButtonUp: 0
+  leftButtonPressed: 0
+  rightButtonDown: 0
+  rightButtonUp: 0
+  rightButtonPressed: 0
+  upButtonDown: 0
+  upButtonUp: 0
+  upButtonPressed: 0
+  downButtonDown: 0
+  downButtonUp: 0
+  downButtonPressed: 0
 --- !u!4 &2085956269 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4125457179508122, guid: ad48fad6cffec514d9dbe4c73aef417f,
