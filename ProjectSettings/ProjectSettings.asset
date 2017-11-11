@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 13
-  productGUID: 47e47f7569e08a44d9c79a04a8042b4c
+  productGUID: 477f921adb9002d429727bfa44aaecd2
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   defaultScreenOrientation: 4
@@ -402,7 +402,7 @@ PlayerSettings:
   ps4VideoOutPixelFormat: 0
   ps4VideoOutInitialWidth: 1920
   ps4VideoOutBaseModeInitialWidth: 1920
-  ps4VideoOutReprojectionRate: 120
+  ps4VideoOutReprojectionRate: 60
   ps4PronunciationXMLPath: 
   ps4PronunciationSIGPath: 
   ps4BackgroundImagePath: 
@@ -518,7 +518,7 @@ PlayerSettings:
   webGLUseWasm: 0
   webGLCompressionFormat: 1
   scriptingDefineSymbols:
-    1: VIU_PLUGIN;VIU_BINDING_INTERFACE_SWITCH;VIU_EXTERNAL_CAMERA_SWITCH;VIU_STEAMVR
+    1: VIU_PLUGIN;VIU_STEAMVR
   platformArchitecture: {}
   scriptingBackend: {}
   incrementalIl2cppBuild: {}
