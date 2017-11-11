@@ -18,11 +18,11 @@ public class MapRepesentation : MonoBehaviour {
 	}
 
 	public Vector3 CalculatePositionFromCoordinate(Vector2 position){
-		return new Vector3(position.x*tileSize.x, position.y*tileSize.y,0);
+		return new Vector3(position.x*tileSize.x+10, 0,position.y*tileSize.y+10);
 	}
 
 	
 	private int convertToIndex(Vector2 position){
-		return (int)position.y*(int)size.x + (int)position.x;
+		return (int)position.x*(int)size.x + (int)position.x;
 	}
 }
