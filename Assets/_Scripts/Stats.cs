@@ -59,7 +59,8 @@ public class Stats : MonoBehaviour {
 			DecreaseStat(1, 5);
 		}
 
-
+		if(Input.GetMouseButtonDown(0))
+			PickUp(Input.mousePosition);
 
 
 	
@@ -68,7 +69,7 @@ public class Stats : MonoBehaviour {
 		resource1Gauge.Visualize();			
 	}
 
-	void IncreaseStat(int resourceID, float value) 
+	public void IncreaseStat(int resourceID, float value) 
 	{
 		if(resources[resourceID] + value <= resourcesMax[resourceID] )
 		{
@@ -77,7 +78,7 @@ public class Stats : MonoBehaviour {
 		}
 	}
 
-	void DecreaseStat(int resourceID, float value) 
+	public void DecreaseStat(int resourceID, float value) 
 	{
 		if (resources[resourceID] < value)
 			return;
@@ -85,4 +86,19 @@ public class Stats : MonoBehaviour {
 			resources[resourceID] -= value;			
 			resourcesGauge[resourceID].value = resources[resourceID];
 	}
+
+
+	void PickUp(Vector2 mpos) 
+	{
+		Ray ray = Camera.main.ScreenPointToRay(mpos);
+		RaycastHit hit;
+		if (Physics.Raycast(ray, out hit, 100.0F) && hit.collider.tag == "PickUp") 
+		{
+			hit.collider.gameObject.GetComponent<EnergySphere>().Collect();
+			Debug.Log(hit.collider);
+		}
+
+
+	}
+
 }
