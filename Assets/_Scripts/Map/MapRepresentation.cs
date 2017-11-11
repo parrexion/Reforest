@@ -17,17 +17,16 @@ public class MapRepresentation : MonoBehaviour {
 	}
 
 	void Start() {
-		mapLib = MapGenerationLibrary.instance;
+		mapLib = GetComponent<MapGenerationLibrary>();
 		GenerateMap();
 	}
 
 	private void GenerateMap() {
 		MapTile tile;
-		for (int j = 0; j < size.y; j++) {
-			for (int i = 0; i < size.x; i++) {
+		for (int j = 0; j < size.x; j++) {
+			for (int i = 0; i < size.y; i++) {
 				//Generate tile information
 				tile = new MapTile();
-				// if (i == 0 || j == 0 || i == size.x-1 || j == size.y-1)
 				tile.terrain = mapLib.GetRandomTerrain();
 				tile.canHasTrees = tile.terrain.canHasTrees;
 				map.Add(tile);
@@ -39,6 +38,7 @@ public class MapRepresentation : MonoBehaviour {
 				tileObj.transform.localRotation = Quaternion.identity;
 				tileObj.GetComponent<MeshRenderer>().material = tile.terrain.material;
 				tileObj.transform.parent = this.transform;
+				tileObj.tag = "Tile";
 
 				//Add some trees for now
 				if (tile.canHasTrees){
@@ -67,8 +67,6 @@ public class MapRepresentation : MonoBehaviour {
 
 	public bool HasTrees(Vector2 position) {
 		MapTile tile = getTile(position);
-		if (tile.tree == null)
-			return false;
 		return (tile.tree.currentGrowthLevel > 0);
 	}
 

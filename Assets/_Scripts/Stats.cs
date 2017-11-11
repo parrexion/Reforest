@@ -38,7 +38,7 @@ public class Stats : MonoBehaviour {
 
 	public int selectedBuilding;
 	
-	
+
 	void Start () 
 	{
 		resources = new float[] { resource0, resource1 };
@@ -57,23 +57,23 @@ public class Stats : MonoBehaviour {
 		if(Input.GetKeyDown("x")) 
 		{
 			//Resource 1
-			IncreaseStat(0, 5);
+			IncreaseStat(0, 25);
 		}
 		if(Input.GetKeyDown("z")) 
 		{
 			//Resource 1
-			IncreaseStat(1, 5);
+			IncreaseStat(1, 25);
 		}
 
 		if(Input.GetKeyDown("v")) 
 		{
 			//Resource 1
-			DecreaseStat(0, 5);
+			DecreaseStat(0, 25);
 		}
 		if(Input.GetKeyDown("c")) 
 		{
 			//Resource 1
-			DecreaseStat(1, 5);
+			DecreaseStat(1, 25);
 		}
 
 		if(Input.GetMouseButtonDown(0))
@@ -81,9 +81,6 @@ public class Stats : MonoBehaviour {
 
 
 	
-		//Update gauges
-		resource0Gauge.Visualize();
-		resource1Gauge.Visualize();			
 	}
 
 	public void IncreaseStat(int resourceID, float value) 
@@ -91,17 +88,22 @@ public class Stats : MonoBehaviour {
 		if(resources[resourceID] + value <= resourcesMax[resourceID] )
 		{
 			resources[resourceID] += value;
-			resourcesGauge[resourceID].value = resources[resourceID];
+			// resourcesGauge[resourceID].value = resources[resourceID];
 		}
+	
+		VisualizeGauges();
 	}
+
+
 
 	public void DecreaseStat(int resourceID, float value) 
 	{
-		if (resources[resourceID] < value)
-			return;
-
+		if (resources[resourceID] - value >= 0) 
+		{
 			resources[resourceID] -= value;			
-			resourcesGauge[resourceID].value = resources[resourceID];
+			// resourcesGauge[resourceID].value = resources[resourceID];
+			VisualizeGauges();
+		}
 	}
 
 
@@ -118,4 +120,18 @@ public class Stats : MonoBehaviour {
 
 	}
 
+
+	void VisualizeGauges() 
+	{
+		int i = 0;
+		foreach(Gauge g in resourcesGauge) 
+		{ 
+			g.Visualize(resources[i]);
+			i++; 	
+		}
+
+	}
+
 }
+
+

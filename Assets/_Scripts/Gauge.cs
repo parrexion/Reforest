@@ -6,27 +6,56 @@ using UnityEngine.UI;
 
 public class Gauge : MonoBehaviour {
 
+
+	public float fillUpTime = 1.25f;
 	public float value;
 	public float maxValue;
-	public Image bar;
+	public Slider bar;
 	public float width = 250;
 	public Text t;
-	
-	private float initialWidth;
+	private float timer;
+
+	public float amountToFill;
+	private bool visualizing;
+
 
 	void Update() 
 	{
+		if(visualizing && timer < fillUpTime) 
+		{
+			timer += Time.deltaTime;
+			float change = (amountToFill/fillUpTime) * timer;
+			
+			value += change;
+			amountToFill -= change; 
 
-		Visualize();
+		}else 
+		{
+			visualizing = false;
+		}
+			
+			float normalized = (value/maxValue);			
+			bar.normalizedValue = normalized;
+	
+	
+			t.text = Mathf.RoundToInt(value) + " / " + maxValue;
 	}
 
-	public void Visualize() 
+	public void Visualize(float f) 
 	{
-		float percent = value/maxValue;
-		bar.rectTransform.sizeDelta = new Vector2(percent * width, bar.rectTransform.sizeDelta.y);	
+			timer = 0;
+			if(value != f) 
+			{
+				//Increase
+				amountToFill = f - value;
 
-		t.text = value + " / " + maxValue;
+				fillUpTime = Mathf.Abs((amountToFill / 10));
 
+			}else 
+			{
+				return;
+			}
+			visualizing = true;
 	}
 
 }
