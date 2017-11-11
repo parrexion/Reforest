@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Gauge : MonoBehaviour {
 
-	public float someValue;
+	public float value;
 	public float maxValue;
 	public Image bar;
 	public float width = 250;
@@ -20,12 +20,12 @@ public class Gauge : MonoBehaviour {
 		Visualize();
 	}
 
-	void Visualize() 
+	public void Visualize() 
 	{
-		float percent = someValue/maxValue;
+		float percent = value/maxValue;
 		bar.rectTransform.sizeDelta = new Vector2(percent * width, bar.rectTransform.sizeDelta.y);	
 
-		t.text = someValue + " / " + maxValue;
+		t.text = value + " / " + maxValue;
 
 	}
 

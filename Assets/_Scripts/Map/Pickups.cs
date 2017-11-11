@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapTile : MonoBehaviour {
+public class Pickups : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

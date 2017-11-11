@@ -243,8 +243,13 @@ PlayerSettings:
   - m_BuildTarget: Standalone
     m_Enabled: 1
     m_Devices:
+<<<<<<< HEAD
+    - OpenVR
+    - Oculus
+=======
     - Oculus
     - OpenVR
+>>>>>>> 9920c5f14964a5b7190b1d1efdd658f6f103b7d0
   m_BuildTargetEnableVuforiaSettings: []
   openGLRequireES31: 0
   openGLRequireES31AEP: 0

@@ -23,6 +23,7 @@ public class Movement : MonoBehaviour {
 	}
 
 	void MoveActor() {
+<<<<<<< HEAD
 		
 		if(Input.GetKeyDown(KeyCode.RightArrow)) {
 			transform.position += Vector3.right * 10;
@@ -46,6 +47,11 @@ public class Movement : MonoBehaviour {
 			} else {
 				Debug.Log("You cannot walk right");
 			}
+=======
+		if (Input.GetAxis("Horizontal") > 0f) { //Höger
+			// if(mr.IsWalkable())
+			Debug.Log("H Över 0");
+>>>>>>> 470387fa8540763b4a9378d06687d64163414b8f
 		} else if(Input.GetAxis("Horizontal") <  0f) { //Vänster
 			if(mr.IsWalkable( new Vector2(CurPos().x - 10, CurPos().y ))) {
 				Debug.Log("You can walk left");
