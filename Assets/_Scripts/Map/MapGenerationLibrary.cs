@@ -21,6 +21,7 @@ public static MapGenerationLibrary instance;
 	public List<GameObject> treeTypes;
 	public GameObject tilePrefab;
 	public GameObject waterTree;
+	public TileTerrain concreteTile;
 
 
 	public TileTerrain GetRandomTerrain(){

@@ -16,7 +16,7 @@ public class Stats : MonoBehaviour {
             instance = this;
         }
     }
-    #endregion
+#endregion
 
 
 	float[] resources;

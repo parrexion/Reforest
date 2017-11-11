@@ -4,6 +4,19 @@ using UnityEngine;
 
 public class MapRepresentation : MonoBehaviour {
 
+#region Singleton
+    public static MapRepresentation instance;
+
+    protected void Awake() {
+        if (instance != null) {
+            Destroy(gameObject);
+        }
+        else {
+            instance = this;
+        }
+    }
+#endregion
+
 	[SerializeField]
 	private List<MapTile> map;
 	private MapGenerationLibrary mapLib;
@@ -23,11 +36,19 @@ public class MapRepresentation : MonoBehaviour {
 
 	private void GenerateMap() {
 		MapTile tile;
+		EnemySpawner eSpawn = EnemySpawner.instance;
 		for (int j = 0; j < size.x; j++) {
 			for (int i = 0; i < size.y; i++) {
+				bool isConcrete = false;
+				//Add spawn point
+				if (i == 0 || j == 0 || i == size.x-1 || j == size.y-1){
+					eSpawn.spawnLocations.Add(new Vector2(i, j));
+					isConcrete = true;
+				}
+
 				//Generate tile information
 				tile = new MapTile();
-				tile.terrain = mapLib.GetRandomTerrain();
+				tile.terrain = (isConcrete) ? mapLib.concreteTile : mapLib.GetRandomTerrain();
 				tile.canHasTrees = tile.terrain.canHasTrees;
 				map.Add(tile);
 				tile.cord = new Vector2(i, j);

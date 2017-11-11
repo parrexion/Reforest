@@ -4,7 +4,6 @@ using UnityEngine;
 
 public abstract class BaseTree : MonoBehaviour {
 
-	public int hp;
 	public int maxGrowthLevel;
 	public float growthTime;
 
