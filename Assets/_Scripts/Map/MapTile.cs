@@ -10,4 +10,5 @@ public class MapTile {
 	// public List<Actor> actors;
 	public List<Pickups> pickups;
 	public bool canHasTrees;
+	public Vector2 cord;
 }
