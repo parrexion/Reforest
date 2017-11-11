@@ -8,5 +8,4 @@ public class TileTerrain : ScriptableObject {
 	public Material material;
 	public bool isWalkable;
 	public bool canHasTrees;
-	public bool isWater;
 }

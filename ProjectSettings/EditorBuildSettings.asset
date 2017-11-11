@@ -4,4 +4,7 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_Scenes/MAIN_CHRISTOFFER.unity
+    guid: f4fee3e03f0e3334d94c8843fb7bfaf9

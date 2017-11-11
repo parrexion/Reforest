@@ -6,8 +6,7 @@ public class Builder : MonoBehaviour {
 
 	public MapRepresentation mr;
 
-
-	public List<GameObject> buildings;
+	public Buttons buttons;
 
 	bool building;
 	// Use this for initialization
@@ -21,6 +20,8 @@ public class Builder : MonoBehaviour {
 		if(Input.GetMouseButtonDown(0)) 
 		{
 			Select(Input.mousePosition);
+			buttons.UpdateButtonSprites(); 
+			
 		}
 	}
 
@@ -71,12 +72,15 @@ public class Builder : MonoBehaviour {
 		// go.transform.parent = parent.transform;
 		// selectedBuilding = -1;
 		
-		mt.tree.ChangeTreeType(1);
+		mt.tree.ChangeTreeType(Stats.instance.selectedBuilding);
 	}
 
 	public void SelectBuilding(int i) 
 	{
 		Stats.instance.selectedBuilding = i;
+		buttons.UpdateButtonSprites(); 
+		
+
 	}
 
 }
