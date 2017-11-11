@@ -12,6 +12,7 @@ public abstract class BaseTree : MonoBehaviour {
 	protected float currentGrowthTime;
 
 	// Use this for initialization
+<<<<<<< HEAD
 	void Start () {
 		Grow();
 	}

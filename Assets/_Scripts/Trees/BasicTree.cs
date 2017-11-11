@@ -7,6 +7,8 @@ public class BasicTree : BaseTree {
     public Transform[] trees;
 
     void Start() {
+        base.Start();
+        
         trees = GetComponentsInChildren<Transform>();
     }
 
