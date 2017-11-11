@@ -16,32 +16,26 @@ public class Buttons : MonoBehaviour {
 
 
 	// Update is called once per frame
-	public void UpdateButtonSprites () 
+	void UpdateButtonSprites () 
 	{
 		switch(Stats.instance.selectedBuilding) 
 		{	
-			case 1: 
+			case 0: 
 			i0.sprite = active[0];
 			i1.sprite = deactive[1];
 			i2.sprite = deactive[2];
 				break;
-			case 2:
+			case 1:
 			i0.sprite = deactive[0];
 			i1.sprite = active[1];
 			i2.sprite = deactive[2]; 
 				break;
 
-			case 0: 
+			case 2: 
 			i0.sprite = deactive[0];
 			i1.sprite = deactive[1];
-			i2.sprite = deactive[2];
-			break;
-
-			default:
-			i0.sprite = deactive[0];
-			i1.sprite = deactive[1];
-			i2.sprite = deactive[2];
-			break;
+			i2.sprite = active[2];
+				break;
 		}
 	}
 }

@@ -4,9 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - FxTemporaire
-  - projectile
   - PickUp
+  - projectile
+  - FxTemporaire
   - Tile
   layers:
   - Default
