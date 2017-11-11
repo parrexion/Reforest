@@ -10,8 +10,11 @@ public class MapRepresentation : MonoBehaviour {
 
 	public Vector2 size;
 	public Vector2 tileSize;
+	public int spawnHeight = 3;
 
-
+	public void setSpawnHeight(int val){
+		spawnHeight = val;
+	}
 
 	void Start() {
 		mapLib = GetComponent<MapGenerationLibrary>();
@@ -66,7 +69,7 @@ public class MapRepresentation : MonoBehaviour {
 	}
 
 	public Vector3 CalculatePositionFromCoordinate(Vector2 position){
-		return new Vector3(position.x*tileSize.x, position.y*tileSize.y,0);
+		return new Vector3(position.x*tileSize.x, 5,position.y*tileSize.y);
 	}
 
 	

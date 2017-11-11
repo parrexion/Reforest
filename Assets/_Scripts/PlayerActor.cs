@@ -9,12 +9,15 @@ public class PlayerActor : MonoBehaviour {
 	public float movementCooldown = 2.0f;
 	private float cooldown;
 	private bool hasJustMoved = false;
+	public Vector2 spawnPosition = new Vector2(0,0);
+	public int spawnHeight = 5;
 	// private Vector3 tempPos = new Vector3(0,0,0);
 
 	// Use this for initialization
 	void Start () {
 		mr = GameObject.Find("MapGenerator").GetComponent<MapRepresentation>();
-		transform.position = mr.CalculatePositionFromCoordinate(new Vector2(0,0));
+		mr.setSpawnHeight(spawnHeight);
+		transform.position = mr.CalculatePositionFromCoordinate(new Vector2(spawnPosition.x,spawnPosition.y));
 		cooldown = 0f;
 	}
 	
