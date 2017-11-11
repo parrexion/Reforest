@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerActor : MonoBehaviour {
+public class PlayerActor : Actor {
 
-	private MapRepresentation mr;
 	public bool canMove = true;
 	public float movementCooldown = 2.0f;
 	private float cooldown;
 	private bool hasJustMoved = false;
 	public Vector2 spawnPosition = new Vector2(0,0);
 	public int spawnHeight = 5;
-	// private Vector3 tempPos = new Vector3(0,0,0);
 
 	// Use this for initialization
 	void Start () {
@@ -96,5 +94,33 @@ public class PlayerActor : MonoBehaviour {
 			}
 		}	
 	}
+
+    protected override void GetInput() {
+		Vector2 nextPosition = currentCoordinate;
+
+		if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)){
+			nextPosition = new Vector2(currentCoordinate.x-1, currentCoordinate.y);
+			nextDirection = Direction.WEST;
+		}
+		else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)){
+			nextPosition = new Vector2(currentCoordinate.x+1, currentCoordinate.y);
+			nextDirection = Direction.EAST;
+		}
+		else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)){
+			nextPosition = new Vector2(currentCoordinate.x, currentCoordinate.y+1);
+			nextDirection = Direction.NORTH;
+		}
+		else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)){
+			nextPosition = new Vector2(currentCoordinate.x, currentCoordinate.y-1);
+			nextDirection = Direction.SOUTH;
+		}
+
+		if (nextDirection == Direction.NONE)
+			return;
+
+		if (!mr.IsWalkable(nextPosition)){
+			nextDirection = Direction.NONE;
+		}
+    }
 }
 
