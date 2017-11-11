@@ -45,7 +45,7 @@ public abstract class BaseTree : MonoBehaviour {
 		DeGrow();
 	}
 
-	protected void ChangeTreeType(int index){
+	public void ChangeTreeType(int index){
 		GameObject nextTree = Instantiate(MapGenerationLibrary.instance.GetTree(index));
 		nextTree.transform.SetParent(transform.parent);
 		nextTree.transform.localPosition = Vector3.zero;
