@@ -61,8 +61,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 281b9a0a73c590b4f8892a7da5df371f, type: 2}
   - {fileID: 11400000, guid: c0813db16842899499977707c307c2db, type: 2}
   treeTypes:
-  - {fileID: 0}
-  tilePrefab: {fileID: 0}
+  - {fileID: 1379145645097458, guid: 0655a9594e8e9e54abde36df692a2d6b, type: 2}
+  - {fileID: 1836432282406354, guid: 9aaf3db947d628d4c8be5314136ddcd1, type: 2}
+  tilePrefab: {fileID: 1586296878241990, guid: 8ca126a6a662b7944b2710672bca1c81, type: 2}
 --- !u!114 &114492986180472430
 MonoBehaviour:
   m_ObjectHideFlags: 1
