@@ -56,14 +56,8 @@ public class PlayerActor : Actor {
 		}
 		else {
 			currentCooldown = movementCooldown;
-		}
-<<<<<<< HEAD:Assets/_Scripts/Actors/PlayerActor.cs
-		else {
-			currentCooldown = movementCooldown;
 			currentCoordinate = nextPosition;
 		}
-=======
->>>>>>> bcbe913b5e4bc238c9d05f8b7bcba07d4d510133:Assets/_Scripts/Actors/PlayerActor.cs
-    }
+	}
 }
 
