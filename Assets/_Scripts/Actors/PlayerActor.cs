@@ -9,6 +9,9 @@ public class PlayerActor : Actor {
 	public Vector2 spawnPosition = new Vector2(0,0);
 	public int spawnHeight = 5;
 
+	public WandController controllerLeft;
+	public WandController controllerRight;
+
 	// Use this for initialization
 	protected override void Initialize() {
 		base.Initialize();
@@ -40,13 +43,20 @@ public class PlayerActor : Actor {
 			nextDirection = Direction.SOUTH;
 		}
 
+		if(controllerLeft.upButtonDown || controllerRight.upButtonDown) {
+			
+		}
+
 		if (nextDirection == Direction.NONE)
 			return;
 
 		if (!mr.IsWalkable(nextPosition)){
 			nextDirection = Direction.NONE;
 		}
-		currentCooldown = movementCooldown;
+		else {
+			currentCooldown = movementCooldown;
+			currentCoordinate = nextPosition;
+		}
     }
 }
 

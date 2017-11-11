@@ -69,7 +69,7 @@ public class MapRepresentation : MonoBehaviour {
 	}
 
 	public Vector3 CalculatePositionFromCoordinate(Vector2 position){
-		return new Vector3(position.x*tileSize.x, 5,position.y*tileSize.y);
+		return new Vector3(position.x*tileSize.x, 0.5f,position.y*tileSize.y);
 	}
 
 	
