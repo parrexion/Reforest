@@ -119,45 +119,40 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4948854361319492, guid: 647836dbdc88ff7448cbaf0bf31005c3, type: 2}
+    - target: {fileID: 4341500246207942, guid: f06840456ff6b744b8acd0d667abfb36, type: 2}
       propertyPath: m_LocalPosition.x
       value: 13.46
       objectReference: {fileID: 0}
-    - target: {fileID: 4948854361319492, guid: 647836dbdc88ff7448cbaf0bf31005c3, type: 2}
+    - target: {fileID: 4341500246207942, guid: f06840456ff6b744b8acd0d667abfb36, type: 2}
       propertyPath: m_LocalPosition.y
       value: 6.27
       objectReference: {fileID: 0}
-    - target: {fileID: 4948854361319492, guid: 647836dbdc88ff7448cbaf0bf31005c3, type: 2}
+    - target: {fileID: 4341500246207942, guid: f06840456ff6b744b8acd0d667abfb36, type: 2}
       propertyPath: m_LocalPosition.z
       value: 4.24
       objectReference: {fileID: 0}
-    - target: {fileID: 4948854361319492, guid: 647836dbdc88ff7448cbaf0bf31005c3, type: 2}
+    - target: {fileID: 4341500246207942, guid: f06840456ff6b744b8acd0d667abfb36, type: 2}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4948854361319492, guid: 647836dbdc88ff7448cbaf0bf31005c3, type: 2}
+    - target: {fileID: 4341500246207942, guid: f06840456ff6b744b8acd0d667abfb36, type: 2}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4948854361319492, guid: 647836dbdc88ff7448cbaf0bf31005c3, type: 2}
+    - target: {fileID: 4341500246207942, guid: f06840456ff6b744b8acd0d667abfb36, type: 2}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4948854361319492, guid: 647836dbdc88ff7448cbaf0bf31005c3, type: 2}
+    - target: {fileID: 4341500246207942, guid: f06840456ff6b744b8acd0d667abfb36, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4948854361319492, guid: 647836dbdc88ff7448cbaf0bf31005c3, type: 2}
+    - target: {fileID: 4341500246207942, guid: f06840456ff6b744b8acd0d667abfb36, type: 2}
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 1677088016514462, guid: 647836dbdc88ff7448cbaf0bf31005c3, type: 2}
-      propertyPath: m_Name
-      value: FireActor
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114658692389496684, guid: 647836dbdc88ff7448cbaf0bf31005c3, type: 2}
-  m_ParentPrefab: {fileID: 100100000, guid: 647836dbdc88ff7448cbaf0bf31005c3, type: 2}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: f06840456ff6b744b8acd0d667abfb36, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &793660186
 GameObject:
@@ -294,6 +289,7 @@ MonoBehaviour:
   - {fileID: 1379145645097458, guid: 0655a9594e8e9e54abde36df692a2d6b, type: 2}
   - {fileID: 1836432282406354, guid: 9aaf3db947d628d4c8be5314136ddcd1, type: 2}
   tilePrefab: {fileID: 1586296878241990, guid: 8ca126a6a662b7944b2710672bca1c81, type: 2}
+  waterTree: {fileID: 1028637618144014, guid: debde06eac42573429c4d18f3b0967fb, type: 2}
 --- !u!4 &1671738633
 Transform:
   m_ObjectHideFlags: 0

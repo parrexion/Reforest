@@ -9,7 +9,7 @@ public abstract class Actor : MonoBehaviour {
   	public Vector2 currentCoordinate;
   	protected Direction nextDirection;
  	public float movementCooldown = 2.0f;		
- 	public float currentCooldown;
+ 	private float currentCooldown;
 
 	// Use this for initialization
 	void Start () {
