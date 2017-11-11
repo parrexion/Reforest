@@ -4,16 +4,9 @@ using UnityEngine;
 
 public class PlayerActor : Actor {
 
-	public float movementCooldown = 2.0f;
-	private float currentCooldown;
-	private bool moveNorth = false;
-	private bool moveSouth = false;
-	private bool moveEast = false;
-	private bool moveWest = false;
 	public Vector2 spawnPosition = new Vector2(0,0);
 	public int spawnHeight = 5;
 
-	public Transform cameraRig;
 	public WandController controllerLeft;
 	public WandController controllerRight;
 
@@ -25,60 +18,30 @@ public class PlayerActor : Actor {
 
     protected override void GetInput() {
 
-		currentCooldown -= Time.deltaTime;
-		if (currentCooldown > 0)
-			return;
-
-		if(controllerLeft.upButtonDown || controllerRight.upButtonDown || cameraRig != null) {
-
-			float r = cameraRig.transform.eulerAngles.y;
-			if(r < 45 || r > 315) {
-				Debug.Log("North");
-				moveNorth = true;
-			} else if(r >= 45 && r < 135) {
-				Debug.Log("East");
-				moveEast = true;
-			} else if(r >= 135 && r < 225) {
-				Debug.Log("South");
-				moveSouth = true;
-			} else {
-				Debug.Log("West");
-				moveWest = true;
-			}
-		}
-
-		Vector2 nextPosition = currentCoordinate;
-
-		if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow) || moveWest){
-			nextPosition = new Vector2(currentCoordinate.x-1, currentCoordinate.y);
+		if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)){
 			nextDirection = Direction.WEST;
-			moveWest = false;
 		}
-		else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow) || moveEast){
-			nextPosition = new Vector2(currentCoordinate.x+1, currentCoordinate.y);
+		else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)){
 			nextDirection = Direction.EAST;
-			moveEast = false;
 		}
-		else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || moveNorth){
-			nextPosition = new Vector2(currentCoordinate.x, currentCoordinate.y+1);
+		else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)){
 			nextDirection = Direction.NORTH;
-			moveNorth = false;
 		}
-		else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow) || moveSouth){
-			nextPosition = new Vector2(currentCoordinate.x, currentCoordinate.y-1);
+		else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)){
 			nextDirection = Direction.SOUTH;
-			moveSouth = false;
+		}
+
+		if(controllerLeft.upButtonDown || controllerRight.upButtonDown) {
+			
 		}
 
 		if (nextDirection == Direction.NONE)
 			return;
+		Vector2 nextPosition = GetNextPositionFromDirection(nextDirection);
 
 		if (!mr.IsWalkable(nextPosition)){
 			nextDirection = Direction.NONE;
 			Debug.Log("Could not walk");
-		}
-		else {
-			currentCooldown = movementCooldown;
 		}
 	}
 }

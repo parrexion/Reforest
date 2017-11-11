@@ -23,10 +23,11 @@ public class MapRepresentation : MonoBehaviour {
 
 	private void GenerateMap() {
 		MapTile tile;
-		for (int j = 0; j < size.x; j++) {
-			for (int i = 0; i < size.y; i++) {
+		for (int j = 0; j < size.y; j++) {
+			for (int i = 0; i < size.x; i++) {
 				//Generate tile information
 				tile = new MapTile();
+				if (i == 0 || j == 0 || i == size.x-1 || j == size.y-1)
 				tile.terrain = mapLib.GetRandomTerrain();
 				tile.canHasTrees = tile.terrain.canHasTrees;
 				map.Add(tile);
