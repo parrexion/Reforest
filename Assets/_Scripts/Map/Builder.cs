@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class Builder : MonoBehaviour {
 
-	Transform selectedTile;
-
-	public int selectedBuilding;
-
 	public MapRepresentation mr;
 
 
@@ -17,7 +13,6 @@ public class Builder : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		buildings = new List<GameObject>();
 		
 	}
 	
@@ -26,53 +21,62 @@ public class Builder : MonoBehaviour {
 		if(Input.GetMouseButtonDown(0)) 
 		{
 			Select(Input.mousePosition);
-
 		}
 	}
 
 
 	void Select(Vector2 mpos) 
-	{
-		if(!building) 
-			return;
-		
+	{	
+		if(Stats.instance.selectedBuilding == -1)
+			return; 
 		Ray ray = Camera.main.ScreenPointToRay(mpos);
 		RaycastHit hit;
 		if (Physics.Raycast(ray, out hit, 100.0F) && hit.collider.tag == "Tile") 
 		{
-			selectedTile = hit.collider.transform;
+			Debug.Log("Raycast Hit " + hit);
+			TryBuild(hit.collider.gameObject);
+		}else 
+		{
+			Stats.instance.selectedBuilding = -1;
+			Debug.Log("Raycast missed");
 		}
 	}
 
 	void TryBuild(GameObject tile) 
 	{
-		MapTile mt = mr.getTile(new Vector2(tile.transform.position.x, tile.transform.position.y));
+		Vector2 cord = new Vector2(tile.transform.position.z / mr.tileSize.x, tile.transform.position.x / mr.tileSize.y);
 
-		if(mt.canHasTrees && mt.tree == null) 
+		Debug.Log(cord);
+
+		MapTile mt = mr.getTile(cord);
+
+		if(mt.canHasTrees && mt.tree != null) 
 		{
 			///BUILD 
-			Build(mt);
+			Debug.Log("Building");
+			Build(mt, tile);
 
 		} else 
 		{
 			///Error
-			
-
+			Debug.Log("CanHasTrees = " + mt.canHasTrees.ToString() + "\n" + "HasTree = " + (mt.tree == null).ToString());
 		}
 
 	}
 
-	void Build(MapTile mt) 
+	void Build(MapTile mt, GameObject parent) 
 	{
-		GameObject go = Instantiate(buildings[selectedBuilding]) as GameObject;
-		mt.tree = go.GetComponent<BaseTree>();
-		go.transform.parent = selectedTile;
-
+		// GameObject go = Instantiate(buildings[selectedBuilding]) as GameObject;
+		// mt.tree = go.GetComponent<BaseTree>();
+		// go.transform.parent = parent.transform;
+		// selectedBuilding = -1;
+		
+		mt.tree.ChangeTreeType(1);
 	}
 
 	public void SelectBuilding(int i) 
 	{
-		selectedBuilding = i;
+		Stats.instance.selectedBuilding = i;
 	}
 
 }

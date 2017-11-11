@@ -23,13 +23,14 @@ public class MapRepresentation : MonoBehaviour {
 
 	private void GenerateMap() {
 		MapTile tile;
-		for (int i = 0; i < size.x; i++) {
-			for (int j = 0; j < size.y; j++) {
+		for (int j = 0; j < size.x; j++) {
+			for (int i = 0; i < size.y; i++) {
 				//Generate tile information
 				tile = new MapTile();
 				tile.terrain = mapLib.GetRandomTerrain();
 				tile.canHasTrees = tile.terrain.canHasTrees;
 				map.Add(tile);
+				tile.cord = new Vector2(i, j);
 				
 				//Generate visual tile
 				GameObject tileObj = Instantiate(mapLib.tilePrefab);
@@ -37,6 +38,7 @@ public class MapRepresentation : MonoBehaviour {
 				tileObj.transform.localRotation = Quaternion.identity;
 				tileObj.GetComponent<MeshRenderer>().material = tile.terrain.material;
 				tileObj.transform.parent = this.transform;
+				tileObj.tag = "Tile";
 
 				//Add some trees for now
 				if (tile.canHasTrees){

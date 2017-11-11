@@ -35,6 +35,9 @@ public class Stats : MonoBehaviour {
 	float resource0 = 0;
 	float resource1 = 0; 
 	// Use this for initialization
+
+	public int selectedBuilding;
+	
 	
 	void Start () 
 	{

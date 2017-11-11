@@ -1086,7 +1086,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -1108,8 +1108,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 793660186}
-  m_LocalRotation: {x: -0.0871723, y: 0.89959055, z: -0.21045254, w: -0.37262255}
-  m_LocalPosition: {x: 8.259648, y: 12.9, z: 8.259649}
+  m_LocalRotation: {x: 0.15049763, y: 0.68733746, z: -0.14888003, w: 0.6948039}
+  m_LocalPosition: {x: -19.940903, y: 16.58242, z: 12.098625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1865,7 +1865,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedBuilding: 0
   mr: {fileID: 2123843616}
-  buildings: []
+  buildings:
+  - {fileID: 1836432282406354, guid: 9aaf3db947d628d4c8be5314136ddcd1, type: 2}
 --- !u!1 &1690294927
 GameObject:
   m_ObjectHideFlags: 0
