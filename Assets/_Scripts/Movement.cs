@@ -9,12 +9,12 @@ public class Movement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		mr = GameObject.Find("GenerateSampleGrid").GetComponent<MapRepesentation>();
-		transform.position = mr.CalculatePositionFromCoordinate(new Vector2(5,5));
+		mr = GameObject.Find("MapGenerator").GetComponent<MapRepesentation>();
+		transform.position = mr.CalculatePositionFromCoordinate(new Vector2(0,0));
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		MoveActor();
 
 		if(Input.GetKey(KeyCode.Space)) {
@@ -37,26 +37,6 @@ public class Movement : MonoBehaviour {
 			transform.position += Vector3.back * 10;
 			Debug.Log(CurPos());
 		}
-		/*if (Input.GetAxis("Horizontal") > 0f) { //Höger
-			if(mr.IsWalkable( new Vector2(CurPos().x + 10, CurPos().y )) && canMove) {
-				canMove = false;
-				Debug.Log("You can walk right");
-				MoveToPos(new Vector2(CurPos().x + 10, CurPos().y));
-				
-			} else {
-				Debug.Log("You cannot walk right");
-			}
-		} else if(Input.GetAxis("Horizontal") <  0f) { //Vänster
-			if(mr.IsWalkable( new Vector2(CurPos().x - 10, CurPos().y ))) {
-				Debug.Log("You can walk left");
-			} else {
-				Debug.Log("You cannot walk left");
-			}
-		} else if (Input.GetAxis("Vertical") > 0f) { //Upp
-			Debug.Log("V Över 0");
-		} else if(Input.GetAxis("Vertical") <  0f) { //Ner
-			Debug.Log("V Under 0");
-		}*/
 	}
 
 	Vector2 CurPos() {
