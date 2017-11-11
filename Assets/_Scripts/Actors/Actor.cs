@@ -5,10 +5,11 @@ using UnityEngine;
 public abstract class Actor : MonoBehaviour {
 
 	protected MapRepresentation mr;
+	public bool isEnemy;
 	public Vector2 currentCoordinate;
 	protected Direction nextDirection;
 	public float movementCooldown = 2.0f;
-	private float currentCooldown;
+	public float currentCooldown;
 
 	// Use this for initialization
 	void Start () {
@@ -23,8 +24,9 @@ public abstract class Actor : MonoBehaviour {
 	
 	void Update() {
 		currentCooldown -= Time.deltaTime;
-		if (currentCooldown > 0)
+		if (currentCooldown > 0) {
 			return;
+		}
 
 		GetInput();
 	}
@@ -39,8 +41,17 @@ public abstract class Actor : MonoBehaviour {
 	protected abstract void GetInput();
 
 	void MoveActor() {
-		currentCoordinate = GetNextPositionFromDirection(nextDirection);
-		transform.position = mr.CalculatePositionFromCoordinate(currentCoordinate);
+		if (nextDirection == Direction.NONE)
+			return;
+
+		Vector2 nextPosition = GetNextPositionFromDirection(nextDirection);
+		if (isEnemy && mr.HasTrees(nextPosition)){
+			mr.getTile(nextPosition).tree.TakeDamage();
+		}
+		else {
+			currentCoordinate = nextPosition;
+			transform.position = mr.CalculatePositionFromCoordinate(currentCoordinate);
+		}
 		nextDirection = Direction.NONE;
 		currentCooldown = movementCooldown;
 	}

@@ -112,48 +112,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &235024327
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4665929641965328, guid: 3a0562e32f90d0f499ed80d2ffb73d59, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 13.46
-      objectReference: {fileID: 0}
-    - target: {fileID: 4665929641965328, guid: 3a0562e32f90d0f499ed80d2ffb73d59, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 6.27
-      objectReference: {fileID: 0}
-    - target: {fileID: 4665929641965328, guid: 3a0562e32f90d0f499ed80d2ffb73d59, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 4.24
-      objectReference: {fileID: 0}
-    - target: {fileID: 4665929641965328, guid: 3a0562e32f90d0f499ed80d2ffb73d59, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4665929641965328, guid: 3a0562e32f90d0f499ed80d2ffb73d59, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4665929641965328, guid: 3a0562e32f90d0f499ed80d2ffb73d59, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4665929641965328, guid: 3a0562e32f90d0f499ed80d2ffb73d59, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4665929641965328, guid: 3a0562e32f90d0f499ed80d2ffb73d59, type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 3a0562e32f90d0f499ed80d2ffb73d59, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &793660186
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: []
-  size: {x: 4, y: 4}
+  size: {x: 10, y: 10}
   tileSize: {x: 10, y: 10}
   spawnHeight: 3
 --- !u!114 &1671738632

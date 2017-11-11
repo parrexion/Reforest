@@ -11,9 +11,8 @@ public class FireActor : Actor {
     protected override void GetInput() {
 		nextDirection = travelDirection;
 		Vector2 nextPos = GetNextPositionFromDirection(nextDirection);
-		if (mr.IsWalkable(nextPos))
+		if (!mr.IsWalkable(nextPos))
 			Destroy(gameObject);
-		
     }
 
 }
