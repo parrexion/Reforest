@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Actor : MonoBehaviour {
 
 	protected MapRepresentation mr;
-	protected Vector2 currentCoordinate;
+	public Vector2 currentCoordinate;
 	protected Direction nextDirection;
 
 	// Use this for initialization

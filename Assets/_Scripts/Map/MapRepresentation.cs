@@ -23,8 +23,8 @@ public class MapRepresentation : MonoBehaviour {
 
 	private void GenerateMap() {
 		MapTile tile;
-		for (int i = 0; i < size.x; i++) {
-			for (int j = 0; j < size.y; j++) {
+		for (int j = 0; j < size.x; j++) {
+			for (int i = 0; i < size.y; i++) {
 				//Generate tile information
 				tile = new MapTile();
 				tile.terrain = mapLib.GetRandomTerrain();

@@ -45,8 +45,11 @@ public class PlayerActor : Actor {
 
 		if (!mr.IsWalkable(nextPosition)){
 			nextDirection = Direction.NONE;
+			Debug.Log("Could not walk");
 		}
-		currentCooldown = movementCooldown;
+		else {
+			currentCooldown = movementCooldown;
+		}
     }
 }
 
