@@ -29,7 +29,8 @@ public abstract class BaseTree : MonoBehaviour {
 			Grow();
 		}else 
 		{
-			s.Spawn();
+			if(s != null)
+				s.Spawn();
 			currentGrowthTime = 0;
 		}
 	}
