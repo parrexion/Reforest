@@ -8,7 +8,7 @@ public abstract class BaseTree : MonoBehaviour {
 	public int maxGrowthLevel;
 	public float growthTime;
 
-	protected int currentGrowthLevel;
+	public int currentGrowthLevel;
 	protected float currentGrowthTime;
 
 	// Use this for initialization
