@@ -6,7 +6,7 @@ public class BasicTree : BaseTree {
 
     public Transform[] trees;
 
-    void Start() {
+    protected override void Start() {
         base.Start();
         
         trees = GetComponentsInChildren<Transform>();

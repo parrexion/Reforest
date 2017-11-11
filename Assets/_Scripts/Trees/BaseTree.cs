@@ -13,7 +13,7 @@ public abstract class BaseTree : MonoBehaviour {
 	private Spawner s;
 
 
-	protected void Start () {
+	protected virtual void Start () {
 		s = GetComponent<Spawner>();
 		Grow();
 	}

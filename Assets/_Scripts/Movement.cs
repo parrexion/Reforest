@@ -9,7 +9,7 @@ public class Movement : MonoBehaviour {
 	public float movementCooldown = 2.0f;
 	private float cooldown;
 	private bool hasJustMoved = false;
-	private Vector3 tempPos = new Vector3(0,0,0);
+	// private Vector3 tempPos = new Vector3(0,0,0);
 
 	// Use this for initialization
 	void Start () {

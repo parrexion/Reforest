@@ -24,6 +24,6 @@ public class Spawner : MonoBehaviour {
 			go.transform.position.y, 
 			Random.Range(0, range));
 	
-	go.GetComponent<EnergySphere>().stats = Stats.instance;
+		go.GetComponent<EnergySphere>().stats = Stats.instance;
 	}
 }
