@@ -6,15 +6,27 @@ public class Movement : MonoBehaviour {
 
 	private MapRepesentation mr;
 	public bool canMove = true;
+	public float movementCooldown = 2.0f;
+	private float cooldown;
+	private bool hasJustMoved = false;
+	private Vector3 tempPos = new Vector3(0,0,0);
 
 	// Use this for initialization
 	void Start () {
 		mr = GameObject.Find("MapGenerator").GetComponent<MapRepesentation>();
 		transform.position = mr.CalculatePositionFromCoordinate(new Vector2(0,0));
+		cooldown = 0f;
 	}
 	
-	// Update is called once per frame
+	void Update()
+	{
+		Timer();
+		//MoveActor();
+	}
+
 	void FixedUpdate () {
+		
+		//UpdatePos(tempPos);
 		MoveActor();
 
 		if(Input.GetKey(KeyCode.Space)) {
@@ -22,20 +34,33 @@ public class Movement : MonoBehaviour {
 		}
 	}
 
+	void UpdatePos(Vector3 pos) {
+		if(pos != new Vector3(0,0,0)) {
+			transform.position = pos;
+		}
+	}
+
 	void MoveActor() {
 		
-		if(Input.GetKeyDown(KeyCode.RightArrow)) {
-			transform.position += Vector3.right * 10;
-			Debug.Log(CurPos());
-		} else if(Input.GetKeyDown(KeyCode.LeftArrow)) {
-			transform.position += Vector3.left * 10;
-			Debug.Log(CurPos());
-		} else if(Input.GetKeyDown(KeyCode.UpArrow)) {
-			transform.position += Vector3.forward * 10;
-			Debug.Log(CurPos());
-		} else if(Input.GetKeyDown(KeyCode.DownArrow)) {
-			transform.position += Vector3.back * 10;
-			Debug.Log(CurPos());
+		if(canMove) {	
+			if(Input.GetKey(KeyCode.RightArrow)) {
+				transform.position += Vector3.right * 10;
+				canMove = false;
+				hasJustMoved = true;
+			} else if(Input.GetKey(KeyCode.LeftArrow)) {
+				transform.position += Vector3.left * 10;
+				canMove = false;
+				hasJustMoved = true;
+			} else if(Input.GetKey(KeyCode.UpArrow)) {
+				transform.position += Vector3.forward * 10;
+				canMove = false;
+				hasJustMoved = true;
+			} else if(Input.GetKey(KeyCode.DownArrow)) {
+				transform.position += Vector3.back * 10;
+				canMove = false;
+				hasJustMoved = true;
+			}
+			
 		}
 	}
 
@@ -44,6 +69,21 @@ public class Movement : MonoBehaviour {
 	}
 	Vector2 MoveToPos(Vector2 pos) {
 		return transform.position = mr.CalculatePositionFromCoordinate(pos);
+	}
+	
+	void Timer() {
+		if(!canMove) {
+			if(cooldown <=0 && !hasJustMoved) {
+				hasJustMoved = false;
+				canMove = true;
+			} else if (cooldown <=0){
+				cooldown = movementCooldown;
+				hasJustMoved = false;
+			}
+			if(cooldown > 0) {
+				cooldown -= Time.deltaTime;
+			}
+		}	
 	}
 }
 
