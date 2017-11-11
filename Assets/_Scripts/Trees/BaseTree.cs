@@ -10,21 +10,27 @@ public abstract class BaseTree : MonoBehaviour {
 
 	public int currentGrowthLevel = 0;
 	protected float currentGrowthTime;
+	private Spawner s;
 
-	// Use this for initialization
-<<<<<<< HEAD
-	void Start () {
+
+	protected void Start () {
+		s = GetComponent<Spawner>();
 		Grow();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (currentGrowthLevel >= maxGrowthLevel)
-			return;
-
 		currentGrowthTime += Time.deltaTime;
-		if (currentGrowthTime >= growthTime) {
+		if (currentGrowthTime <= growthTime) 
+		{
+			return;
+		}if(currentGrowthLevel< maxGrowthLevel) 
+		{
 			Grow();
+		}else 
+		{
+			s.Spawn();
+			currentGrowthTime = 0;
 		}
 	}
 
