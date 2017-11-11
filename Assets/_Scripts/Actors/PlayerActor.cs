@@ -56,7 +56,6 @@ public class PlayerActor : Actor {
 		}
 		else {
 			currentCooldown = movementCooldown;
-			currentCoordinate = nextPosition;
 		}
 	}
 }
