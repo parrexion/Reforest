@@ -5,7 +5,7 @@ using UnityEngine;
 public class MapGenerationLibrary : MonoBehaviour {
 
 	public List<TileTerrain> terrainTypes;
-	public List<BaseTree> treeTypes;
+	public List<GameObject> treeTypes;
 	public GameObject tilePrefab;
 
 
@@ -15,7 +15,7 @@ public class MapGenerationLibrary : MonoBehaviour {
 		return terrainTypes[r];
 	}
 
-	public BaseTree GetTree(){
-		return treeTypes[0];
+	public GameObject GetTree(int index){
+		return treeTypes[index];
 	}
 }

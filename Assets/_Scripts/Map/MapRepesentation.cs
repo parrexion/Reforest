@@ -24,6 +24,7 @@ public class MapRepesentation : MonoBehaviour {
 				//Generate tile information
 				tile = new MapTile();
 				tile.terrain = mapLib.GetRandomTerrain();
+				tile.canHasTrees = tile.terrain.canHasTrees;
 				map.Add(tile);
 				
 				//Generate visual tile
@@ -32,6 +33,15 @@ public class MapRepesentation : MonoBehaviour {
 				tileObj.transform.localRotation = Quaternion.identity;
 				tileObj.GetComponent<MeshRenderer>().material = tile.terrain.material;
 				tileObj.transform.parent = this.transform;
+
+				//Add some trees for now
+				if (tile.canHasTrees){
+					int r = Random.Range(0,3);
+					GameObject tree = (r==0) ? Instantiate(mapLib.GetTree(1)) : Instantiate(mapLib.GetTree(0));
+					tree.transform.SetParent(tileObj.transform);
+					tree.transform.localPosition = Vector3.zero;
+					tile.tree = tree.GetComponent<BaseTree>();
+				}
 			}
 		}
 	}

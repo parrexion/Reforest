@@ -9,5 +9,5 @@ public class MapTile {
 	public TileTerrain terrain;
 	// public List<Actor> actors;
 	public List<Pickups> pickups;
-
+	public bool canHasTrees;
 }
