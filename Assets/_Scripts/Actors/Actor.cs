@@ -10,6 +10,10 @@ public abstract class Actor : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Initialize();
+	}
+
+	protected virtual void Initialize() {
 		mr = GameObject.Find("MapGenerator").GetComponent<MapRepresentation>();
 		currentCoordinate = Vector2.zero;
 		transform.position = mr.CalculatePositionFromCoordinate(currentCoordinate);
