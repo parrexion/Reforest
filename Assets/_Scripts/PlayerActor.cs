@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class PlayerActor : Actor {
 
-	public bool canMove = true;
 	public float movementCooldown = 2.0f;
-	private float cooldown;
-	private bool hasJustMoved = false;
+	private float currentCooldown;
 	public Vector2 spawnPosition = new Vector2(0,0);
 	public int spawnHeight = 5;
 
@@ -15,11 +13,14 @@ public class PlayerActor : Actor {
 	protected override void Initialize() {
 		base.Initialize();
 		mr.setSpawnHeight(spawnHeight);
-		cooldown = 0f;
 	}
 
     protected override void GetInput() {
-		Timer();
+
+		currentCooldown -= Time.deltaTime;
+		if (currentCooldown > 0)
+			return;
+
 		Vector2 nextPosition = currentCoordinate;
 
 		if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)){
@@ -45,21 +46,7 @@ public class PlayerActor : Actor {
 		if (!mr.IsWalkable(nextPosition)){
 			nextDirection = Direction.NONE;
 		}
+		currentCooldown = movementCooldown;
     }
-	
-	void Timer() {
-		if(!canMove) {
-			if(cooldown <=0 && !hasJustMoved) {
-				hasJustMoved = false;
-				canMove = true;
-			} else if (cooldown <=0){
-				cooldown = movementCooldown;
-				hasJustMoved = false;
-			}
-			if(cooldown > 0) {
-				cooldown -= Time.deltaTime;
-			}
-		}	
-	}
 }
 
