@@ -127,7 +127,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4736963868418632}
-  - component: {fileID: 114335924214442648}
+  - component: {fileID: 114683512576914526}
   m_Layer: 0
   m_Name: Basic Trees
   m_TagString: Untagged
@@ -720,7 +720,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114335924214442648
+--- !u!114 &114683512576914526
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -728,10 +728,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1836432282406354}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b38d1069f4fedbf46a0ace9d44c4e75c, type: 3}
+  m_Script: {fileID: 11500000, guid: df9119d73c7f98f459e587e15e167b60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 0
-  maxGrowthLevel: 0
-  growthTime: 0
+  maxGrowthLevel: 5
+  growthTime: 3
   currentGrowthLevel: 0
+  trees: []
