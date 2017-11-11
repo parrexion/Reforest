@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerActor : Actor {
 
@@ -13,9 +14,12 @@ public class PlayerActor : Actor {
 	public Vector2 spawnPosition = new Vector2(0,0);
 	public int spawnHeight = 5;
 
-	public Transform cameraRig;
-	public WandController controllerLeft;
-	public WandController controllerRight;
+	public SteamVR_TrackedObject cameraRig;
+	public SteamVR_TrackedController controllerLeft;
+	public SteamVR_TrackedController controllerRight;
+
+	public Text debugText;
+	public Text debugText2;
 
 	// Use this for initialization
 	protected override void Initialize() {
@@ -24,25 +28,27 @@ public class PlayerActor : Actor {
 	}
 
     protected override void GetInput() {
+		float r = cameraRig.transform.eulerAngles.y;
+		debugText2.text = r.ToString();
 
 		currentCooldown -= Time.deltaTime;
 		if (currentCooldown > 0)
 			return;
 
-		if(controllerLeft.upButtonDown || controllerRight.upButtonDown || cameraRig != null) {
-
-			float r = cameraRig.transform.eulerAngles.y;
+		if(controllerLeft.triggerPressed || controllerRight.triggerPressed) {
+			debugText.text += "\nTrigger Pressed";
+			
 			if(r < 45 || r > 315) {
-				Debug.Log("North");
+				debugText.text += "\nNorth";
 				moveNorth = true;
 			} else if(r >= 45 && r < 135) {
-				Debug.Log("East");
+				debugText.text += "\nEast";
 				moveEast = true;
 			} else if(r >= 135 && r < 225) {
-				Debug.Log("South");
+				debugText.text += "\nSouth";
 				moveSouth = true;
 			} else {
-				Debug.Log("West");
+				debugText.text += "\nWest";
 				moveWest = true;
 			}
 		}

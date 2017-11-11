@@ -47,6 +47,13 @@ public class MapRepresentation : MonoBehaviour {
 					tree.transform.SetParent(tileObj.transform);
 					tree.transform.localPosition = Vector3.zero;
 					tile.tree = tree.GetComponent<BaseTree>();
+				} else if( tile.terrain.isWater ) {
+					tileObj.transform.position -= new Vector3(0,0.15f,0);
+					tileObj.transform.localScale = new Vector3(1.1f,1.1f,1.1f);
+					GameObject tree = Instantiate(mapLib.waterTree);
+					tree.transform.SetParent(tileObj.transform);
+					tree.transform.localPosition = new Vector3(0,0.15f,0);
+					tile.tree = tree.GetComponent<BaseTree>();
 				}
 			}
 		}
