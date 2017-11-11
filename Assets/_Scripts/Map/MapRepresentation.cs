@@ -17,16 +17,17 @@ public class MapRepresentation : MonoBehaviour {
 	}
 
 	void Start() {
-		mapLib = GetComponent<MapGenerationLibrary>();
+		mapLib = MapGenerationLibrary.instance;
 		GenerateMap();
 	}
 
 	private void GenerateMap() {
 		MapTile tile;
-		for (int j = 0; j < size.x; j++) {
-			for (int i = 0; i < size.y; i++) {
+		for (int j = 0; j < size.y; j++) {
+			for (int i = 0; i < size.x; i++) {
 				//Generate tile information
 				tile = new MapTile();
+				// if (i == 0 || j == 0 || i == size.x-1 || j == size.y-1)
 				tile.terrain = mapLib.GetRandomTerrain();
 				tile.canHasTrees = tile.terrain.canHasTrees;
 				map.Add(tile);
@@ -38,7 +39,6 @@ public class MapRepresentation : MonoBehaviour {
 				tileObj.transform.localRotation = Quaternion.identity;
 				tileObj.GetComponent<MeshRenderer>().material = tile.terrain.material;
 				tileObj.transform.parent = this.transform;
-				tileObj.tag = "Tile";
 
 				//Add some trees for now
 				if (tile.canHasTrees){
@@ -46,6 +46,13 @@ public class MapRepresentation : MonoBehaviour {
 					GameObject tree = (r==0) ? Instantiate(mapLib.GetTree(1)) : Instantiate(mapLib.GetTree(0));
 					tree.transform.SetParent(tileObj.transform);
 					tree.transform.localPosition = Vector3.zero;
+					tile.tree = tree.GetComponent<BaseTree>();
+				} else if( tile.terrain.isWater ) {
+					tileObj.transform.position -= new Vector3(0,0.15f,0);
+					tileObj.transform.localScale = new Vector3(1.1f,1.1f,1.1f);
+					GameObject tree = Instantiate(mapLib.waterTree);
+					tree.transform.SetParent(tileObj.transform);
+					tree.transform.localPosition = new Vector3(0,0.15f,0);
 					tile.tree = tree.GetComponent<BaseTree>();
 				}
 			}
@@ -67,6 +74,8 @@ public class MapRepresentation : MonoBehaviour {
 
 	public bool HasTrees(Vector2 position) {
 		MapTile tile = getTile(position);
+		if (tile.tree == null)
+			return false;
 		return (tile.tree.currentGrowthLevel > 0);
 	}
 
