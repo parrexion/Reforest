@@ -11,8 +11,6 @@ public class PlayerActor : Actor {
 	private bool moveWest = false;
 	public Vector2 spawnPosition = new Vector2(0,0);
 	public int spawnHeight = 5;
-	public float bulletAquaCost = 3f;
-	public float bulletSolarCost = 0f;
 
 	public GameObject bulletPrefab;
 	public Text text1;
@@ -51,7 +49,12 @@ public class PlayerActor : Actor {
 				moveWest = true;
 			}
 		} else if (controllerRight.triggerPressed && bulletPrefab != null){
-			FireBullet(bulletAquaCost, bulletSolarCost);
+			//FIRE A BULLET
+			GameObject bullet = Instantiate(bulletPrefab);
+			//bullet.transform.SetParent(controllerRightTransform.transform);
+			bullet.transform.position = controllerRightTransform.transform.position; 
+			bullet.transform.rotation = controllerRightTransform.transform.rotation;
+			currentCooldown = 0.5f;
 		}
 
 		Vector2 nextPosition = currentCoordinate;
@@ -83,26 +86,6 @@ public class PlayerActor : Actor {
 		if (!mr.IsWalkable(nextPosition)){
 			nextDirection = Direction.NONE;
 			Debug.Log("Could not walk");
-		}
-	}
-
-	void FireBullet(float aquaCost, float solarCost){
-		if(aquaCost <= Stats.instance.resources[0] && solarCost <= Stats.instance.resources[1] ) 
-		{
-			//FIRE A BULLET
-			GameObject bullet = Instantiate(bulletPrefab);
-			bullet.transform.position = controllerRightTransform.transform.position; 
-			bullet.transform.rotation = controllerRightTransform.transform.rotation;
-			currentCooldown = 0.5f;
-
-			Stats.instance.DecreaseStat(0, aquaCost);
-			Stats.instance.DecreaseStat(1, solarCost);
-
-			Debug.Log("Aqua left: " + Stats.instance.resources[0]);
-			Debug.Log("Solar left: " + Stats.instance.resources[1]);
-		}else 
-		{
-			Debug.Log("Not enought resources to shoot");
 		}
 	}
 }
