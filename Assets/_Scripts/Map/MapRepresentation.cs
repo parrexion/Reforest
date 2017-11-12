@@ -39,17 +39,28 @@ public class MapRepresentation : MonoBehaviour {
 		EnemySpawner eSpawn = EnemySpawner.instance;
 		for (int j = 0; j < size.x; j++) {
 			for (int i = 0; i < size.y; i++) {
+				bool isCity = false;
 				bool isConcrete = false;
-				//Add spawn point
+				//Add City border
 				if (i == 0 || j == 0 || i == size.x-1 || j == size.y-1) {
+					if (i == 0 ^ j == 0 ^ i == size.x-1 ^ j == size.y-1) {
+						bool spawnCity = ((i+j) % 3 != 0);
+						isCity = spawnCity;
+						isConcrete = !spawnCity;
+					}
+					else {
+						isConcrete = true;
+					}
+				}
+				else if (i == 1 || j == 1 || i == size.x-2 || j == size.y-2) {
 					isConcrete = true;
-					if (i == 0 ^ j == 0 ^ i == size.x-1 ^ j == size.y-1)
+					if (i == 1 ^ j == 1 ^ i == size.x-2 ^ j == size.y-2)
 						eSpawn.spawnLocations.Add(new Vector2(i, j));
 				}
 
 				//Generate tile information
 				tile = new MapTile();
-				tile.terrain = ScriptableObject.Instantiate((isConcrete) ? mapLib.concreteTile : mapLib.GetRandomTerrain());
+				tile.terrain = ScriptableObject.Instantiate((isCity) ? mapLib.cityTile : (isConcrete) ? mapLib.concreteTile : mapLib.GetRandomTerrain());
 				tile.canHasTrees = tile.terrain.canHasTrees;
 				map.Add(tile);
 				tile.cord = new Vector2(i, j);
@@ -82,6 +93,19 @@ public class MapRepresentation : MonoBehaviour {
 					tree.transform.SetParent(tileObj.transform);
 					tree.transform.localPosition = new Vector3(0,0.15f,0);
 					tile.tree = tree.GetComponent<BaseTree>();
+				} else if (tile.terrain.isCity){
+					GameObject tree = Instantiate(mapLib.GetTree(4));
+					tree.transform.SetParent(tileObj.transform);
+					tree.transform.localPosition = Vector3.zero;
+					tile.tree = tree.GetComponent<BaseTree>();
+					if (i == 0)
+						tree.transform.localRotation = Quaternion.Euler(0,0,0);
+					if (j == 0)
+						tree.transform.localRotation = Quaternion.Euler(0,90,0);
+					if (i == size.x)
+						tree.transform.localRotation = Quaternion.Euler(0,180,0);
+					if (j == size.y)
+						tree.transform.localRotation = Quaternion.Euler(0,270,0);
 				}
 			}
 		}

@@ -107,7 +107,10 @@ public abstract class Actor : MonoBehaviour {
  	}
 
 	void LerpToNextPosition(){
-		transform.position = Vector3.Lerp(previousWorldPosition,currentWorldPosition,GetPercentCooldownFilled());
+		if (isEnemy)
+			transform.position = Vector3.Lerp(previousWorldPosition,currentWorldPosition,GetPercentCooldownFilled());
+		else
+			transform.position = currentWorldPosition;
 	}
  		
  		

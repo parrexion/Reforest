@@ -6,7 +6,6 @@ public class MapGenerationLibrary : MonoBehaviour {
 
 #region Singleton
 public static MapGenerationLibrary instance;
-
 	void Awake() {
 		if (instance != null){
 			Destroy(gameObject);
@@ -23,6 +22,7 @@ public static MapGenerationLibrary instance;
 	public GameObject waterTree;
 	public TileTerrain concreteTile;
 	public TileTerrain worldTreeTile;
+	public TileTerrain cityTile;
 
 
 	public TileTerrain GetRandomTerrain(){
