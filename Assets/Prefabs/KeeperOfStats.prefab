@@ -515,6 +515,7 @@ GameObject:
   - component: {fileID: 4269815979551620}
   - component: {fileID: 114026658264813170}
   - component: {fileID: 114912196286027168}
+  - component: {fileID: 82420771863803944}
   m_Layer: 0
   m_Name: KeeperOfStats
   m_TagString: Untagged
@@ -735,7 +736,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1737720081004464
 GameObject:
   m_ObjectHideFlags: 1
@@ -987,6 +988,86 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &82420771863803944
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1403375786867684}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 57bb0f8bae36d4123939171f32be53d6, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114003809243401888
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1091,12 +1172,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef21b0721ceb471abad75dd751ff97f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resources: []
+  resources:
+  - 0
+  - 25
   resource0Max: 100
   resource0Gauge: {fileID: 114658156822980386}
   resource1Max: 100
   resource1Gauge: {fileID: 114504075389014312}
-  selectedBuilding: 0
+  selectedBuilding: -1
 --- !u!114 &114029698464871184
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1579,8 +1662,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tt: {fileID: 114600358829357552}
   spellID: 2
-  cost1: 
-  cost2: 
+  cost1: 0
+  cost2: 40
   isPickup: 0
 --- !u!114 &114311275832858378
 MonoBehaviour:
@@ -1751,7 +1834,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.66
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1789,7 +1872,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 100 / 100
+  m_Text: 0 / 100
 --- !u!114 &114389971260242620
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1955,14 +2038,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c714edea1740420aa164447ac0cfe25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fillUpTime: 2
-  value: 0
+  fillUpTime: 2.5
+  value: 25.000002
   maxValue: 100
   bar: {fileID: 114600936082685914}
   t: {fileID: 114554279920417806}
-  timer: 0
-  normalized: 0
-  amountToFill: 0
+  timer: 2.5511305
+  normalized: 0.25000003
+  amountToFill: -9.892617e-19
   visualizing: 0
   isResourceGauge: 1
 --- !u!114 &114511978011229498
@@ -2063,7 +2146,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 100 / 100
+  m_Text: 25 / 100
 --- !u!114 &114578827831685940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2154,7 +2237,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.56
+  m_Value: 0.25000003
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2200,8 +2283,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tt: {fileID: 114600358829357552}
   spellID: 1
-  cost1: 
-  cost2: 
+  cost1: 25
+  cost2: 25
   isPickup: 0
 --- !u!114 &114658156822980386
 MonoBehaviour:
