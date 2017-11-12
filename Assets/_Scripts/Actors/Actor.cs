@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class Actor : MonoBehaviour {
 
+	public static int uuid = 0;
+
 	protected MapRepresentation mr;
 	public bool isEnemy;		
   	public Vector2 currentCoordinate;
@@ -11,17 +13,28 @@ public abstract class Actor : MonoBehaviour {
  	public float movementCooldown = 2.0f;		
  	public float currentCooldown;
 	public bool isAttacking;
+	public int id;
+	public int gridPosition = -1;
 
 	public Gauge gauge;
 
 	// Use this for initialization
 	void Start () {
-		Initialize();
+		if (!isEnemy)
+			Initialize();
 	}
 
-	protected virtual void Initialize() {
+	public virtual void Initialize() {
 		mr = GameObject.Find("MapGenerator").GetComponent<MapRepresentation>();
-		transform.position = mr.CalculatePositionFromCoordinate(currentCoordinate);
+		gridPosition = mr.getTile(currentCoordinate).RegisterAtTile(this);
+		if (isEnemy) {
+			if (gridPosition == -1) {
+				Destroy(gameObject);
+				return;
+			}
+		}
+		transform.position = mr.CalculatePositionFromCoordinate(currentCoordinate, gridPosition);
+		id = uuid++;
 		if (isEnemy)
 			currentCooldown = movementCooldown;
 	}
@@ -60,9 +73,21 @@ public abstract class Actor : MonoBehaviour {
  			mr.getTile(nextPosition).tree.TakeDamage();
 			isAttacking = true;	
  		}		
- 		else {
- 			currentCoordinate = nextPosition;		
- 			transform.position = mr.CalculatePositionFromCoordinate(currentCoordinate);		
+ 		else if (mr.IsWalkable(nextPosition)) {
+			if (isEnemy) {
+				int res = mr.getTile(nextPosition).RegisterAtTile(this);
+				if (res != -1) {
+					gridPosition = res;
+					mr.getTile(currentCoordinate).UnregisterAtTile(id);
+					currentCoordinate = nextPosition;
+					transform.position = mr.CalculatePositionFromCoordinate(currentCoordinate, gridPosition);
+				}
+				Debug.Log("Grid position is now: " + gridPosition);
+			}
+			else {
+ 				currentCoordinate = nextPosition;		
+ 				transform.position = mr.CalculatePositionFromCoordinate(currentCoordinate, gridPosition);		
+			}
 			isAttacking = false;
  		}		
  		nextDirection = Direction.NONE;

@@ -32,23 +32,18 @@
 
 		if (possibleDirs.Count > 0) {
 			int r = Random.Range(0,possibleDirs.Count);
-			Debug.Log("Possible was " + possibleDirs[r].ToString());
-			Debug.Log("Walkable: " + mr.IsWalkable(GetNextPositionFromDirection(possibleDirs[r])).ToString());
 			return possibleDirs[r];
 		}
 		int r2 = Random.Range(0,4);
 		int d = Random.Range(0,2);
 		Direction testDirection = dirs[r2];
 		int c = 0;
-		Debug.Log("TestDir is " + testDirection);
+		
 		while (!mr.IsWalkable(GetNextPositionFromDirection(testDirection)) && c < 4) {
 			c++;
 			testDirection = GetNextDirection(testDirection,d);
-			Debug.Log("TestDir is " + testDirection);
 		}
 		testDirection = (c>=4) ? Direction.NONE : testDirection;
-		Debug.Log("Possible was " + testDirection.ToString());
-		Debug.Log("Walkable: " + mr.IsWalkable(GetNextPositionFromDirection(testDirection)).ToString());
 		return testDirection;
 	}
 

@@ -20,8 +20,9 @@ public class PlayerActor : Actor {
 	// public Text debugText2;
 	
 	// Use this for initialization
-	protected override void Initialize() {
+	public override void Initialize() {
 		base.Initialize();
+		gridPosition = -1;
 		mr.setSpawnHeight(spawnHeight);
 	}
 

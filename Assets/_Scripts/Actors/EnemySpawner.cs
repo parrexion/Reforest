@@ -30,8 +30,10 @@ public class EnemySpawner : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		currentTime -= Time.deltaTime;
-		if (currentTime <= 0)
+		if (currentTime <= 0) {
 			SpawnLumber();
+			SpawnFire();
+		}
 	}
 
 	void SpawnFire() {
@@ -42,6 +44,7 @@ public class EnemySpawner : MonoBehaviour {
 		FireActor fireActor = fire.GetComponent<FireActor>();
 		fireActor.currentCoordinate = pos;
 		fireActor.travelDirection = GetStartingDirection(pos);
+		fireActor.Initialize();
 	}
 
 	void SpawnLumber() {
@@ -51,6 +54,7 @@ public class EnemySpawner : MonoBehaviour {
 		Transform lumber = Instantiate(lumberPrefab);
 		LumberActor lumberActor = lumber.GetComponent<LumberActor>();
 		lumberActor.currentCoordinate = pos;
+		lumberActor.Initialize();
 	}
 
 	Direction GetStartingDirection(Vector2 coordinate){

@@ -27,7 +27,6 @@ public static MapGenerationLibrary instance;
 
 	public TileTerrain GetRandomTerrain(){
 		int r = Random.Range(0,terrainTypes.Count);
-
 		return terrainTypes[r];
 	}
 
