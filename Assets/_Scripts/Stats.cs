@@ -53,6 +53,9 @@ public class Stats : MonoBehaviour {
 				
 		resource0Gauge.maxValue = resource0Max;
 		resource1Gauge.maxValue = resource1Max;	
+
+		selectedBuilding = -1;
+
 	}
 	
 	// Update is called once per frame
@@ -113,7 +116,7 @@ public class Stats : MonoBehaviour {
 	{
 		Ray ray = Camera.main.ScreenPointToRay(mpos);
 		RaycastHit hit;
-		if (Physics.Raycast(ray, out hit, 100.0F) && hit.collider.tag == "PickUp") 
+		if (Physics.Raycast(ray, out hit, 1000.0F) && hit.collider.tag == "PickUp") 
 		{
 			hit.collider.gameObject.GetComponent<EnergySphere>().Collect();
 			Debug.Log(hit.collider);

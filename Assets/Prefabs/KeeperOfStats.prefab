@@ -1091,7 +1091,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef21b0721ceb471abad75dd751ff97f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  costs: []
   resources: []
   resource0Max: 100
   resource0Gauge: {fileID: 114658156822980386}
@@ -1582,6 +1581,7 @@ MonoBehaviour:
   spellID: 2
   cost1: 
   cost2: 
+  isPickup: 0
 --- !u!114 &114311275832858378
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2202,6 +2202,7 @@ MonoBehaviour:
   spellID: 1
   cost1: 
   cost2: 
+  isPickup: 0
 --- !u!114 &114658156822980386
 MonoBehaviour:
   m_ObjectHideFlags: 1
