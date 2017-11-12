@@ -54,7 +54,7 @@ public class PlayerActor : Actor {
 			//bullet.transform.SetParent(controllerRightTransform.transform);
 			bullet.transform.position = controllerRightTransform.transform.position; 
 			bullet.transform.rotation = controllerRightTransform.transform.rotation;
-			currentCooldown = 1.0f;
+			currentCooldown = 0.5f;
 		}
 
 		Vector2 nextPosition = currentCoordinate;

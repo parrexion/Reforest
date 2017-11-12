@@ -1169,8 +1169,8 @@ MonoBehaviour:
   isEnemy: 0
   currentCoordinate: {x: 6, y: 14}
   previousWorldPosition: {x: 0, y: 0, z: 0}
-  currentWorldPosition: {x: 0, y: 0, z: 0}
-  movementCooldown: 2
+  currentWorldPosition: {x: 50, y: 0, z: 50}
+  movementCooldown: 0.5
   currentCooldown: 0
   isAttacking: 0
   id: 0
