@@ -14,12 +14,18 @@ public class Stats : MonoBehaviour {
         }
         else {
             instance = this;
+
+		costs = new Costs[] { new Costs(0, 0), new Costs(25, 25), new Costs(0, 40)};
+			
         }
     }
     #endregion
 
 
-	float[] resources;
+	public Costs[] costs;
+
+
+	public float[] resources;
 	float[] resourcesMax;
 	Gauge[] resourcesGauge;
 
@@ -37,9 +43,9 @@ public class Stats : MonoBehaviour {
 	// Use this for initialization
 
 	public int selectedBuilding;
-	
 
-	void Start () 
+
+    void Start () 
 	{
 		resources = new float[] { resource0, resource1 };
 		resourcesMax = new float[] { resource0Max, resource1Max };
@@ -48,6 +54,8 @@ public class Stats : MonoBehaviour {
 		resource0Gauge.maxValue = resource0Max;
 		resource1Gauge.maxValue = resource1Max;	
 		
+
+
 	}
 	
 	// Update is called once per frame

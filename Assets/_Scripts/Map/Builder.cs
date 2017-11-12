@@ -5,7 +5,7 @@ using UnityEngine;
 public class Builder : MonoBehaviour {
 
 	public MapRepresentation mr;
-
+	public ToolTip tt;
 	public Buttons buttons;
 
 	bool building;
@@ -45,7 +45,7 @@ public class Builder : MonoBehaviour {
 
 	void TryBuild(GameObject tile) 
 	{
-		Vector2 cord = new Vector2(tile.transform.position.z / mr.tileSize.x, tile.transform.position.x / mr.tileSize.y);
+		Vector2 cord = new Vector2(tile.transform.position.x / mr.tileSize.x, tile.transform.position.z / mr.tileSize.y);
 
 		Debug.Log(cord);
 
@@ -53,10 +53,17 @@ public class Builder : MonoBehaviour {
 
 		if(mt.canHasTrees && mt.tree != null) 
 		{
-			///BUILD 
-			Debug.Log("Building");
-			Build(mt, tile);
 
+			if(Stats.instance.costs[Stats.instance.selectedBuilding].aquaticCost <= Stats.instance.resources[0] &&
+				Stats.instance.costs[Stats.instance.selectedBuilding].solarCost <= Stats.instance.resources[1] ) 
+				{
+					///BUILD 
+					Debug.Log("Building");
+					Build(mt, tile);
+				}else 
+				{
+					tt.ErrorMsg("Not enough resources");
+				}
 		} else 
 		{
 			///Error
@@ -73,6 +80,10 @@ public class Builder : MonoBehaviour {
 		// selectedBuilding = -1;
 		
 		mt.tree.ChangeTreeType(Stats.instance.selectedBuilding);
+		Stats.instance.DecreaseStat(0, Stats.instance.costs[Stats.instance.selectedBuilding].aquaticCost);
+		Stats.instance.DecreaseStat(1, Stats.instance.costs[Stats.instance.selectedBuilding].solarCost);
+		
+
 	}
 
 	public void SelectBuilding(int i) 
