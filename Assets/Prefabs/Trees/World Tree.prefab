@@ -272,9 +272,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 293aca622b3e31b4da1b4a6cc7a29446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxGrowthLevel: 1
+  maxGrowthLevel: 5
   growthTime: 0
-  currentGrowthLevel: 1
+  currentGrowthLevel: 5
   rotateTrees: 1
 --- !u!199 &199198512814628308
 ParticleSystemRenderer:
