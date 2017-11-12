@@ -51,7 +51,7 @@ public class Builder : MonoBehaviour {
 
 		MapTile mt = mr.getTile(cord);
 
-		if(mt.canHasTrees && mt.tree != null) 
+		if(mt.canHasTrees && mt.tree != null && CheckIfTreeIsNearby(cord)) 
 		{
 			if (Stats.instance.selectedBuilding == 1 && mt.terrain.isSwamp)
 				Stats.instance.selectedBuilding = 3;
@@ -86,4 +86,16 @@ public class Builder : MonoBehaviour {
 		buttons.UpdateButtonSprites(); 
 	}
 
+	private bool CheckIfTreeIsNearby(Vector2 coordinate){
+		if (mr.HasTrees(mr.GetNextPositionFromDirection(coordinate, Direction.NORTH)))
+			return true;
+		if (mr.HasTrees(mr.GetNextPositionFromDirection(coordinate, Direction.WEST)))
+			return true;
+		if (mr.HasTrees(mr.GetNextPositionFromDirection(coordinate, Direction.SOUTH)))
+			return true;
+		if (mr.HasTrees(mr.GetNextPositionFromDirection(coordinate, Direction.EAST)))
+			return true;
+
+		return false;
+	}
 }

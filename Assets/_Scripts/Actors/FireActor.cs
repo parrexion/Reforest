@@ -8,7 +8,7 @@
  		
      protected override void GetInput() {		
  		nextDirection = travelDirection;		
- 		Vector2 nextPos = GetNextPositionFromDirection(nextDirection);		
+ 		Vector2 nextPos = mr.GetNextPositionFromDirection(currentCoordinate, nextDirection);		
  		if (!mr.IsWalkable(nextPos))		
  			Destroy(gameObject);	
      }		

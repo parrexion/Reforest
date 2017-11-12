@@ -141,6 +141,21 @@ public class MapRepresentation : MonoBehaviour {
 		return new Vector3(position.x*tileSize.x+xOff, 0.5f,position.y*tileSize.y+zOff);
 	}
 
+	public Vector2 GetNextPositionFromDirection(Vector2 currentPos, Direction nextDir) {
+		switch (nextDir) {
+			case Direction.NORTH:
+				return new Vector2(currentPos.x, currentPos.y+1);
+			case Direction.WEST:
+				return new Vector2(currentPos.x-1, currentPos.y);
+			case Direction.EAST:
+				return new Vector2(currentPos.x+1, currentPos.y);
+			case Direction.SOUTH:
+				return new Vector2(currentPos.x, currentPos.y-1);
+			default:		
+ 				return currentPos;
+		}
+	}
+
 	
 	private int convertToIndex(Vector2 position){
 		return (int)position.y*(int)size.x + (int)position.x;

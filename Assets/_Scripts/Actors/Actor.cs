@@ -82,7 +82,7 @@ public abstract class Actor : MonoBehaviour {
  			return;
 		}	
  		
- 		Vector2 nextPosition = GetNextPositionFromDirection(nextDirection);		
+ 		Vector2 nextPosition = mr.GetNextPositionFromDirection(currentCoordinate, nextDirection);		
  		if (isEnemy && mr.HasTrees(nextPosition)){		
  			mr.getTile(nextPosition).tree.TakeDamage();
 			isAttacking = true;
@@ -118,23 +118,6 @@ public abstract class Actor : MonoBehaviour {
 			transform.position = Vector3.Lerp(previousWorldPosition,currentWorldPosition,GetPercentCooldownFilled());
 		else
 			transform.position = currentWorldPosition;
-	}
- 		
- 		
- 	protected Vector2 GetNextPositionFromDirection(Direction nextDir) {
-		switch (nextDirection) {
-			case Direction.NORTH:
-				return new Vector2(currentCoordinate.x, currentCoordinate.y+1);
-			case Direction.WEST:
-				return new Vector2(currentCoordinate.x-1, currentCoordinate.y);
-			case Direction.EAST:
-				return new Vector2(currentCoordinate.x+1, currentCoordinate.y);
-			case Direction.SOUTH:
-				return new Vector2(currentCoordinate.x, currentCoordinate.y-1);
-			default:		
- 				return currentCoordinate;
-		}
-
 	}
 
 }

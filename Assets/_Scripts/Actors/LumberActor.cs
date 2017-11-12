@@ -21,13 +21,13 @@
 		int yDiff = (int)currentCoordinate.y - (int)(mr.size.y/2);
 
 		List<Direction> possibleDirs = new List<Direction>();
-		if (xDiff > 0 && mr.IsWalkable(GetNextPositionFromDirection(Direction.WEST)))
+		if (xDiff > 0 && mr.IsWalkable(mr.GetNextPositionFromDirection(currentCoordinate, Direction.WEST)))
 			possibleDirs.Add(Direction.WEST);
-		if (yDiff > 0 && mr.IsWalkable(GetNextPositionFromDirection(Direction.SOUTH)))
+		if (yDiff > 0 && mr.IsWalkable(mr.GetNextPositionFromDirection(currentCoordinate, Direction.SOUTH)))
 			possibleDirs.Add(Direction.SOUTH);
-		if (xDiff < 0 && mr.IsWalkable(GetNextPositionFromDirection(Direction.EAST)))
+		if (xDiff < 0 && mr.IsWalkable(mr.GetNextPositionFromDirection(currentCoordinate, Direction.EAST)))
 			possibleDirs.Add(Direction.EAST);
-		if (yDiff < 0 && mr.IsWalkable(GetNextPositionFromDirection(Direction.NORTH)))
+		if (yDiff < 0 && mr.IsWalkable(mr.GetNextPositionFromDirection(currentCoordinate, Direction.NORTH)))
 			possibleDirs.Add(Direction.NORTH);
 
 		if (possibleDirs.Count > 0) {
@@ -39,7 +39,7 @@
 		Direction testDirection = dirs[r2];
 		int c = 0;
 		
-		while (!mr.IsWalkable(GetNextPositionFromDirection(testDirection)) && c < 4) {
+		while (!mr.IsWalkable(mr.GetNextPositionFromDirection(currentCoordinate, testDirection)) && c < 4) {
 			c++;
 			testDirection = GetNextDirection(testDirection,d);
 		}

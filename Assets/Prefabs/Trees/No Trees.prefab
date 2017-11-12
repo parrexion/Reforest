@@ -474,3 +474,4 @@ MonoBehaviour:
   maxGrowthLevel: 0
   growthTime: 0
   currentGrowthLevel: 0
+  rotateTrees: 1
