@@ -12,7 +12,7 @@ public abstract class Actor : MonoBehaviour {
 	public Vector3 previousWorldPosition;
 	public Vector3 currentWorldPosition;
   	protected Direction nextDirection;
- 	public float movementCooldown = 2.0f;
+ 	public float movementCooldown = 0.5f;
  	public float currentCooldown;
 	public bool isAttacking;
 	public int id;
@@ -63,9 +63,16 @@ public abstract class Actor : MonoBehaviour {
 		return 1f - Mathf.Clamp01(currentCooldown / movementCooldown);
 	}
 
-	/// <summary>
-	/// Implement this to decide how the actor moves.
-	/// </summary>
+	void OnCollisionEnter(Collision other)
+	{
+		if(other.gameObject.tag == "projectile") {
+			if(isEnemy) {
+				Destroy(other.gameObject);
+				Destroy(gameObject);
+			}
+		}
+	}
+
 	protected abstract void GetInput();
 
 	void MoveActor() {
@@ -92,6 +99,7 @@ public abstract class Actor : MonoBehaviour {
 					currentWorldPosition = mr.CalculatePositionFromCoordinate(currentCoordinate, gridPosition);
 					// transform.position = mr.CalculatePositionFromCoordinate(currentCoordinate, gridPosition);
 				}
+				Debug.Log("Grid position is now: " + gridPosition);
 			}
 			else {
  				currentCoordinate = nextPosition;
