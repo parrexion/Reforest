@@ -276,8 +276,7 @@ MonoBehaviour:
   maxGrowthLevel: 1
   growthTime: 0
   currentGrowthLevel: 1
-<<<<<<< HEAD
---- !u!198 &198242550649075120
+
 ParticleSystem:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -3648,6 +3647,3 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
-=======
-  rotateTrees: 0
->>>>>>> 68b2937553eba4ae7a9f326d4666c0858137fa67
