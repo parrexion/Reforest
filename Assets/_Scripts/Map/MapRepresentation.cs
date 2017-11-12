@@ -49,7 +49,7 @@ public class MapRepresentation : MonoBehaviour {
 
 				//Generate tile information
 				tile = new MapTile();
-				tile.terrain = (isConcrete) ? mapLib.concreteTile : mapLib.GetRandomTerrain();
+				tile.terrain = ScriptableObject.Instantiate((isConcrete) ? mapLib.concreteTile : mapLib.GetRandomTerrain());
 				tile.canHasTrees = tile.terrain.canHasTrees;
 				map.Add(tile);
 				tile.cord = new Vector2(i, j);
@@ -97,7 +97,7 @@ public class MapRepresentation : MonoBehaviour {
 			return false;
 
 		MapTile tile = getTile(position);
-		return tile.terrain.isWalkable;
+		return tile.terrain.isWalkable && !tile.terrain.isWater;
 	}
 
 	public bool HasTrees(Vector2 position) {

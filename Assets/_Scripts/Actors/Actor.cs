@@ -7,10 +7,12 @@ public abstract class Actor : MonoBehaviour {
 	public static int uuid = 0;
 
 	protected MapRepresentation mr;
-	public bool isEnemy;		
+	public bool isEnemy;
   	public Vector2 currentCoordinate;
+	public Vector3 previousWorldPosition;
+	public Vector3 currentWorldPosition;
   	protected Direction nextDirection;
- 	public float movementCooldown = 2.0f;		
+ 	public float movementCooldown = 2.0f;
  	public float currentCooldown;
 	public bool isAttacking;
 	public int id;
@@ -33,7 +35,8 @@ public abstract class Actor : MonoBehaviour {
 				return;
 			}
 		}
-		transform.position = mr.CalculatePositionFromCoordinate(currentCoordinate, gridPosition);
+
+		transform.position = currentWorldPosition = previousWorldPosition = mr.CalculatePositionFromCoordinate(currentCoordinate, gridPosition);
 		id = uuid++;
 		if (isEnemy)
 			currentCooldown = movementCooldown;
@@ -53,10 +56,11 @@ public abstract class Actor : MonoBehaviour {
 
 	void FixedUpdate () {
 		MoveActor();
+		LerpToNextPosition();
 	}
 
 	public float GetPercentCooldownFilled(){
-		return 1f - currentCooldown / movementCooldown;
+		return 1f - Mathf.Clamp01(currentCooldown / movementCooldown);
 	}
 
 	/// <summary>
@@ -65,13 +69,17 @@ public abstract class Actor : MonoBehaviour {
 	protected abstract void GetInput();
 
 	void MoveActor() {
-		if (nextDirection == Direction.NONE)		
+		if (nextDirection == Direction.NONE){
+			if (currentCooldown <= 0)
+				previousWorldPosition = currentWorldPosition;
  			return;
+		}	
  		
  		Vector2 nextPosition = GetNextPositionFromDirection(nextDirection);		
  		if (isEnemy && mr.HasTrees(nextPosition)){		
  			mr.getTile(nextPosition).tree.TakeDamage();
-			isAttacking = true;	
+			isAttacking = true;
+			previousWorldPosition = currentWorldPosition;
  		}		
  		else if (mr.IsWalkable(nextPosition)) {
 			if (isEnemy) {
@@ -80,19 +88,27 @@ public abstract class Actor : MonoBehaviour {
 					gridPosition = res;
 					mr.getTile(currentCoordinate).UnregisterAtTile(id);
 					currentCoordinate = nextPosition;
-					transform.position = mr.CalculatePositionFromCoordinate(currentCoordinate, gridPosition);
+					previousWorldPosition = currentWorldPosition;
+					currentWorldPosition = mr.CalculatePositionFromCoordinate(currentCoordinate, gridPosition);
+					// transform.position = mr.CalculatePositionFromCoordinate(currentCoordinate, gridPosition);
 				}
 				Debug.Log("Grid position is now: " + gridPosition);
 			}
 			else {
- 				currentCoordinate = nextPosition;		
- 				transform.position = mr.CalculatePositionFromCoordinate(currentCoordinate, gridPosition);		
+ 				currentCoordinate = nextPosition;
+				previousWorldPosition = currentWorldPosition;	
+ 				currentWorldPosition = mr.CalculatePositionFromCoordinate(currentCoordinate, gridPosition);	
+ 				// transform.position = mr.CalculatePositionFromCoordinate(currentCoordinate, gridPosition);	
 			}
 			isAttacking = false;
  		}		
  		nextDirection = Direction.NONE;
  		currentCooldown = movementCooldown;
- 	}		
+ 	}
+
+	void LerpToNextPosition(){
+		transform.position = Vector3.Lerp(previousWorldPosition,currentWorldPosition,GetPercentCooldownFilled());
+	}
  		
  		
  	protected Vector2 GetNextPositionFromDirection(Direction nextDir) {
