@@ -125,4 +125,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxGrowthLevel: 1
   growthTime: 0
-  currentGrowthLevel: 0
+  currentGrowthLevel: 1

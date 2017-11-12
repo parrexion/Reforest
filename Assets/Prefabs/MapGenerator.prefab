@@ -82,3 +82,4 @@ MonoBehaviour:
   tilePrefab: {fileID: 1586296878241990, guid: 8ca126a6a662b7944b2710672bca1c81, type: 2}
   waterTree: {fileID: 1028637618144014, guid: debde06eac42573429c4d18f3b0967fb, type: 2}
   concreteTile: {fileID: 11400000, guid: c0813db16842899499977707c307c2db, type: 2}
+  worldTreeTile: {fileID: 11400000, guid: 34c7190bfdfb4404cba7c7069597389c, type: 2}
