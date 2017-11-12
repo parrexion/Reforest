@@ -74,10 +74,10 @@ MonoBehaviour:
   treeTypes:
   - {fileID: 1379145645097458, guid: 0655a9594e8e9e54abde36df692a2d6b, type: 2}
   - {fileID: 1836432282406354, guid: 9aaf3db947d628d4c8be5314136ddcd1, type: 2}
-  - {fileID: 1836432282406354, guid: 11afeefd2f5086443b2b36e0e3b94d18, type: 2}
-  - {fileID: 1519347466890542, guid: 80360b8f7c72993438944b05cf093dca, type: 2}
-  - {fileID: 1102086701775614, guid: 28e615b8a5d61c34794e27e79e9f0b57, type: 2}
   - {fileID: 1519347466890542, guid: 4bf5bb5e6286f46998d13a96d4d5dba9, type: 2}
+  - {fileID: 1836432282406354, guid: 11afeefd2f5086443b2b36e0e3b94d18, type: 2}
+  - {fileID: 1102086701775614, guid: 28e615b8a5d61c34794e27e79e9f0b57, type: 2}
+  - {fileID: 1519347466890542, guid: 80360b8f7c72993438944b05cf093dca, type: 2}
   tilePrefab: {fileID: 1586296878241990, guid: 8ca126a6a662b7944b2710672bca1c81, type: 2}
   waterTree: {fileID: 1028637618144014, guid: debde06eac42573429c4d18f3b0967fb, type: 2}
   concreteTile: {fileID: 11400000, guid: c0813db16842899499977707c307c2db, type: 2}

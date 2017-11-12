@@ -53,15 +53,16 @@ public class Builder : MonoBehaviour {
 
 		if(mt.canHasTrees && mt.tree != null) 
 		{
-
+			if (Stats.instance.selectedBuilding == 1 && mt.terrain.isSwamp)
+				Stats.instance.selectedBuilding = 3;
 			if(Stats.instance.costs[Stats.instance.selectedBuilding].aquaticCost <= Stats.instance.resources[0] &&
 				Stats.instance.costs[Stats.instance.selectedBuilding].solarCost <= Stats.instance.resources[1] ) 
 				{
 					///BUILD 
 					Debug.Log("Building");
 					Build(mt, tile);
-				}else 
-				{
+				}
+				else  {
 					tt.ErrorMsg("Not enough resources");
 				}
 		} else 
@@ -73,25 +74,16 @@ public class Builder : MonoBehaviour {
 	}
 
 	void Build(MapTile mt, GameObject parent) 
-	{
-		// GameObject go = Instantiate(buildings[selectedBuilding]) as GameObject;
-		// mt.tree = go.GetComponent<BaseTree>();
-		// go.transform.parent = parent.transform;
-		// selectedBuilding = -1;
-		
+	{	
 		mt.tree.ChangeTreeType(Stats.instance.selectedBuilding);
 		Stats.instance.DecreaseStat(0, Stats.instance.costs[Stats.instance.selectedBuilding].aquaticCost);
 		Stats.instance.DecreaseStat(1, Stats.instance.costs[Stats.instance.selectedBuilding].solarCost);
-		
-
 	}
 
 	public void SelectBuilding(int i) 
 	{
 		Stats.instance.selectedBuilding = i;
 		buttons.UpdateButtonSprites(); 
-		
-
 	}
 
 }

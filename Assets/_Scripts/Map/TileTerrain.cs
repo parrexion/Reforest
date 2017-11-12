@@ -9,5 +9,6 @@ public class TileTerrain : ScriptableObject {
 	public bool isWalkable;
 	public bool canHasTrees;
 	public bool isWater;
+	public bool isSwamp;
 	public bool isCity;
 }

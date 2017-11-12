@@ -15,7 +15,7 @@ public class Stats : MonoBehaviour {
         else {
             instance = this;
 
-		costs = new Costs[] { new Costs(0, 0), new Costs(25, 25), new Costs(0, 40)};
+		costs = new Costs[] { new Costs(0, 0), new Costs(25, 25), new Costs(0, 40), new Costs(25, 25)};
 			
         }
     }
@@ -53,15 +53,13 @@ public class Stats : MonoBehaviour {
 				
 		resource0Gauge.maxValue = resource0Max;
 		resource1Gauge.maxValue = resource1Max;	
-		
-
-
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	
 	{	
+#if UNITY_EDITOR
 		if(Input.GetKeyDown("x")) 
 		{
 			//Resource 1
@@ -83,12 +81,11 @@ public class Stats : MonoBehaviour {
 			//Resource 1
 			DecreaseStat(1, 25);
 		}
+#endif
 
 		if(Input.GetMouseButtonDown(0))
 			PickUp(Input.mousePosition);
 
-
-	
 	}
 
 	public void IncreaseStat(int resourceID, float value) 
@@ -102,8 +99,6 @@ public class Stats : MonoBehaviour {
 		VisualizeGauges();
 	}
 
-
-
 	public void DecreaseStat(int resourceID, float value) 
 	{
 		if (resources[resourceID] - value >= 0) 
@@ -113,7 +108,6 @@ public class Stats : MonoBehaviour {
 			VisualizeGauges();
 		}
 	}
-
 
 	void PickUp(Vector2 mpos) 
 	{
@@ -127,7 +121,6 @@ public class Stats : MonoBehaviour {
 
 
 	}
-
 
 	void VisualizeGauges() 
 	{

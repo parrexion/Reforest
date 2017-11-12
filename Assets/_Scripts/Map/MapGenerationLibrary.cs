@@ -140,14 +140,14 @@ public static MapGenerationLibrary instance;
 		if (x == 10 && y == 8) return treeTypes[1];
 		if (x == 10 && y == 12) return treeTypes[1];
 
-		if (x == 8 && y == 9) return treeTypes[2];
+		if (x == 8 && y == 9) return treeTypes[3];
 		if (x == 12 && y == 9) return treeTypes[1];
-		if (x == 9 && y == 8) return treeTypes[2];
+		if (x == 9 && y == 8) return treeTypes[3];
 		if (x == 9 && y == 12) return treeTypes[1];
 		if (x == 8 && y == 11) return treeTypes[1];
-		if (x == 12 && y == 11) return treeTypes[2];
+		if (x == 12 && y == 11) return treeTypes[3];
 		if (x == 11 && y == 8) return treeTypes[1];
-		if (x == 11 && y == 12) return treeTypes[2];
+		if (x == 11 && y == 12) return treeTypes[3];
 		return treeTypes[0];
 	}	
 }

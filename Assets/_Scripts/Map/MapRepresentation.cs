@@ -74,7 +74,7 @@ public class MapRepresentation : MonoBehaviour {
 
 				//Add some trees for now
 				if (i == (int)(size.x/2) && j == (int)(size.y/2)) {
-					GameObject tree = Instantiate(mapLib.GetTree(3));
+					GameObject tree = Instantiate(mapLib.GetTree(5));
 					tree.transform.SetParent(tileObj.transform);
 					tree.transform.localPosition = Vector3.zero;
 					tile.tree = tree.GetComponent<BaseTree>();
