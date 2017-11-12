@@ -60,7 +60,7 @@ public class MapRepresentation : MonoBehaviour {
 
 				//Generate tile information
 				tile = new MapTile();
-				tile.terrain = ScriptableObject.Instantiate((isCity) ? mapLib.cityTile : (isConcrete) ? mapLib.concreteTile : mapLib.GetRandomTerrain());
+				tile.terrain = ScriptableObject.Instantiate((isCity) ? mapLib.cityTile : (isConcrete) ? mapLib.concreteTile : mapLib.GetSpecificTerrain(i,j));
 				tile.canHasTrees = tile.terrain.canHasTrees;
 				map.Add(tile);
 				tile.cord = new Vector2(i, j);
@@ -81,11 +81,11 @@ public class MapRepresentation : MonoBehaviour {
 					tileObj.GetComponent<MeshRenderer>().material = mapLib.worldTreeTile.material;
 				}
 				else if (tile.canHasTrees){
-					int r = Random.Range(0,3);
-					GameObject tree = (r==0) ? Instantiate(mapLib.GetTree(1)) : Instantiate(mapLib.GetTree(0));
+					GameObject tree = Instantiate(mapLib.GetSpecificTree(i,j));
 					tree.transform.SetParent(tileObj.transform);
 					tree.transform.localPosition = Vector3.zero;
 					tile.tree = tree.GetComponent<BaseTree>();
+					tile.tree.currentGrowthLevel = tile.tree.maxGrowthLevel;
 				} else if (tile.terrain.isWater){
 					tileObj.transform.position -= new Vector3(0,0.15f,0);
 					tileObj.transform.localScale = new Vector3(1.1f,1.1f,1.1f);
