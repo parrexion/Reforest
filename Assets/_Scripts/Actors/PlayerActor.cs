@@ -12,13 +12,15 @@ public class PlayerActor : Actor {
 	public Vector2 spawnPosition = new Vector2(0,0);
 	public int spawnHeight = 5;
 
+	public GameObject bulletPrefab;
+	public Text text1;
+	public Text text2;
+
 	public SteamVR_TrackedObject cameraRig;
+	public SteamVR_TrackedObject controllerRightTransform;
 	public SteamVR_TrackedController controllerLeft;
 	public SteamVR_TrackedController controllerRight;
 
-	// public Text debugText;
-	// public Text debugText2;
-	
 	// Use this for initialization
 	public override void Initialize() {
 		base.Initialize();
@@ -28,24 +30,31 @@ public class PlayerActor : Actor {
 
     protected override void GetInput() {
 		float r = cameraRig.transform.eulerAngles.y;
-			// debugText2.text = r.ToString();
+			text1.text = r.ToString();
 
-		if(controllerLeft.triggerPressed || controllerRight.triggerPressed) {
-			// debugText.text += "\nTrigger Pressed";
+		if(controllerLeft.triggerPressed) {
+			// CHECK THE ROTATION OF THE HMD
 			
 			if(r < 45 || r > 315) {
-				// debugText.text += "\nNorth";
+				 text2.text += "\nNorth";
 				moveNorth = true;
 			} else if(r >= 45 && r < 135) {
-				// debugText.text += "\nEast";
+				 text2.text += "\nEast";
 				moveEast = true;
 			} else if(r >= 135 && r < 225) {
-				// debugText.text += "\nSouth";
+				 text2.text += "\nSouth";
 				moveSouth = true;
 			} else {
-				// debugText.text += "\nWest";
+				 text2.text += "\nWest";
 				moveWest = true;
 			}
+		} else if (controllerRight.triggerPressed && bulletPrefab != null){
+			//FIRE A BULLET
+			GameObject bullet = Instantiate(bulletPrefab);
+			//bullet.transform.SetParent(controllerRightTransform.transform);
+			bullet.transform.position = controllerRightTransform.transform.position; 
+			bullet.transform.rotation = controllerRightTransform.transform.rotation;
+			currentCooldown = 1.0f;
 		}
 
 		Vector2 nextPosition = currentCoordinate;
