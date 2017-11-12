@@ -79,7 +79,9 @@ MonoBehaviour:
   - {fileID: 1836432282406354, guid: 9aaf3db947d628d4c8be5314136ddcd1, type: 2}
   - {fileID: 1836432282406354, guid: 11afeefd2f5086443b2b36e0e3b94d18, type: 2}
   - {fileID: 1519347466890542, guid: 80360b8f7c72993438944b05cf093dca, type: 2}
+  - {fileID: 1102086701775614, guid: 28e615b8a5d61c34794e27e79e9f0b57, type: 2}
   tilePrefab: {fileID: 1586296878241990, guid: 8ca126a6a662b7944b2710672bca1c81, type: 2}
   waterTree: {fileID: 1028637618144014, guid: debde06eac42573429c4d18f3b0967fb, type: 2}
   concreteTile: {fileID: 11400000, guid: c0813db16842899499977707c307c2db, type: 2}
   worldTreeTile: {fileID: 11400000, guid: 34c7190bfdfb4404cba7c7069597389c, type: 2}
+  cityTile: {fileID: 11400000, guid: 54c59da6acd40ca48a4f8447f1fb1242, type: 2}
