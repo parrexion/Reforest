@@ -58,13 +58,13 @@ public class EnemySpawner : MonoBehaviour {
 	}
 
 	Direction GetStartingDirection(Vector2 coordinate){
-		if (coordinate.x == 0)
+		if (coordinate.x == 1)
 			return Direction.EAST;
-		if (coordinate.y == 0)
+		if (coordinate.y == 1)
 			return Direction.NORTH;
-		if (coordinate.x == MapRepresentation.instance.size.x-1)
+		if (coordinate.x == MapRepresentation.instance.size.x-2)
 			return Direction.WEST;
-		if (coordinate.y == MapRepresentation.instance.size.y-1)
+		if (coordinate.y == MapRepresentation.instance.size.y-2)
 			return Direction.SOUTH;
 
 		return Direction.NONE;

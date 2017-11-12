@@ -15,11 +15,9 @@ public class MapTile {
 
 	public int RegisterAtTile(Actor act){
 		if (actors.Count >= 4){
-			Debug.Log("Failed!");
 			return -1;
 		}
 		
-			Debug.Log("Success!  " + actors.Count);
 		actors.Add(act);
 		return actors.Count-1;
 	}

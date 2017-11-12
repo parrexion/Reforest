@@ -92,7 +92,6 @@ public abstract class Actor : MonoBehaviour {
 					currentWorldPosition = mr.CalculatePositionFromCoordinate(currentCoordinate, gridPosition);
 					// transform.position = mr.CalculatePositionFromCoordinate(currentCoordinate, gridPosition);
 				}
-				Debug.Log("Grid position is now: " + gridPosition);
 			}
 			else {
  				currentCoordinate = nextPosition;
