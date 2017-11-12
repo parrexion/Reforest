@@ -10,10 +10,9 @@ public abstract class Actor : MonoBehaviour {
   	protected Direction nextDirection;
  	public float movementCooldown = 2.0f;		
  	public float currentCooldown;
+	public bool isAttacking;
 
 	public Gauge gauge;
-
-	
 
 	// Use this for initialization
 	void Start () {
@@ -32,7 +31,6 @@ public abstract class Actor : MonoBehaviour {
 		{
 			gauge.Visualize(currentCooldown, movementCooldown);
 		}
-
 		currentCooldown -= Time.deltaTime;		
  		if (currentCooldown > 0) {
  			return;		
@@ -42,6 +40,10 @@ public abstract class Actor : MonoBehaviour {
 
 	void FixedUpdate () {
 		MoveActor();
+	}
+
+	public float GetPercentCooldownFilled(){
+		return 1f - currentCooldown / movementCooldown;
 	}
 
 	/// <summary>
@@ -55,14 +57,16 @@ public abstract class Actor : MonoBehaviour {
  		
  		Vector2 nextPosition = GetNextPositionFromDirection(nextDirection);		
  		if (isEnemy && mr.HasTrees(nextPosition)){		
- 			mr.getTile(nextPosition).tree.TakeDamage();		
+ 			mr.getTile(nextPosition).tree.TakeDamage();
+			isAttacking = true;	
  		}		
- 		else {		
+ 		else {
  			currentCoordinate = nextPosition;		
  			transform.position = mr.CalculatePositionFromCoordinate(currentCoordinate);		
+			isAttacking = false;
  		}		
- 		nextDirection = Direction.NONE;		
- 		currentCooldown = movementCooldown;		
+ 		nextDirection = Direction.NONE;
+ 		currentCooldown = movementCooldown;
  	}		
  		
  		

@@ -41,9 +41,10 @@ public class MapRepresentation : MonoBehaviour {
 			for (int i = 0; i < size.y; i++) {
 				bool isConcrete = false;
 				//Add spawn point
-				if (i == 0 ^ j == 0 ^ i == size.x-1 ^ j == size.y-1) {
-					eSpawn.spawnLocations.Add(new Vector2(i, j));
+				if (i == 0 || j == 0 || i == size.x-1 || j == size.y-1) {
 					isConcrete = true;
+					if (i == 0 ^ j == 0 ^ i == size.x-1 ^ j == size.y-1)
+						eSpawn.spawnLocations.Add(new Vector2(i, j));
 				}
 
 				//Generate tile information

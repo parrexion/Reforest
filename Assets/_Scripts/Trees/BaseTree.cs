@@ -6,14 +6,17 @@ public abstract class BaseTree : MonoBehaviour {
 
 	public int maxGrowthLevel;
 	public float growthTime;
-
 	public int currentGrowthLevel = 0;
+	public bool rotateTrees = true;
+	
 	protected float currentGrowthTime;
 	private Spawner s;
 
 
 	protected virtual void Start () {
 		s = GetComponent<Spawner>();
+		if (rotateTrees)
+			RandomizeTrees();
 		Grow();
 	}
 	
@@ -31,6 +34,20 @@ public abstract class BaseTree : MonoBehaviour {
 			if(s != null)
 				s.Spawn();
 			currentGrowthTime = 0;
+		}
+	}
+
+	void RandomizeTrees() {
+		int r = Random.Range(0,4);
+		transform.localRotation = Quaternion.Euler(0,90f*r,0);
+		Transform[] trees = GetComponentsInChildren<Transform>();
+		float diff;
+		Vector3 oldScale;
+		for (int i = 1; i < trees.Length; i++) {
+			diff = Random.Range(0.85f,1.15f);
+			oldScale = trees[i].localScale;
+			trees[i].localScale = new Vector3(oldScale.x*diff,oldScale.y*diff,oldScale.z*diff);
+			trees[i].localRotation = Quaternion.Euler(0,Random.Range(0,360),0);
 		}
 	}
 
