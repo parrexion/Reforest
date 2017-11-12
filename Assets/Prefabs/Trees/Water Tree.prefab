@@ -227,10 +227,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b38d1069f4fedbf46a0ace9d44c4e75c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 0
   maxGrowthLevel: 0
   growthTime: 0
   currentGrowthLevel: 0
+  rotateTrees: 0
 --- !u!114 &114393362870267806
 MonoBehaviour:
   m_ObjectHideFlags: 1

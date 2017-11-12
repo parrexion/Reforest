@@ -41,14 +41,15 @@ public class MapRepresentation : MonoBehaviour {
 			for (int i = 0; i < size.y; i++) {
 				bool isConcrete = false;
 				//Add spawn point
-				if (i == 0 ^ j == 0 ^ i == size.x-1 ^ j == size.y-1) {
-					eSpawn.spawnLocations.Add(new Vector2(i, j));
+				if (i == 0 || j == 0 || i == size.x-1 || j == size.y-1) {
 					isConcrete = true;
+					if (i == 0 ^ j == 0 ^ i == size.x-1 ^ j == size.y-1)
+						eSpawn.spawnLocations.Add(new Vector2(i, j));
 				}
 
 				//Generate tile information
 				tile = new MapTile();
-				tile.terrain = (isConcrete) ? mapLib.concreteTile : mapLib.GetRandomTerrain();
+				tile.terrain = ScriptableObject.Instantiate((isConcrete) ? mapLib.concreteTile : mapLib.GetRandomTerrain());
 				tile.canHasTrees = tile.terrain.canHasTrees;
 				map.Add(tile);
 				tile.cord = new Vector2(i, j);
@@ -96,7 +97,7 @@ public class MapRepresentation : MonoBehaviour {
 			return false;
 
 		MapTile tile = getTile(position);
-		return tile.terrain.isWalkable;
+		return tile.terrain.isWalkable && !tile.terrain.isWater;
 	}
 
 	public bool HasTrees(Vector2 position) {
@@ -106,8 +107,14 @@ public class MapRepresentation : MonoBehaviour {
 		return (tile.tree.currentGrowthLevel > 0);
 	}
 
-	public Vector3 CalculatePositionFromCoordinate(Vector2 position){
-		return new Vector3(position.x*tileSize.x, 0.5f,position.y*tileSize.y);
+	public Vector3 CalculatePositionFromCoordinate(Vector2 position, int tilePosition){
+		float xOff = 0f;
+		float zOff = 0f; 
+		if (tilePosition != -1){
+			xOff = (tilePosition > 1) ? 2.5f : -2.5f;
+			zOff = (tilePosition % 2 == 0) ? 2.5f : -2.5f; 
+		}
+		return new Vector3(position.x*tileSize.x+xOff, 0.5f,position.y*tileSize.y+zOff);
 	}
 
 	
