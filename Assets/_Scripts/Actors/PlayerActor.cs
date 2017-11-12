@@ -18,7 +18,7 @@ public class PlayerActor : Actor {
 
 	// public Text debugText;
 	// public Text debugText2;
-
+	
 	// Use this for initialization
 	protected override void Initialize() {
 		base.Initialize();

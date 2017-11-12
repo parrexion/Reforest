@@ -11,6 +11,10 @@ public abstract class Actor : MonoBehaviour {
  	public float movementCooldown = 2.0f;		
  	public float currentCooldown;
 
+	public Gauge gauge;
+
+	
+
 	// Use this for initialization
 	void Start () {
 		Initialize();
@@ -24,6 +28,11 @@ public abstract class Actor : MonoBehaviour {
 	}
 	
 	void Update() {
+		if (!isEnemy) 
+		{
+			gauge.Visualize(currentCooldown, movementCooldown);
+		}
+
 		currentCooldown -= Time.deltaTime;		
  		if (currentCooldown > 0) {
  			return;		

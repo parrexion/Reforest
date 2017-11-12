@@ -11,16 +11,23 @@ public class Gauge : MonoBehaviour {
 	public float value;
 	public float maxValue;
 	public Slider bar;
-	public float width = 250;
 	public Text t;
-	private float timer;
-
+	public float timer;
+	public float normalized;
 	public float amountToFill;
-	private bool visualizing;
+	public bool visualizing;
+
+
+	public bool isResourceGauge; 
+
 
 
 	void Update() 
 	{
+		if(!isResourceGauge)
+		return;
+
+
 		if(visualizing && timer < fillUpTime) 
 		{
 			timer += Time.deltaTime;
@@ -32,30 +39,43 @@ public class Gauge : MonoBehaviour {
 		}else 
 		{
 			visualizing = false;
-		}
-			
-			float normalized = (value/maxValue);			
+		}	
+			normalized = value / maxValue;			
 			bar.normalizedValue = normalized;
-	
-	
 			t.text = Mathf.RoundToInt(value) + " / " + maxValue;
 	}
 
-	public void Visualize(float f) 
+	public void Visualize(float f, float max = 0) 
 	{
+		if(!isResourceGauge) 
+		{	
+			VisualizeCooldown(f, max);
+			return;
+		}
+
 			timer = 0;
 			if(value != f) 
 			{
 				//Increase
 				amountToFill = f - value;
-
+				
 				fillUpTime = Mathf.Abs((amountToFill / 10));
 
 			}else 
 			{
+				Debug.Log("Didn't visualize");
 				return;
 			}
-			visualizing = true;
+			visualizing = true;	
+	}
+
+	public void VisualizeCooldown(float f, float max) 
+	{
+		maxValue = max;
+		value = f;
+
+			normalized = Mathf.Clamp01(1 - f / max);			
+			bar.normalizedValue = normalized;
 	}
 
 }
