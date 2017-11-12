@@ -32,7 +32,7 @@ public class Builder : MonoBehaviour {
 			return; 
 		Ray ray = Camera.main.ScreenPointToRay(mpos);
 		RaycastHit hit;
-		if (Physics.Raycast(ray, out hit, 100.0F) && hit.collider.tag == "Tile") 
+		if (Physics.Raycast(ray, out hit, 1000.0F) && hit.collider.tag == "Tile") 
 		{
 			Debug.Log("Raycast Hit " + hit);
 			TryBuild(hit.collider.gameObject);
@@ -45,6 +45,7 @@ public class Builder : MonoBehaviour {
 
 	void TryBuild(GameObject tile) 
 	{
+
 		Vector2 cord = new Vector2(tile.transform.position.x / mr.tileSize.x, tile.transform.position.z / mr.tileSize.y);
 
 		Debug.Log(cord);
@@ -53,8 +54,10 @@ public class Builder : MonoBehaviour {
 
 		if(mt.canHasTrees && mt.tree != null && CheckIfTreeIsNearby(cord)) 
 		{
-			if (Stats.instance.selectedBuilding == 1 && mt.terrain.isSwamp)
+			if (Stats.instance.selectedBuilding == 1 && mt.terrain.isSwamp) 
+			{
 				Stats.instance.selectedBuilding = 3;
+			}
 			if(Stats.instance.costs[Stats.instance.selectedBuilding].aquaticCost <= Stats.instance.resources[0] &&
 				Stats.instance.costs[Stats.instance.selectedBuilding].solarCost <= Stats.instance.resources[1] ) 
 				{
@@ -62,15 +65,17 @@ public class Builder : MonoBehaviour {
 					Debug.Log("Building");
 					Build(mt, tile);
 				}
-				else  {
+				else  
+				{
 					tt.ErrorMsg("Not enough resources");
 				}
-		} else 
+		} else if(!CheckIfTreeIsNearby(cord))
 		{
-			///Error
-			Debug.Log("CanHasTrees = " + mt.canHasTrees.ToString() + "\n" + "HasTree = " + (mt.tree == null).ToString());
+					tt.ErrorMsg("Too far away from forest");
+		}else 
+		{
+				tt.ErrorMsg("Build failed");
 		}
-
 	}
 
 	void Build(MapTile mt, GameObject parent) 

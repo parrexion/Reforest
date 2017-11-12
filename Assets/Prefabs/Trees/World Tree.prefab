@@ -275,7 +275,7 @@ MonoBehaviour:
   maxGrowthLevel: 1
   growthTime: 0
   currentGrowthLevel: 1
-  rotateTrees: 1
+  rotateTrees: 0
 --- !u!199 &199198512814628308
 ParticleSystemRenderer:
   serializedVersion: 4
