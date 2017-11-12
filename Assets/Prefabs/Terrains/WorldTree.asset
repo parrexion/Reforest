@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b80d125322af2545ade74901f618c1a, type: 3}
   m_Name: WorldTree
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: bc14a0f7586379d4ea5c8b50efcf89f0, type: 2}
+  material: {fileID: 2100000, guid: d9dd6e36631cb41e6aa4de55f6064448, type: 2}
   isWalkable: 0
   canHasTrees: 0
   isWater: 0
