@@ -19,7 +19,7 @@ public class Stats : MonoBehaviour {
 			
         }
     }
-    #endregion
+#endregion
 
 
 	public Costs[] costs;

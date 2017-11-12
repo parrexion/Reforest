@@ -4,6 +4,19 @@ using UnityEngine;
 
 public class MapRepresentation : MonoBehaviour {
 
+#region Singleton
+    public static MapRepresentation instance;
+
+    protected void Awake() {
+        if (instance != null) {
+            Destroy(gameObject);
+        }
+        else {
+            instance = this;
+        }
+    }
+#endregion
+
 	[SerializeField]
 	private List<MapTile> map;
 	private MapGenerationLibrary mapLib;
@@ -23,11 +36,19 @@ public class MapRepresentation : MonoBehaviour {
 
 	private void GenerateMap() {
 		MapTile tile;
+		EnemySpawner eSpawn = EnemySpawner.instance;
 		for (int j = 0; j < size.x; j++) {
 			for (int i = 0; i < size.y; i++) {
+				bool isConcrete = false;
+				//Add spawn point
+				if (i == 0 || j == 0 || i == size.x-1 || j == size.y-1){
+					eSpawn.spawnLocations.Add(new Vector2(i, j));
+					isConcrete = true;
+				}
+
 				//Generate tile information
 				tile = new MapTile();
-				tile.terrain = mapLib.GetRandomTerrain();
+				tile.terrain = (isConcrete) ? mapLib.concreteTile : mapLib.GetRandomTerrain();
 				tile.canHasTrees = tile.terrain.canHasTrees;
 				map.Add(tile);
 				tile.cord = new Vector2(i, j);
@@ -47,7 +68,7 @@ public class MapRepresentation : MonoBehaviour {
 					tree.transform.SetParent(tileObj.transform);
 					tree.transform.localPosition = Vector3.zero;
 					tile.tree = tree.GetComponent<BaseTree>();
-				} else if( tile.terrain.isWater ) {
+				} else if (tile.terrain.isWater) {
 					tileObj.transform.position -= new Vector3(0,0.15f,0);
 					tileObj.transform.localScale = new Vector3(1.1f,1.1f,1.1f);
 					GameObject tree = Instantiate(mapLib.waterTree);
@@ -74,6 +95,8 @@ public class MapRepresentation : MonoBehaviour {
 
 	public bool HasTrees(Vector2 position) {
 		MapTile tile = getTile(position);
+		if (tile.tree == null)
+			return false;
 		return (tile.tree.currentGrowthLevel > 0);
 	}
 

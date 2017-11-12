@@ -4,15 +4,13 @@
  		
  public class FireActor : Actor {		
  		
- 	public Direction travelDirection;		
- 	public float timeDelay;		
- 	private float currentDelay;		
+ 	public Direction travelDirection;
  		
      protected override void GetInput() {		
  		nextDirection = travelDirection;		
  		Vector2 nextPos = GetNextPositionFromDirection(nextDirection);		
  		if (!mr.IsWalkable(nextPos))		
- 			Destroy(gameObject);		
+ 			Destroy(gameObject);	
      }		
  		
  }

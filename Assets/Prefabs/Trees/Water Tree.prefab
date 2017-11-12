@@ -200,7 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reflectionMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   reflectSkybox: 1
   clearColor: {r: 1, g: 1, b: 1, a: 1}
   reflectionSampler: _ReflectionTex
@@ -256,5 +256,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sharedMaterial: {fileID: 2100000, guid: 656fde119942645aa8e062e04c119aa1, type: 2}
-  waterQuality: 2
-  edgeBlend: 1
+  waterQuality: 0
+  edgeBlend: 0

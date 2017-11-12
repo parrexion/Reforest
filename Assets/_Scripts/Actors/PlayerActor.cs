@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class PlayerActor : Actor {
 
-	public float movementCooldown = 2.0f;
-	private float currentCooldown;
 	private bool moveNorth = false;
 	private bool moveSouth = false;
 	private bool moveEast = false;
@@ -30,10 +28,6 @@ public class PlayerActor : Actor {
     protected override void GetInput() {
 		float r = cameraRig.transform.eulerAngles.y;
 		debugText2.text = r.ToString();
-
-		currentCooldown -= Time.deltaTime;
-		if (currentCooldown > 0)
-			return;
 
 		if(controllerLeft.triggerPressed || controllerRight.triggerPressed) {
 			debugText.text += "\nTrigger Pressed";
@@ -82,9 +76,6 @@ public class PlayerActor : Actor {
 		if (!mr.IsWalkable(nextPosition)){
 			nextDirection = Direction.NONE;
 			Debug.Log("Could not walk");
-		}
-		else {
-			currentCooldown = movementCooldown;
 		}
 	}
 }
