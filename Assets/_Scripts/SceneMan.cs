@@ -9,11 +9,11 @@ public class SceneMan {
 		SceneManager.LoadScene(0);
 	}
 
-	public static void NewGame() {
+	public static void IntroScene() {
 		SceneManager.LoadScene(1);
 	}
 
-	public static void IntroScene() {
+	public static void NewGame() {
 		SceneManager.LoadScene(2);
 	}
 	
@@ -22,6 +22,6 @@ public class SceneMan {
 	}
 
 	public static void QuitGame() {
-		
+		Application.Quit();
 	}
 }
