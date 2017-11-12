@@ -13,7 +13,7 @@ public class BasicTree : BaseTree {
     }
 
     protected override void Grow() {
-        transform.localPosition = new Vector3(0,(2+currentGrowthLevel)*0.25f,0);
+        // transform.localPosition = new Vector3(0,(2+currentGrowthLevel)*0.25f,0);
 		currentGrowthLevel++;
 		currentGrowthTime = 0;
         transform.localScale = new Vector3(1,(1+currentGrowthLevel),1);
