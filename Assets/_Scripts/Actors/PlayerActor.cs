@@ -16,8 +16,8 @@ public class PlayerActor : Actor {
 	public SteamVR_TrackedController controllerLeft;
 	public SteamVR_TrackedController controllerRight;
 
-	public Text debugText;
-	public Text debugText2;
+	// public Text debugText;
+	// public Text debugText2;
 
 	// Use this for initialization
 	protected override void Initialize() {
@@ -27,22 +27,22 @@ public class PlayerActor : Actor {
 
     protected override void GetInput() {
 		float r = cameraRig.transform.eulerAngles.y;
-		debugText2.text = r.ToString();
+			// debugText2.text = r.ToString();
 
 		if(controllerLeft.triggerPressed || controllerRight.triggerPressed) {
-			debugText.text += "\nTrigger Pressed";
+			// debugText.text += "\nTrigger Pressed";
 			
 			if(r < 45 || r > 315) {
-				debugText.text += "\nNorth";
+				// debugText.text += "\nNorth";
 				moveNorth = true;
 			} else if(r >= 45 && r < 135) {
-				debugText.text += "\nEast";
+				// debugText.text += "\nEast";
 				moveEast = true;
 			} else if(r >= 135 && r < 225) {
-				debugText.text += "\nSouth";
+				// debugText.text += "\nSouth";
 				moveSouth = true;
 			} else {
-				debugText.text += "\nWest";
+				// debugText.text += "\nWest";
 				moveWest = true;
 			}
 		}

@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: []
-  size: {x: 11, y: 11}
+  size: {x: 21, y: 21}
   tileSize: {x: 10, y: 10}
   spawnHeight: 3
 --- !u!114 &114919659706961526
