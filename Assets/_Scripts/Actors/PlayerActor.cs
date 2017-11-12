@@ -17,6 +17,7 @@ public class PlayerActor : Actor {
 	public GameObject bulletPrefab;
 	public Text text1;
 	public Text text2;
+	public AudioSource shoot;
 
 	public SteamVR_TrackedObject cameraRig;
 	public SteamVR_TrackedObject controllerRightTransform;
@@ -100,6 +101,7 @@ public class PlayerActor : Actor {
 
 			Debug.Log("Aqua left: " + Stats.instance.resources[0]);
 			Debug.Log("Solar left: " + Stats.instance.resources[1]);
+			shoot.Play();
 		}else 
 		{
 			Debug.Log("Not enought resources to shoot");

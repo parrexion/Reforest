@@ -62,7 +62,7 @@ public class Stats : MonoBehaviour {
 	void Update ()
 	
 	{	
-#if UNITY_EDITOR
+
 		if(Input.GetKeyDown("x")) 
 		{
 			//Resource 1
@@ -84,7 +84,7 @@ public class Stats : MonoBehaviour {
 			//Resource 1
 			DecreaseStat(1, 25);
 		}
-#endif
+
 
 		if(Input.GetMouseButtonDown(0))
 			PickUp(Input.mousePosition);
