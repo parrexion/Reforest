@@ -13,12 +13,12 @@ public class ToolTip : MonoBehaviour {
 
 	public Text t2;
 
-	public GameObject child0;
-	public GameObject child1;
+	public GameObject resourcesLayout;
+	public GameObject errorLayout;
 	
 
-	public float max = -180;
-	public float min = -220;
+	public float ymax = 170; //Show
+	public float ymin = 15; //Hide
 
 	public float target;
 
@@ -31,69 +31,63 @@ public class ToolTip : MonoBehaviour {
 	float timer = 0;
 
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
 	// Update is called once per frame
 	void Update () {
 		timer += Time.deltaTime;
 		
-		if(move)
-			if(bg.rectTransform.localPosition.y != target) 
-			{
+		if(move) {
+			if(bg.rectTransform.localPosition.y != target)
 				bg.rectTransform.localPosition = new Vector2(bg.rectTransform.localPosition.x, Mathf.Lerp(bg.rectTransform.localPosition.y, target, step));
-			}else 
-			{
+			else
 				move = false;
-			}
+		}
 
+		if(errorMode) 
+		{
+			resourcesLayout.SetActive(false);
+			errorLayout.SetActive(true);
 
+			if (timer >= 2)
+				FadeOut();
 
-
-
-			if(errorMode) 
-			{
-				child0.SetActive(false);
-				child1.SetActive(true);
-
-
-				if(timer >= 2) { FadeOut(); }
-			}else 
-			{
-				child0.SetActive(true);
-				child1.SetActive(false);
-
-			}
+		} else {
+			resourcesLayout.SetActive(true);
+			errorLayout.SetActive(false);
+		}
 
 	}
 
-	public void Fade(string s, string s1) 
-	{
+	/// <summary>
+	/// Show the tooltip.
+	/// </summary>
+	/// <param name="s"></param>
+	/// <param name="s1"></param>
+	public void FadeIn(string s, string s1) {
 		errorMode = false;
 		move = true;
-
 		t0.text = s;
 		t1.text = s1;
-		target = max;
-		
+		target = ymax;
 	}
-	public void FadeOut() 
-	{
+
+	/// <summary>
+	/// Hide the tooltip.
+	/// </summary>
+	public void FadeOut() {
 		errorMode = false;
 		move = true;
-
-		target = min;
+		target = ymin;
 	}
 
-	public void ErrorMsg(string s) 
-	{
+	/// <summary>
+	/// Show an error message in the tooltip.
+	/// </summary>
+	/// <param name="s"></param>
+	public void ErrorMsg(string s) {
 		errorMode = true;
 		move = true;
-
 		t2.text = s;
-		target = max;
+		target = ymax;
 		timer = 0;	
 	}
 
