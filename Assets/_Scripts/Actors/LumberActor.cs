@@ -4,14 +4,21 @@
  		
  public class LumberActor : Actor {
 
+    public ControlAnimation controlAnim;
+
+
 	public Direction attackDirection;
- 		
+ 	
 	protected override void GetInput() {
 		if (isAttacking)
+        { 
 			nextDirection = attackDirection;
-		else {
+            controlAnim.Attack();
+        }
+        else {
 			nextDirection = GetDirectionTowardsMiddle();
 			attackDirection = nextDirection;
+            controlAnim.Run();
 		}
 	}		
  		
@@ -60,5 +67,5 @@
 			default:
 				return Direction.NONE;
 		}
-	}
- }
+    }
+}
