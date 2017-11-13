@@ -4,7 +4,6 @@
  		
  public class LumberActor : Actor {
 
-	private Direction[] dirs = {Direction.EAST, Direction.NORTH, Direction.WEST, Direction.SOUTH};
 	public Direction attackDirection;
  		
 	protected override void GetInput() {
@@ -17,17 +16,17 @@
 	}		
  		
 	private Direction GetDirectionTowardsMiddle(){
-		int xDiff = (int)currentCoordinate.x - (int)(mr.size.x/2);
-		int yDiff = (int)currentCoordinate.y - (int)(mr.size.y/2);
+		int xDiff = (int)currentCoordinate.x - (int)MapUtility.mapSize.x/2;
+		int yDiff = (int)currentCoordinate.y - (int)MapUtility.mapSize.y/2;
 
 		List<Direction> possibleDirs = new List<Direction>();
-		if (xDiff > 0 && mr.IsWalkable(mr.GetNextPositionFromDirection(currentCoordinate, Direction.WEST)))
+		if (xDiff > 0 && mr.IsWalkable(MapUtility.GetNextPositionFromDirection(currentCoordinate, Direction.WEST),this))
 			possibleDirs.Add(Direction.WEST);
-		if (yDiff > 0 && mr.IsWalkable(mr.GetNextPositionFromDirection(currentCoordinate, Direction.SOUTH)))
+		if (yDiff > 0 && mr.IsWalkable(MapUtility.GetNextPositionFromDirection(currentCoordinate, Direction.SOUTH),this))
 			possibleDirs.Add(Direction.SOUTH);
-		if (xDiff < 0 && mr.IsWalkable(mr.GetNextPositionFromDirection(currentCoordinate, Direction.EAST)))
+		if (xDiff < 0 && mr.IsWalkable(MapUtility.GetNextPositionFromDirection(currentCoordinate, Direction.EAST),this))
 			possibleDirs.Add(Direction.EAST);
-		if (yDiff < 0 && mr.IsWalkable(mr.GetNextPositionFromDirection(currentCoordinate, Direction.NORTH)))
+		if (yDiff < 0 && mr.IsWalkable(MapUtility.GetNextPositionFromDirection(currentCoordinate, Direction.NORTH),this))
 			possibleDirs.Add(Direction.NORTH);
 
 		if (possibleDirs.Count > 0) {
@@ -36,10 +35,10 @@
 		}
 		int r2 = Random.Range(0,4);
 		int d = Random.Range(0,2);
-		Direction testDirection = dirs[r2];
+		Direction testDirection = MapUtility.allDirections[r2];
 		int c = 0;
 		
-		while (!mr.IsWalkable(mr.GetNextPositionFromDirection(currentCoordinate, testDirection)) && c < 4) {
+		while (!mr.IsWalkable(MapUtility.GetNextPositionFromDirection(currentCoordinate, testDirection),this) && c < 4) {
 			c++;
 			testDirection = GetNextDirection(testDirection,d);
 		}

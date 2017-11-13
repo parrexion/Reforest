@@ -5,50 +5,46 @@ using UnityEngine.UI;
 
 public class PlayerActor : Actor {
 
-	private bool moveNorth = false;
-	private bool moveSouth = false;
-	private bool moveEast = false;
-	private bool moveWest = false;
 	public Vector2 spawnPosition = new Vector2(0,0);
-	public int spawnHeight = 5;
+
+	[Header("Bullet")]
+	public GameObject bulletPrefab;
 	public float bulletAquaCost = 3f;
 	public float bulletSolarCost = 0f;
 
-	public GameObject bulletPrefab;
-	public Text text1;
-	public Text text2;
-
+	[Header("Steam VR")]
 	public SteamVR_TrackedObject cameraRig;
 	public SteamVR_TrackedObject controllerRightTransform;
 	public SteamVR_TrackedController controllerLeft;
 	public SteamVR_TrackedController controllerRight;
 
+	public Gauge movementGuage;
+
+
 	// Use this for initialization
 	public override void Initialize() {
 		base.Initialize();
 		gridPosition = -1;
-		mr.setSpawnHeight(spawnHeight);
+		movementGuage.maxValue = movementCooldown;
 	}
 
     protected override void GetInput() {
-		float r = cameraRig.transform.eulerAngles.y;
-			text1.text = r.ToString();
 
+		//Update movementGauge
+		movementGuage.UpdateVisualValue(currentCooldown);
+
+		float r = cameraRig.transform.eulerAngles.y;
+		Direction faceDirection = Direction.NONE;
 		if(controllerLeft.triggerPressed) {
 			// CHECK THE ROTATION OF THE HMD
-			
 			if(r < 45 || r > 315) {
-				 text2.text += "\nNorth";
-				moveNorth = true;
+				faceDirection = Direction.NORTH;
 			} else if(r >= 45 && r < 135) {
-				 text2.text += "\nEast";
-				moveEast = true;
+				faceDirection = Direction.EAST;
 			} else if(r >= 135 && r < 225) {
-				 text2.text += "\nSouth";
-				moveSouth = true;
+				faceDirection = Direction.SOUTH;
 			} else {
-				 text2.text += "\nWest";
-				moveWest = true;
+				faceDirection = Direction.WEST;
 			}
 		} else if (controllerRight.triggerPressed && bulletPrefab != null){
 			FireBullet(bulletAquaCost, bulletSolarCost);
@@ -56,38 +52,36 @@ public class PlayerActor : Actor {
 
 		Vector2 nextPosition = currentCoordinate;
 
-		if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow) || moveWest){
-			nextPosition = new Vector2(currentCoordinate.x-1, currentCoordinate.y);
+		if (faceDirection != Direction.NONE) {
+			nextDirection = faceDirection;
+		}
+#if UNITY_EDITOR
+		else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)){
 			nextDirection = Direction.WEST;
-			moveWest = false;
 		}
-		else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow) || moveEast){
-			nextPosition = new Vector2(currentCoordinate.x+1, currentCoordinate.y);
+		else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)){
 			nextDirection = Direction.EAST;
-			moveEast = false;
 		}
-		else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || moveNorth){
-			nextPosition = new Vector2(currentCoordinate.x, currentCoordinate.y+1);
+		else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)){
 			nextDirection = Direction.NORTH;
-			moveNorth = false;
 		}
-		else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow) || moveSouth){
-			nextPosition = new Vector2(currentCoordinate.x, currentCoordinate.y-1);
+		else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)){
 			nextDirection = Direction.SOUTH;
-			moveSouth = false;
 		}
-
+#endif
 		if (nextDirection == Direction.NONE)
 			return;
 
-		if (!mr.IsWalkable(nextPosition)){
+		nextPosition = new Vector2(currentCoordinate.x-1, currentCoordinate.y);
+
+		if (!mr.IsWalkable(nextPosition, this)){
 			nextDirection = Direction.NONE;
 			Debug.Log("Could not walk");
 		}
 	}
 
 	void FireBullet(float aquaCost, float solarCost){
-		if(aquaCost <= Stats.instance.resources[0] && solarCost <= Stats.instance.resources[1] ) 
+		if(Stats.instance.CanAfford(Stats.Resource.AQUA, aquaCost) && solarCost <= Stats.instance.currentRes[1] ) 
 		{
 			//FIRE A BULLET
 			GameObject bullet = Instantiate(bulletPrefab);
@@ -95,11 +89,11 @@ public class PlayerActor : Actor {
 			bullet.transform.rotation = controllerRightTransform.transform.rotation;
 			currentCooldown = 0.5f;
 
-			Stats.instance.DecreaseStat(0, aquaCost);
-			Stats.instance.DecreaseStat(1, solarCost);
+			Stats.instance.DecreaseStat(Stats.Resource.AQUA, aquaCost);
+			Stats.instance.DecreaseStat(Stats.Resource.SUN, solarCost);
 
-			Debug.Log("Aqua left: " + Stats.instance.resources[0]);
-			Debug.Log("Solar left: " + Stats.instance.resources[1]);
+			Debug.Log("Aqua left: " + Stats.instance.currentRes[0]);
+			Debug.Log("Solar left: " + Stats.instance.currentRes[1]);
 		}else 
 		{
 			Debug.Log("Not enought resources to shoot");

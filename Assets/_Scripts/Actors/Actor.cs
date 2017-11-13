@@ -18,7 +18,6 @@ public abstract class Actor : MonoBehaviour {
 	public int id;
 	public int gridPosition = -1;
 
-	public Gauge gauge;
 
 	// Use this for initialization
 	void Start () {
@@ -36,17 +35,14 @@ public abstract class Actor : MonoBehaviour {
 			}
 		}
 
-		transform.position = currentWorldPosition = previousWorldPosition = mr.CalculatePositionFromCoordinate(currentCoordinate, gridPosition);
+		transform.position = currentWorldPosition = previousWorldPosition = MapUtility.ConvertCoordinateToWorldPosition(currentCoordinate, gridPosition);
 		id = uuid++;
 		if (isEnemy)
 			currentCooldown = movementCooldown;
 	}
 	
 	void Update() {
-		if (!isEnemy) 
-		{
-			gauge.Visualize(currentCooldown, movementCooldown);
-		}
+
 		currentCooldown -= Time.deltaTime;		
  		if (currentCooldown > 0) {
  			return;		
@@ -82,13 +78,13 @@ public abstract class Actor : MonoBehaviour {
  			return;
 		}	
  		
- 		Vector2 nextPosition = mr.GetNextPositionFromDirection(currentCoordinate, nextDirection);		
+ 		Vector2 nextPosition = MapUtility.GetNextPositionFromDirection(currentCoordinate, nextDirection);		
  		if (isEnemy && mr.HasTrees(nextPosition)){		
  			mr.getTile(nextPosition).tree.TakeDamage();
 			isAttacking = true;
 			previousWorldPosition = currentWorldPosition;
  		}		
- 		else if (mr.IsWalkable(nextPosition)) {
+ 		else if (mr.IsWalkable(nextPosition,this)) {
 			if (isEnemy) {
 				int res = mr.getTile(nextPosition).RegisterAtTile(this);
 				if (res != -1) {
@@ -96,16 +92,13 @@ public abstract class Actor : MonoBehaviour {
 					mr.getTile(currentCoordinate).UnregisterAtTile(id);
 					currentCoordinate = nextPosition;
 					previousWorldPosition = currentWorldPosition;
-					currentWorldPosition = mr.CalculatePositionFromCoordinate(currentCoordinate, gridPosition);
-					// transform.position = mr.CalculatePositionFromCoordinate(currentCoordinate, gridPosition);
+					currentWorldPosition = MapUtility.ConvertCoordinateToWorldPosition(currentCoordinate, gridPosition);
 				}
-				Debug.Log("Grid position is now: " + gridPosition);
 			}
 			else {
  				currentCoordinate = nextPosition;
 				previousWorldPosition = currentWorldPosition;	
- 				currentWorldPosition = mr.CalculatePositionFromCoordinate(currentCoordinate, gridPosition);	
- 				// transform.position = mr.CalculatePositionFromCoordinate(currentCoordinate, gridPosition);	
+ 				currentWorldPosition = MapUtility.ConvertCoordinateToWorldPosition(currentCoordinate, gridPosition);	
 			}
 			isAttacking = false;
  		}		

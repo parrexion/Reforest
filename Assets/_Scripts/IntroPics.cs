@@ -18,6 +18,8 @@ public class IntroPics : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (Input.GetKeyDown(KeyCode.Space))
+			SceneMan.NewGame();
 		currentTime += Time.deltaTime;
 		if (currentTime >= changeTime) {
 			showPic();
