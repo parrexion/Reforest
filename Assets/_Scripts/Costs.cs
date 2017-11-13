@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Costs {
-
-	public Costs(float a, float b) 
-	{
-		aquaticCost = a;
-		solarCost = b;
-	}
 
 	public float aquaticCost;
 	public float solarCost;
 
+	public Costs(float aquaCost, float sunCost) {
+		this.aquaticCost = aquaCost;
+		this.solarCost = sunCost;
+	}
 }

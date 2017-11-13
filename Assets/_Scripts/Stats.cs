@@ -14,48 +14,35 @@ public class Stats : MonoBehaviour {
         }
         else {
             instance = this;
-
-		costs = new Costs[] { new Costs(0, 0), new Costs(25, 25), new Costs(0, 40), new Costs(25, 25)};
-			
         }
     }
 #endregion
 
+	public enum Resource {AQUA = 0, SUN = 1}
 
-	public Costs[] costs;
+	public float[] currentRes;
+	float[] maxResources;
+	Gauge[] gauges;
 
-
-	public float[] resources;
-	float[] resourcesMax;
-	Gauge[] resourcesGauge;
-
-	[Header("Resource 0 (Left)")]
-
-	public float resource0Max;
-	public Gauge resource0Gauge;
-
-	[Header("Resource 1 (Right)")]
-	public float resource1Max;	
-	public Gauge resource1Gauge;	
-
+	[Header ("Resource 0 (Left)")]
 	float resource0 = 0;
-	float resource1 = 0; 
-	// Use this for initialization
+	[SerializeField] private float resourceAquaMax;
+	[SerializeField] private Gauge gaugeAqua;
 
-	public int selectedBuilding;
+	[Header ("Resource 1 (Right)")]
+	float resource1 = 0;
+	[SerializeField] private float resourceSunMax;
+	[SerializeField] private Gauge gaugeSun;
 
 
     void Start () 
 	{
-		resources = new float[] { resource0, resource1 };
-		resourcesMax = new float[] { resource0Max, resource1Max };
-		resourcesGauge = new Gauge[] { resource0Gauge, resource1Gauge };
+		currentRes = new float[] { resource0, resource1 };
+		maxResources = new float[] { resourceAquaMax, resourceSunMax };
+		gauges = new Gauge[] { gaugeAqua, gaugeSun };
 				
-		resource0Gauge.maxValue = resource0Max;
-		resource1Gauge.maxValue = resource1Max;	
-
-		selectedBuilding = -1;
-
+		gaugeAqua.maxValue = resourceAquaMax;
+		gaugeSun.maxValue = resourceSunMax;	
 	}
 	
 	// Update is called once per frame
@@ -66,50 +53,60 @@ public class Stats : MonoBehaviour {
 		if(Input.GetKeyDown("x")) 
 		{
 			//Resource 1
-			IncreaseStat(0, 25);
+			IncreaseStat(Resource.AQUA, 25);
 		}
 		if(Input.GetKeyDown("z")) 
 		{
 			//Resource 1
-			IncreaseStat(1, 25);
+			IncreaseStat(Resource.SUN, 25);
 		}
 
 		if(Input.GetKeyDown("v")) 
 		{
 			//Resource 1
-			DecreaseStat(0, 25);
+			DecreaseStat(Resource.AQUA, 25);
 		}
 		if(Input.GetKeyDown("c")) 
 		{
 			//Resource 1
-			DecreaseStat(1, 25);
+			DecreaseStat(Resource.SUN, 25);
 		}
 
 
 		if(Input.GetMouseButtonDown(0))
 			PickUp(Input.mousePosition);
-
 	}
 
-	public void IncreaseStat(int resourceID, float value) 
-	{
-		if(resources[resourceID] + value <= resourcesMax[resourceID] )
-		{
-			resources[resourceID] += value;
-			// resourcesGauge[resourceID].value = resources[resourceID];
-		}
-	
-		VisualizeGauges();
+	/// <summary>
+	/// Check if we can afford the cost.
+	/// </summary>
+	/// <param name="cost"></param>
+	/// <param name="type"></param>
+	/// <returns></returns>
+	public bool CanAfford(Resource type, float cost){
+		return cost <= currentRes[(int)type];
 	}
 
-	public void DecreaseStat(int resourceID, float value) 
+	/// <summary>
+	/// Increases the resource with the given amount up to at most maximum.
+	/// </summary>
+	/// <param name="resourceID"></param>
+	/// <param name="value"></param>
+	public void IncreaseStat(Resource type, float value) 
 	{
-		if (resources[resourceID] - value >= 0) 
-		{
-			resources[resourceID] -= value;			
-			// resourcesGauge[resourceID].value = resources[resourceID];
-			VisualizeGauges();
-		}
+		currentRes[(int)type] = Mathf.Min(currentRes[(int)type] + value, maxResources[(int)type]);
+		UpdateGauges();
+	}
+
+	/// <summary>
+	/// Decreases the resource with the given amount down to at lowest 0.
+	/// </summary>
+	/// <param name="resourceID"></param>
+	/// <param name="value"></param>
+	public void DecreaseStat(Resource type, float value) 
+	{
+		currentRes[(int)type] = Mathf.Max(currentRes[(int)type] + value, 0);
+		UpdateGauges();
 	}
 
 	void PickUp(Vector2 mpos) 
@@ -121,21 +118,18 @@ public class Stats : MonoBehaviour {
 			hit.collider.gameObject.GetComponent<EnergySphere>().Collect();
 			Debug.Log(hit.collider);
 		}
-
-
 	}
 
-	void VisualizeGauges() 
+	/// <summary>
+	/// Updates the values for all gauges.
+	/// </summary>
+	void UpdateGauges() 
 	{
-		int i = 0;
-		foreach(Gauge g in resourcesGauge) 
-		{ 
-			g.Visualize(resources[i]);
-			i++; 	
+		for (int i = 0; i < gauges.Length; i++) {
+			gauges[i].UpdateRealValue(currentRes[i]);
 		}
-
+		Debug.Log("Updated gauges");
 	}
-
 }
 
 

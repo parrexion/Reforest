@@ -20,9 +20,6 @@ public static MapGenerationLibrary instance;
 	public List<GameObject> treeTypes;
 	public GameObject tilePrefab;
 	public GameObject waterTree;
-	public TileTerrain concreteTile;
-	public TileTerrain worldTreeTile;
-	public TileTerrain cityTile;
 
 
 	public TileTerrain GetRandomTerrain(){
@@ -34,6 +31,14 @@ public static MapGenerationLibrary instance;
 		return treeTypes[index];
 	}
 
+#region SpecificGenerationFunction
+	/// <summary>
+	/// Generates a specific map. Quite ugly.
+	/// If implemented properly, use a map editor or read from a file.
+	/// </summary>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
+	/// <returns></returns>
 	public TileTerrain GetSpecificTerrain(int x, int y) {
 
 		//Create some water
@@ -150,4 +155,6 @@ public static MapGenerationLibrary instance;
 		if (x == 11 && y == 12) return treeTypes[3];
 		return treeTypes[0];
 	}	
+#endregion
+
 }

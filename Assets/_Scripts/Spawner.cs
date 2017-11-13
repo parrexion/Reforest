@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour {
 
-	public GameObject sphere;
-
+	public Transform sphere;
 	public float range;
 
 	// Use this for initialization
@@ -14,16 +13,14 @@ public class Spawner : MonoBehaviour {
 		if(Input.GetKeyDown("p")) {Spawn();}
 	}
 
+	/// <summary>
+	/// Spawns a new EnergySphere.
+	/// </summary>
 	public void Spawn() 
 	{
-		GameObject go = Instantiate(sphere) as GameObject;
-		go.transform.SetParent(this.transform); 
+		Transform t = Instantiate(sphere);
+		t.SetParent(this.transform); 
 
-		go.transform.localPosition = new Vector3(
-			Random.Range(0, range), 
-			go.transform.position.y, 
-			Random.Range(0, range));
-	
-		go.GetComponent<EnergySphere>().stats = Stats.instance;
+		t.localPosition = new Vector3(Random.Range(0, range), t.transform.position.y, Random.Range(0, range));
 	}
 }

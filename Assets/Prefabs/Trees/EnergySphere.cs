@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class EnergySphere : MonoBehaviour {
 
-
-	public Stats stats;
+	public Stats.Resource type;
 	public float lifetime;
 	public float energy;
-	public int resourceID;
 
 
 	void Start() 
@@ -18,7 +16,7 @@ public class EnergySphere : MonoBehaviour {
 
 	public void Collect() 
 	{
-		stats.IncreaseStat(resourceID, energy);
+		Stats.instance.IncreaseStat(type, energy);
 		Destroy(this.gameObject);
 	}
 }

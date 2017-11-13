@@ -13,4 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 0abb26ded804e7c4dac2c4b7d32b0134, type: 2}
   isWalkable: 1
-  canHasTrees: 1
+  canHaveTrees: 1
+  isAttackable: 1
+  isWater: 0
+  isSwamp: 0
+  isCity: 0

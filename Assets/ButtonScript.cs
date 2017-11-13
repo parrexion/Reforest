@@ -6,33 +6,27 @@ using UnityEngine.EventSystems;
 
 public class ButtonScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
+	public Builder builder;
 	public ToolTip tt;
-
-	public int spellID;
-
-	public string cost1;
-	public string cost2;
+	public int buildingID;
+	public string costAqua;
+	public string costSun;
 
 
 	// Use this for initialization
 	void Start () {
-		cost1 = Stats.instance.costs[spellID].aquaticCost.ToString();
-		cost2 = Stats.instance.costs[spellID].solarCost.ToString();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+		Costs cost = builder.GetSelectedBuildingCosts(buildingID);
+		costAqua = cost.aquaticCost.ToString();
+		costSun = cost.solarCost.ToString();
 	}
 
-    void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
-    {
-		tt.Fade(cost1, cost2);
-    }
+	void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
+	{
+		tt.FadeIn(costAqua, costSun);
+	}
 
-    void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
-    {
+	void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
+	{
 		tt.FadeOut();
-		
-    }
+	}
 }

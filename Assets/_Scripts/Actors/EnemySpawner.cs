@@ -4,27 +4,16 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour {
 
-#region Singleton
-    public static EnemySpawner instance;
-
-    protected void Awake() {
-        if (instance != null) {
-            Destroy(gameObject);
-        }
-        else {
-            instance = this;
-        }
-    }
-#endregion
+	private MapRepresentation mr;
 
 	public Transform firePrefab;
 	public Transform lumberPrefab;
-	public List<Vector2> spawnLocations;
 	public float spawnInterval;
 	private float currentTime;
 
 	// Use this for initialization
 	void Start () {
+		mr = MapRepresentation.instance;
 	}
 	
 	// Update is called once per frame
@@ -36,37 +25,31 @@ public class EnemySpawner : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Spawns a fire enemy and initializes it.
+	/// </summary>
 	void SpawnFire() {
 		currentTime = spawnInterval;
-		int r = Random.Range(0,spawnLocations.Count);
-		Vector2 pos = spawnLocations[r];
+		int r = Random.Range(0,mr.spawnLocations.Count);
+		Vector2 pos = mr.spawnLocations[r];
 		Transform fire = Instantiate(firePrefab);
 		FireActor fireActor = fire.GetComponent<FireActor>();
 		fireActor.currentCoordinate = pos;
-		fireActor.travelDirection = GetStartingDirection(pos);
+		fireActor.travelDirection = MapUtility.FaceFromEdge(pos);
 		fireActor.Initialize();
 	}
 
+	/// <summary>
+	/// Spawns a lumber jack enemy and initializes it.
+	/// </summary>
 	void SpawnLumber() {
 		currentTime = spawnInterval;
-		int r = Random.Range(0,spawnLocations.Count);
-		Vector2 pos = spawnLocations[r];
+		int r = Random.Range(0,mr.spawnLocations.Count);
+		Vector2 pos = mr.spawnLocations[r];
 		Transform lumber = Instantiate(lumberPrefab);
 		LumberActor lumberActor = lumber.GetComponent<LumberActor>();
 		lumberActor.currentCoordinate = pos;
 		lumberActor.Initialize();
 	}
 
-	Direction GetStartingDirection(Vector2 coordinate){
-		if (coordinate.x == 1)
-			return Direction.EAST;
-		if (coordinate.y == 1)
-			return Direction.NORTH;
-		if (coordinate.x == MapRepresentation.instance.size.x-2)
-			return Direction.WEST;
-		if (coordinate.y == MapRepresentation.instance.size.y-2)
-			return Direction.SOUTH;
-
-		return Direction.NONE;
-	}
 }

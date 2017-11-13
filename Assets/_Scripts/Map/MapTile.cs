@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class MapTile {
+public class MapTile : MonoBehaviour{
 
-	public BaseTree tree;
-	public TileTerrain terrain;
-	public List<Actor> actors = new List<Actor>();
-	public List<Pickups> pickups;
-	public bool canHasTrees;
 	public Vector2 cord;
+	public TileTerrain terrain;
+	public BaseTree tree;
+	public List<Actor> actors = new List<Actor>();
+	public bool hasTree { get { return (tree != null && tree.currentGrowthLevel > 0); }}
 
 
 	public int RegisterAtTile(Actor act){
-		if (actors.Count >= 4){
+		if (actors.Count >= MapUtility.maxEnemiesTogether){
 			return -1;
 		}
 		

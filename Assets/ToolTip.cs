@@ -6,95 +6,83 @@ using UnityEngine.UI;
 
 public class ToolTip : MonoBehaviour {
 
-	public Image bg;
+	public Image background;
 
-	public Text t0;
-	public Text t1;
+	public Text costAqua;
+	public Text costSun;
+	public Text errorText;
 
-	public Text t2;
-
-	public GameObject child0;
-	public GameObject child1;
+	public GameObject resourcesLayout;
+	public GameObject errorLayout;
 	
-
-	public float max = -180;
-	public float min = -220;
+	public float ymax = -365f; //Show
+	public float ymin = -520f; //Hide
 
 	public float target;
-
 	public float step = 0.5f;
-	
 	private bool move;
-
 	private bool errorMode;
-
 	float timer = 0;
 
 
-	// Use this for initialization
-	void Start () {
-		
+	void Start() {
+		transform.localPosition = new Vector3(transform.localPosition.x,ymin,transform.localPosition.z);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		timer += Time.deltaTime;
 		
-		if(move)
-			if(bg.rectTransform.localPosition.y != target) 
-			{
-				bg.rectTransform.localPosition = new Vector2(bg.rectTransform.localPosition.x, Mathf.Lerp(bg.rectTransform.localPosition.y, target, step));
-			}else 
-			{
+		if(move) {
+			if(background.rectTransform.localPosition.y != target)
+				background.rectTransform.localPosition = new Vector2(background.rectTransform.localPosition.x, Mathf.Lerp(background.rectTransform.localPosition.y, target, step));
+			else
 				move = false;
-			}
+		}
 
+		if(errorMode) 
+		{
+			resourcesLayout.SetActive(false);
+			errorLayout.SetActive(true);
 
+			if (timer >= 2)
+				FadeOut();
 
-
-
-			if(errorMode) 
-			{
-				child0.SetActive(false);
-				child1.SetActive(true);
-
-
-				if(timer >= 2) { FadeOut(); }
-			}else 
-			{
-				child0.SetActive(true);
-				child1.SetActive(false);
-
-			}
+		} else {
+			resourcesLayout.SetActive(true);
+			errorLayout.SetActive(false);
+		}
 
 	}
 
-	public void Fade(string s, string s1) 
-	{
-		errorMode = false;
-		move = true;
-
-		t0.text = s;
-		t1.text = s1;
-		target = max;
-		
-	}
-	public void FadeOut() 
-	{
-		errorMode = false;
-		move = true;
-
-		target = min;
+	/// <summary>
+	/// Show the tooltip.
+	/// </summary>
+	/// <param name="s"></param>
+	/// <param name="s1"></param>
+	public void FadeIn(string s, string s1) {
+		costAqua.text = s;
+		costSun.text = s1;
+		target = ymax;
 	}
 
-	public void ErrorMsg(string s) 
-	{
-		errorMode = true;
-		move = true;
+	/// <summary>
+	/// Hide the tooltip.
+	/// </summary>
+	public void FadeOut() {
+		target = ymin;
+	}
 
-		t2.text = s;
-		target = max;
-		timer = 0;	
+	/// <summary>
+	/// Show an error message in the tooltip.
+	/// </summary>
+	/// <param name="s"></param>
+	public void ErrorMsg(string s) {
+		errorText.text = s;
+		target = ymax;
+		timer = 0;
+		resourcesLayout.SetActive(false);
+		errorLayout.SetActive(true);
 	}
 
 }

@@ -17,17 +17,10 @@ public class MapRepresentation : MonoBehaviour {
     }
 #endregion
 
-	[SerializeField]
-	private List<MapTile> map;
+	private List<MapTile> map = new List<MapTile>();
+	public List<Vector2> spawnLocations = new List<Vector2>();
 	private MapGenerationLibrary mapLib;
 
-	public Vector2 size;
-	public Vector2 tileSize;
-	public int spawnHeight = 3;
-
-	public void setSpawnHeight(int val){
-		spawnHeight = val;
-	}
 
 	void Start() {
 		mapLib = GetComponent<MapGenerationLibrary>();
@@ -36,14 +29,13 @@ public class MapRepresentation : MonoBehaviour {
 
 	private void GenerateMap() {
 		MapTile tile;
-		EnemySpawner eSpawn = EnemySpawner.instance;
-		for (int j = 0; j < size.x; j++) {
-			for (int i = 0; i < size.y; i++) {
+		for (int j = 0; j < MapUtility.mapSize.x; j++) {
+			for (int i = 0; i < MapUtility.mapSize.y; i++) {
 				bool isCity = false;
 				bool isConcrete = false;
 				//Add City border
-				if (i == 0 || j == 0 || i == size.x-1 || j == size.y-1) {
-					if (i == 0 ^ j == 0 ^ i == size.x-1 ^ j == size.y-1) {
+				if (i == 0 || j == 0 || i == MapUtility.mapSize.x-1 || j == MapUtility.mapSize.y-1) {
+					if (i == 0 ^ j == 0 ^ i == MapUtility.mapSize.x-1 ^ j == MapUtility.mapSize.y-1) {
 						bool spawnCity = ((i+j) % 3 != 0);
 						isCity = spawnCity;
 						isConcrete = !spawnCity;
@@ -52,41 +44,45 @@ public class MapRepresentation : MonoBehaviour {
 						isConcrete = true;
 					}
 				}
-				else if (i == 1 || j == 1 || i == size.x-2 || j == size.y-2) {
+				else if (i == 1 || j == 1 || i == MapUtility.mapSize.x-2 || j == MapUtility.mapSize.y-2) {
 					isConcrete = true;
-					if (i == 1 ^ j == 1 ^ i == size.x-2 ^ j == size.y-2)
-						eSpawn.spawnLocations.Add(new Vector2(i, j));
+					if (i == 1 ^ j == 1 ^ i == MapUtility.mapSize.x-2 ^ j == MapUtility.mapSize.y-2)
+						spawnLocations.Add(new Vector2(i, j));
 				}
-
-				//Generate tile information
-				tile = new MapTile();
-				tile.terrain = ScriptableObject.Instantiate((isCity) ? mapLib.cityTile : (isConcrete) ? mapLib.concreteTile : mapLib.GetSpecificTerrain(i,j));
-				tile.canHasTrees = tile.terrain.canHasTrees;
-				map.Add(tile);
-				tile.cord = new Vector2(i, j);
 				
 				//Generate visual tile
 				GameObject tileObj = Instantiate(mapLib.tilePrefab);
-				tileObj.transform.position = new Vector3(tileSize.x * i, 0, tileSize.y * j);
+				tileObj.transform.position = MapUtility.ConvertCoordinateToWorldPosition(new Vector2(i,j),-1);
 				tileObj.transform.localRotation = Quaternion.identity;
-				tileObj.GetComponent<MeshRenderer>().material = tile.terrain.material;
 				tileObj.transform.parent = this.transform;
 
-				//Add some trees for now
-				if (i == (int)(size.x/2) && j == (int)(size.y/2)) {
+				//Generate tile information
+				tile = tileObj.GetComponent<MapTile>();
+				tile.cord = new Vector2(i, j);
+				tile.terrain = ScriptableObject.Instantiate((isCity) ? mapLib.terrainTypes[5] : 
+								(isConcrete) ? mapLib.terrainTypes[3] : mapLib.GetSpecificTerrain(i,j));
+				tileObj.GetComponent<MeshRenderer>().material = tile.terrain.material;
+				map.Add(tile);
+
+				//Create the special tree trees
+				if (i == (int)MapUtility.mapSize.x/2 && j == (int)MapUtility.mapSize.y/2) {
+					//World tree in the middle
 					GameObject tree = Instantiate(mapLib.GetTree(5));
 					tree.transform.SetParent(tileObj.transform);
 					tree.transform.localPosition = Vector3.zero;
 					tile.tree = tree.GetComponent<BaseTree>();
-					tileObj.GetComponent<MeshRenderer>().material = mapLib.worldTreeTile.material;
+					tile.terrain = mapLib.terrainTypes[4];
+					tileObj.GetComponent<MeshRenderer>().material = tile.terrain.material;
 				}
-				else if (tile.canHasTrees){
+				else if (tile.terrain.canHaveTrees){
+					//Basic or no tree
 					GameObject tree = Instantiate(mapLib.GetSpecificTree(i,j));
 					tree.transform.SetParent(tileObj.transform);
 					tree.transform.localPosition = Vector3.zero;
 					tile.tree = tree.GetComponent<BaseTree>();
 					tile.tree.currentGrowthLevel = tile.tree.maxGrowthLevel;
 				} else if (tile.terrain.isWater){
+					//Water wave
 					tileObj.transform.position -= new Vector3(0,0.15f,0);
 					tileObj.transform.localScale = new Vector3(1.1f,1.1f,1.1f);
 					GameObject tree = Instantiate(mapLib.waterTree);
@@ -94,6 +90,7 @@ public class MapRepresentation : MonoBehaviour {
 					tree.transform.localPosition = new Vector3(0,0.15f,0);
 					tile.tree = tree.GetComponent<BaseTree>();
 				} else if (tile.terrain.isCity){
+					//City trees
 					GameObject tree = Instantiate(mapLib.GetTree(4));
 					tree.transform.SetParent(tileObj.transform);
 					tree.transform.localPosition = Vector3.zero;
@@ -102,62 +99,65 @@ public class MapRepresentation : MonoBehaviour {
 						tree.transform.localRotation = Quaternion.Euler(0,0,0);
 					if (j == 0)
 						tree.transform.localRotation = Quaternion.Euler(0,90,0);
-					if (i == size.x)
+					if (i == MapUtility.mapSize.x)
 						tree.transform.localRotation = Quaternion.Euler(0,180,0);
-					if (j == size.y)
+					if (j == MapUtility.mapSize.y)
 						tree.transform.localRotation = Quaternion.Euler(0,270,0);
 				}
 			}
 		}
 	}
 
-	public MapTile getTile(Vector2 position) {
-		return map[convertToIndex(position)];
+	public MapTile getTile(Vector2 coordinate) {
+		return map[convertToIndex(coordinate)];
 	}
 
-	public bool IsWalkable(Vector2 position){
+	private int convertToIndex(Vector2 position){
+		return (int)position.y*(int)MapUtility.mapSize.x + (int)position.x;
+	}
+
+	/// <summary>
+	/// Checks if the tile can be walked on or attacked by enemies.
+	/// </summary>
+	/// <param name="coordinate"></param>
+	/// <param name="actor"></param>
+	/// <returns></returns>
+	public bool IsWalkable(Vector2 coordinate, Actor actor){
 		//Out of bounds
-		if (position.x < 0 || position.y < 0 || position.x >= size.x || position.y >= size.y)
+		if (MapUtility.IsOutOfBounds(coordinate))
 			return false;
 
-		MapTile tile = getTile(position);
-		return tile.terrain.isWalkable && !tile.terrain.isWater;
+		MapTile tile = getTile(coordinate);
+		return tile.terrain.isWalkable || (actor.isEnemy && tile.terrain.isAttackable);
 	}
 
-	public bool HasTrees(Vector2 position) {
-		MapTile tile = getTile(position);
+	/// <summary>
+	/// Checks if a tile has any trees planted at the moment.
+	/// </summary>
+	/// <param name="coordinate"></param>
+	/// <returns></returns>
+	public bool HasTrees(Vector2 coordinate) {
+		MapTile tile = getTile(coordinate);
 		if (tile.tree == null)
 			return false;
 		return (tile.tree.currentGrowthLevel > 0);
 	}
 
-	public Vector3 CalculatePositionFromCoordinate(Vector2 position, int tilePosition){
-		float xOff = 0f;
-		float zOff = 0f; 
-		if (tilePosition != -1){
-			xOff = (tilePosition > 1) ? 2.5f : -2.5f;
-			zOff = (tilePosition % 2 == 0) ? 2.5f : -2.5f; 
-		}
-		return new Vector3(position.x*tileSize.x+xOff, 0.5f,position.y*tileSize.y+zOff);
-	}
+	/// <summary>
+	/// Checks if one of the tiles beside the coordinate has a tree.
+	/// </summary>
+	/// <param name="coordinate"></param>
+	/// <returns></returns>
+	public bool CheckIfTreeIsNearby(Vector2 coordinate){
+		if (HasTrees(MapUtility.GetNextPositionFromDirection(coordinate, Direction.NORTH)))
+			return true;
+		if (HasTrees(MapUtility.GetNextPositionFromDirection(coordinate, Direction.WEST)))
+			return true;
+		if (HasTrees(MapUtility.GetNextPositionFromDirection(coordinate, Direction.SOUTH)))
+			return true;
+		if (HasTrees(MapUtility.GetNextPositionFromDirection(coordinate, Direction.EAST)))
+			return true;
 
-	public Vector2 GetNextPositionFromDirection(Vector2 currentPos, Direction nextDir) {
-		switch (nextDir) {
-			case Direction.NORTH:
-				return new Vector2(currentPos.x, currentPos.y+1);
-			case Direction.WEST:
-				return new Vector2(currentPos.x-1, currentPos.y);
-			case Direction.EAST:
-				return new Vector2(currentPos.x+1, currentPos.y);
-			case Direction.SOUTH:
-				return new Vector2(currentPos.x, currentPos.y-1);
-			default:		
- 				return currentPos;
-		}
-	}
-
-	
-	private int convertToIndex(Vector2 position){
-		return (int)position.y*(int)size.x + (int)position.x;
+		return false;
 	}
 }
