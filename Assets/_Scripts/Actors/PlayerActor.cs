@@ -11,6 +11,7 @@ public class PlayerActor : Actor {
 	public GameObject bulletPrefab;
 	public float bulletAquaCost = 3f;
 	public float bulletSolarCost = 0f;
+	public AudioSource shoot;
 
 	[Header("Steam VR")]
 	public SteamVR_TrackedObject cameraRig;
@@ -94,6 +95,7 @@ public class PlayerActor : Actor {
 
 			Debug.Log("Aqua left: " + Stats.instance.currentRes[0]);
 			Debug.Log("Solar left: " + Stats.instance.currentRes[1]);
+			shoot.Play();
 		}else 
 		{
 			Debug.Log("Not enought resources to shoot");

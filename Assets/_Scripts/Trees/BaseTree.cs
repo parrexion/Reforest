@@ -56,6 +56,9 @@ public abstract class BaseTree : MonoBehaviour {
 	protected abstract void DeGrow();
 
 	public void TakeDamage() {
+		if (currentGrowthLevel <= 0)
+			return;
+			
 		currentGrowthLevel--;
 		currentGrowthTime = 0;
 		DeGrow();

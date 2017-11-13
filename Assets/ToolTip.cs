@@ -6,38 +6,36 @@ using UnityEngine.UI;
 
 public class ToolTip : MonoBehaviour {
 
-	public Image bg;
+	public Image background;
 
-	public Text t0;
-	public Text t1;
-
-	public Text t2;
+	public Text costAqua;
+	public Text costSun;
+	public Text errorText;
 
 	public GameObject resourcesLayout;
 	public GameObject errorLayout;
 	
-
-	public float ymax = 170; //Show
-	public float ymin = 15; //Hide
+	public float ymax = -365f; //Show
+	public float ymin = -520f; //Hide
 
 	public float target;
-
 	public float step = 0.5f;
-	
 	private bool move;
-
 	private bool errorMode;
-
 	float timer = 0;
 
+
+	void Start() {
+		transform.localPosition = new Vector3(transform.localPosition.x,ymin,transform.localPosition.z);
+	}
 
 	// Update is called once per frame
 	void Update () {
 		timer += Time.deltaTime;
 		
 		if(move) {
-			if(bg.rectTransform.localPosition.y != target)
-				bg.rectTransform.localPosition = new Vector2(bg.rectTransform.localPosition.x, Mathf.Lerp(bg.rectTransform.localPosition.y, target, step));
+			if(background.rectTransform.localPosition.y != target)
+				background.rectTransform.localPosition = new Vector2(background.rectTransform.localPosition.x, Mathf.Lerp(background.rectTransform.localPosition.y, target, step));
 			else
 				move = false;
 		}
@@ -63,10 +61,8 @@ public class ToolTip : MonoBehaviour {
 	/// <param name="s"></param>
 	/// <param name="s1"></param>
 	public void FadeIn(string s, string s1) {
-		errorMode = false;
-		move = true;
-		t0.text = s;
-		t1.text = s1;
+		costAqua.text = s;
+		costSun.text = s1;
 		target = ymax;
 	}
 
@@ -74,8 +70,6 @@ public class ToolTip : MonoBehaviour {
 	/// Hide the tooltip.
 	/// </summary>
 	public void FadeOut() {
-		errorMode = false;
-		move = true;
 		target = ymin;
 	}
 
@@ -84,11 +78,11 @@ public class ToolTip : MonoBehaviour {
 	/// </summary>
 	/// <param name="s"></param>
 	public void ErrorMsg(string s) {
-		errorMode = true;
-		move = true;
-		t2.text = s;
+		errorText.text = s;
 		target = ymax;
-		timer = 0;	
+		timer = 0;
+		resourcesLayout.SetActive(false);
+		errorLayout.SetActive(true);
 	}
 
 }
