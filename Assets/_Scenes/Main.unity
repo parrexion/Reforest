@@ -2521,16 +2521,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114912196286027168, guid: 1ba93911d20f05248befca1a5bbe99eb,
-        type: 2}
-      propertyPath: tt
-      value: 
-      objectReference: {fileID: 110543843}
-    - target: {fileID: 114912196286027168, guid: 1ba93911d20f05248befca1a5bbe99eb,
-        type: 2}
-      propertyPath: buttons
-      value: 
-      objectReference: {fileID: 1826848727}
     - target: {fileID: 114026658264813170, guid: 1ba93911d20f05248befca1a5bbe99eb,
         type: 2}
       propertyPath: gaugeAqua
@@ -2541,6 +2531,16 @@ Prefab:
       propertyPath: gaugeSun
       value: 
       objectReference: {fileID: 1740737559}
+    - target: {fileID: 114912196286027168, guid: 1ba93911d20f05248befca1a5bbe99eb,
+        type: 2}
+      propertyPath: tt
+      value: 
+      objectReference: {fileID: 110543843}
+    - target: {fileID: 114912196286027168, guid: 1ba93911d20f05248befca1a5bbe99eb,
+        type: 2}
+      propertyPath: buttons
+      value: 
+      objectReference: {fileID: 1826848727}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ba93911d20f05248befca1a5bbe99eb, type: 2}
   m_IsPrefabParent: 0
