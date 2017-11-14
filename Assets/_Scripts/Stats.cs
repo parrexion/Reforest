@@ -19,6 +19,8 @@ public class Stats : MonoBehaviour {
 #endregion
 
 	public enum Resource {AQUA = 0, SUN = 1}
+	public int MaxSpawnedResources = 3;
+	public int CurrentSpawnedResources = 0;
 
 	public float[] currentRes;
 	float[] maxResources;

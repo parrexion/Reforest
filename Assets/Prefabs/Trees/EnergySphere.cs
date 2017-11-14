@@ -19,4 +19,9 @@ public class EnergySphere : MonoBehaviour {
 		Stats.instance.IncreaseStat(type, energy);
 		Destroy(this.gameObject);
 	}
+
+	void OnDestroy()
+	{
+		Stats.instance.CurrentSpawnedResources--;
+	}
 }

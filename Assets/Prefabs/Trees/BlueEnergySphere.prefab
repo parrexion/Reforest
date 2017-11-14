@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  lifetime: 10
+  lifetime: 5
   energy: 10
 --- !u!135 &135831930043915620
 SphereCollider:

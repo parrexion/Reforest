@@ -10,7 +10,7 @@ public class Spawner : MonoBehaviour {
 	// Use this for initialization
 	void Update () {
 		//For testing
-		if(Input.GetKeyDown("p")) {Spawn();}
+		//Sif(Input.GetKeyDown("p")) {Spawn();}
 	}
 
 	/// <summary>
@@ -18,9 +18,14 @@ public class Spawner : MonoBehaviour {
 	/// </summary>
 	public void Spawn() 
 	{
-		Transform t = Instantiate(sphere);
-		t.SetParent(this.transform); 
+		if(Stats.instance.CurrentSpawnedResources < Stats.instance.MaxSpawnedResources) {	
+			Transform t = Instantiate(sphere)	;
+			t.SetParent(this.transform); 
 
-		t.localPosition = new Vector3(Random.Range(0, range), t.transform.position.y, Random.Range(0, range));
+			t.localPosition = new Vector3(Random.Range(0, range), t.transform.position.y, Random.Range(0, range));
+			Stats.instance.CurrentSpawnedResources++;
+		} else {
+			Debug.Log("CANNOT SPAWN ANY MORE RESOURCES, LIMIT EXEEDED!");
+		}
 	}
 }
