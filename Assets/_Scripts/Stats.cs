@@ -77,8 +77,8 @@ public class Stats : MonoBehaviour {
 		}
 
 
-		if(Input.GetMouseButtonDown(0))
-			PickUp(Input.mousePosition);
+		// if(Input.GetMouseButtonDown(0))
+		// 	PickUp(Input.mousePosition);
 	}
 
 	/// <summary>
@@ -114,16 +114,16 @@ public class Stats : MonoBehaviour {
 		UpdateGauges();
 	}
 
-	void PickUp(Vector2 mpos) 
-	{
-		Ray ray = Camera.main.ScreenPointToRay(mpos);
-		RaycastHit hit;
-		if (Physics.Raycast(ray, out hit, 1000.0F) && hit.collider.tag == "PickUp") 
-		{
-			hit.collider.gameObject.GetComponent<EnergySphere>().Collect();
-			Debug.Log(hit.collider);
-		}
-	}
+	// void PickUp(Vector2 mpos) 
+	// {
+	// 	Ray ray = Camera.main.ScreenPointToRay(mpos);
+	// 	RaycastHit hit;
+	// 	if (Physics.Raycast(ray, out hit, 1000.0F) && hit.collider.tag == "PickUp") 
+	// 	{
+	// 		hit.collider.gameObject.GetComponent<EnergySphere>().Collect();
+	// 		Debug.Log(hit.collider);
+	// 	}
+	// }
 
 	/// <summary>
 	/// Updates the values for all gauges.

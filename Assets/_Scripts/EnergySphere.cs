@@ -13,6 +13,11 @@ public class EnergySphere : MonoBehaviour {
 	{
 		Destroy(gameObject, lifetime);
 	}
+	
+	void OnMouseOver() 
+	{
+		Collect();
+	}
 
 	public void Collect() 
 	{
