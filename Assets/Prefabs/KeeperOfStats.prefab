@@ -52,9 +52,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef21b0721ceb471abad75dd751ff97f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxSpawnedResources: 3
+  CurrentSpawnedResources: 0
   currentRes: []
+  resource0: 25
   resourceAquaMax: 100
   gaugeAqua: {fileID: 0}
+  resource1: 25
   resourceSunMax: 100
   gaugeSun: {fileID: 0}
 --- !u!114 &114912196286027168

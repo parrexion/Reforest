@@ -27,12 +27,12 @@ public class Stats : MonoBehaviour {
 	Gauge[] gauges;
 
 	[Header ("Resource 0 (Left)")]
-	float resource0 = 0;
+	[SerializeField] float resource0 = 0;
 	[SerializeField] private float resourceAquaMax;
 	[SerializeField] private Gauge gaugeAqua;
 
 	[Header ("Resource 1 (Right)")]
-	float resource1 = 0;
+	[SerializeField] float resource1 = 0;
 	[SerializeField] private float resourceSunMax;
 	[SerializeField] private Gauge gaugeSun;
 
@@ -45,6 +45,8 @@ public class Stats : MonoBehaviour {
 				
 		gaugeAqua.maxValue = resourceAquaMax;
 		gaugeSun.maxValue = resourceSunMax;	
+
+		UpdateGauges();
 	}
 	
 	// Update is called once per frame
@@ -86,7 +88,8 @@ public class Stats : MonoBehaviour {
 	/// <param name="type"></param>
 	/// <returns></returns>
 	public bool CanAfford(Resource type, float cost){
-		return cost <= currentRes[(int)type];
+		Debug.Log("Cost for " + type + ": " + cost);
+		return (cost <= currentRes[(int)type]);
 	}
 
 	/// <summary>
@@ -107,7 +110,7 @@ public class Stats : MonoBehaviour {
 	/// <param name="value"></param>
 	public void DecreaseStat(Resource type, float value) 
 	{
-		currentRes[(int)type] = Mathf.Max(currentRes[(int)type] + value, 0);
+		currentRes[(int)type] = Mathf.Max(currentRes[(int)type] - value, 0);
 		UpdateGauges();
 	}
 

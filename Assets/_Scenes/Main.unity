@@ -1582,6 +1582,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114662030044496012, guid: 34916514f8bbb8b4abb482cbde739497,
+        type: 2}
+      propertyPath: spawnInterval
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34916514f8bbb8b4abb482cbde739497, type: 2}
   m_IsPrefabParent: 0
@@ -2521,16 +2526,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114912196286027168, guid: 1ba93911d20f05248befca1a5bbe99eb,
-        type: 2}
-      propertyPath: tt
-      value: 
-      objectReference: {fileID: 110543843}
-    - target: {fileID: 114912196286027168, guid: 1ba93911d20f05248befca1a5bbe99eb,
-        type: 2}
-      propertyPath: buttons
-      value: 
-      objectReference: {fileID: 1826848727}
     - target: {fileID: 114026658264813170, guid: 1ba93911d20f05248befca1a5bbe99eb,
         type: 2}
       propertyPath: gaugeAqua
@@ -2541,6 +2536,16 @@ Prefab:
       propertyPath: gaugeSun
       value: 
       objectReference: {fileID: 1740737559}
+    - target: {fileID: 114912196286027168, guid: 1ba93911d20f05248befca1a5bbe99eb,
+        type: 2}
+      propertyPath: tt
+      value: 
+      objectReference: {fileID: 110543843}
+    - target: {fileID: 114912196286027168, guid: 1ba93911d20f05248befca1a5bbe99eb,
+        type: 2}
+      propertyPath: buttons
+      value: 
+      objectReference: {fileID: 1826848727}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ba93911d20f05248befca1a5bbe99eb, type: 2}
   m_IsPrefabParent: 0
@@ -2855,7 +2860,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2f8d9cd0e2faa4e249a20f13a784eb73, type: 3}
   - {fileID: 21300000, guid: fdfab58c9fd22472987c7a01badfb28a, type: 3}
   - {fileID: 21300000, guid: 9ca97edfc3aa54dc39fadf54a7a343b6, type: 3}
-  buttonImages: []
+  buttonImages:
+  - {fileID: 1830884649}
+  - {fileID: 1734194862}
+  - {fileID: 1474627518}
 --- !u!222 &1826848728
 CanvasRenderer:
   m_ObjectHideFlags: 0

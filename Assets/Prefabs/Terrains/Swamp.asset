@@ -16,5 +16,5 @@ MonoBehaviour:
   canHaveTrees: 1
   isAttackable: 1
   isWater: 0
-  isSwamp: 0
+  isSwamp: 1
   isCity: 0

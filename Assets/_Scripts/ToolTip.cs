@@ -78,6 +78,7 @@ public class ToolTip : MonoBehaviour {
 	/// </summary>
 	/// <param name="s"></param>
 	public void ErrorMsg(string s) {
+		Debug.Log(s);
 		errorText.text = s;
 		target = ymax;
 		timer = 0;

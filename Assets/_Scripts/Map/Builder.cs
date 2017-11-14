@@ -9,7 +9,7 @@ public class Builder : MonoBehaviour {
 
 	public int selectedBuilding = -1;
 	public ToolTip tt;
-	public Buttons buttons;
+	public BuildButtons buttons;
 
 	[Header("Building costs")]
 	public Costs[] costs;
@@ -35,7 +35,7 @@ public class Builder : MonoBehaviour {
 	/// <param name="index"></param>
 	/// <returns></returns>
 	public Costs GetSelectedBuildingCosts(int selectedIndex){
-		return (selectedIndex < 0) ? costs[selectedIndex] : new Costs(0,0);
+		return (selectedIndex >= 0) ? costs[selectedIndex] : new Costs(0,0);
 	}
 
 	/// <summary>
@@ -47,21 +47,24 @@ public class Builder : MonoBehaviour {
 		if(selectedBuilding == -1)
 			return;
 		
+		bool built = false;
 		Ray ray = Camera.main.ScreenPointToRay(mpos);
 		RaycastHit hit;
 		if (Physics.Raycast(ray, out hit, 1000.0F)) {
 			Debug.Log("Raycast Hit " + hit);
 			MapTile tile = hit.transform.GetComponent<MapTile>();
 			if (tile)
-				TryBuild(tile);
+				built = TryBuild(tile);
 			else {
-				selectedBuilding = -1;
 				Debug.Log("Raycast hit other object");
 			}
 		}
 		else {
-			selectedBuilding = -1;
 			Debug.Log("Raycast missed");
+		}
+
+		if (!built) {
+			selectedBuilding = -1;
 		}
 	}
 
@@ -69,7 +72,7 @@ public class Builder : MonoBehaviour {
 	/// Checks if it possible to build the selected building on the tile and then builds it.
 	/// </summary>
 	/// <param name="tile"></param>
-	void TryBuild(MapTile tile) 
+	bool TryBuild(MapTile tile) 
 	{
 		Debug.Log("Trying to build at: " + tile.cord);
 
@@ -84,6 +87,7 @@ public class Builder : MonoBehaviour {
 			{
 				Debug.Log("Building");
 				Build(tile);
+				return true;
 			}
 			else {
 				tt.ErrorMsg("Not enough resources");
@@ -95,6 +99,7 @@ public class Builder : MonoBehaviour {
 		else {
 			tt.ErrorMsg("Build failed");
 		}
+		return false;
 	}
 
 	/// <summary>

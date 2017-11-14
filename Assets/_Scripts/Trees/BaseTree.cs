@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class BaseTree : MonoBehaviour {
 
+	public MapTile tile;
 	public int maxGrowthLevel;
 	public float growthTime;
 	public int currentGrowthLevel = 0;
@@ -68,6 +69,12 @@ public abstract class BaseTree : MonoBehaviour {
 		GameObject nextTree = Instantiate(MapGenerationLibrary.instance.GetTree(index));
 		nextTree.transform.SetParent(transform.parent);
 		nextTree.transform.localPosition = Vector3.zero;
+		BaseTree nTree = nextTree.GetComponent<BaseTree>();
+		nTree.tile = tile;
+		Debug.Log(tile);
+		Debug.Log(nextTree.GetComponent<BaseTree>());
+		Debug.Log(tile.tree);
+		tile.tree = nextTree.GetComponent<BaseTree>();
 		Destroy(gameObject);
 	}
 }

@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Builder))]
-public class Buttons : MonoBehaviour {
+public class BuildButtons : MonoBehaviour {
 
 	public Sprite[] deactive;
 	public Sprite[] active;
@@ -16,7 +15,7 @@ public class Buttons : MonoBehaviour {
 	{
 		for (int i = 0; i < buttonImages.Length; i++)
 		{
-			buttonImages[i].sprite = (i == selectedBuilding) ? active[i] : deactive[i];
+			buttonImages[i].sprite = (i == (selectedBuilding-1)) ? active[i] : deactive[i];
 		}
 	}
 }

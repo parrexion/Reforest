@@ -71,6 +71,7 @@ public class MapRepresentation : MonoBehaviour {
 					tree.transform.SetParent(tileObj.transform);
 					tree.transform.localPosition = Vector3.zero;
 					tile.tree = tree.GetComponent<BaseTree>();
+					tile.tree.tile = tile;
 					tile.terrain = mapLib.terrainTypes[4];
 					tileObj.GetComponent<MeshRenderer>().material = tile.terrain.material;
 				}
@@ -80,6 +81,7 @@ public class MapRepresentation : MonoBehaviour {
 					tree.transform.SetParent(tileObj.transform);
 					tree.transform.localPosition = Vector3.zero;
 					tile.tree = tree.GetComponent<BaseTree>();
+					tile.tree.tile = tile;
 					tile.tree.currentGrowthLevel = tile.tree.maxGrowthLevel;
 				} else if (tile.terrain.isWater){
 					//Water wave
@@ -89,12 +91,14 @@ public class MapRepresentation : MonoBehaviour {
 					tree.transform.SetParent(tileObj.transform);
 					tree.transform.localPosition = new Vector3(0,0.15f,0);
 					tile.tree = tree.GetComponent<BaseTree>();
+					tile.tree.tile = tile;
 				} else if (tile.terrain.isCity){
 					//City trees
 					GameObject tree = Instantiate(mapLib.GetTree(4));
 					tree.transform.SetParent(tileObj.transform);
 					tree.transform.localPosition = Vector3.zero;
 					tile.tree = tree.GetComponent<BaseTree>();
+					tile.tree.tile = tile;
 					if (i == 0)
 						tree.transform.localRotation = Quaternion.Euler(0,0,0);
 					if (j == 0)
