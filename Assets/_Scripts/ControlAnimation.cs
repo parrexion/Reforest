@@ -14,13 +14,18 @@ public class ControlAnimation : MonoBehaviour {
     private float timer = 0f;
     private bool readyToAnimate;
 
+    private void Start() {
+        readyToAnimate = true;
+    }
+
     private void Update()
     {
+        
         timer += Time.deltaTime;
-        if(timer > anim.GetCurrentAnimatorClipInfo(0)[currentState].clip.length)
-        {
-            readyToAnimate = true;
-        }
+        //if( timer >= anim.GetCurrentAnimatorClipInfo(0)[currentState].clip.length && !readyToAnimate)
+        //{
+        //    readyToAnimate = true;
+        //}
     }
 
     public void Idle()

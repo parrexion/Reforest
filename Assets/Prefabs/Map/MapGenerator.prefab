@@ -77,6 +77,6 @@ MonoBehaviour:
   - {fileID: 1519347466890542, guid: 4bf5bb5e6286f46998d13a96d4d5dba9, type: 2}
   - {fileID: 1133775137340008, guid: 11afeefd2f5086443b2b36e0e3b94d18, type: 2}
   - {fileID: 1102086701775614, guid: 28e615b8a5d61c34794e27e79e9f0b57, type: 2}
-  - {fileID: 1519347466890542, guid: 80360b8f7c72993438944b05cf093dca, type: 2}
+  - {fileID: 1000011998996884, guid: 2f2475e695505194996d6f3e2bce58b5, type: 2}
   tilePrefab: {fileID: 1859351353138954, guid: c3d984deac2b99f44bf3da2b519f567a, type: 2}
   waterTree: {fileID: 1028637618144014, guid: debde06eac42573429c4d18f3b0967fb, type: 2}

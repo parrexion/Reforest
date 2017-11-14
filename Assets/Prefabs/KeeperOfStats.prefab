@@ -55,10 +55,8 @@ MonoBehaviour:
   MaxSpawnedResources: 3
   CurrentSpawnedResources: 0
   currentRes: []
-  resource0: 25
   resourceAquaMax: 100
   gaugeAqua: {fileID: 0}
-  resource1: 25
   resourceSunMax: 100
   gaugeSun: {fileID: 0}
 --- !u!114 &114912196286027168

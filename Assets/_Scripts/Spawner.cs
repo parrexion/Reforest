@@ -24,9 +24,6 @@ public class Spawner : MonoBehaviour {
 
 			t.localPosition = new Vector3(Random.Range(0, range), t.transform.position.y, Random.Range(0, range));
 			Stats.instance.CurrentSpawnedResources++;
-		} 
-		// else {
-		// 	Debug.Log("CANNOT SPAWN ANY MORE RESOURCES, LIMIT EXEEDED!");
-		// }
+		}
 	}
 }

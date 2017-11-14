@@ -13,6 +13,8 @@ public abstract class Actor : MonoBehaviour {
 	public Vector3 currentWorldPosition;
   	protected Direction nextDirection;
  	public float movementCooldown = 0.5f;
+	public float npcAttackCooldown = 6f;
+	public float npcMovementCooldown = 4f;
  	public float currentCooldown;
 	public bool isAttacking;
 	public int id;
@@ -83,6 +85,9 @@ public abstract class Actor : MonoBehaviour {
  			mr.getTile(nextPosition).tree.TakeDamage();
 			isAttacking = true;
 			previousWorldPosition = currentWorldPosition;
+			currentCooldown = npcAttackCooldown;
+			nextDirection = Direction.NONE;
+			return;
  		}		
  		else if (mr.IsWalkable(nextPosition,this)) {
 			if (isEnemy) {
@@ -93,6 +98,10 @@ public abstract class Actor : MonoBehaviour {
 					currentCoordinate = nextPosition;
 					previousWorldPosition = currentWorldPosition;
 					currentWorldPosition = MapUtility.ConvertCoordinateToWorldPosition(currentCoordinate, gridPosition);
+					nextDirection = Direction.NONE;
+					currentCooldown = npcMovementCooldown;
+					isAttacking = false;
+					return;
 				}
 			}
 			else {
@@ -107,10 +116,13 @@ public abstract class Actor : MonoBehaviour {
  	}
 
 	void LerpToNextPosition(){
-		if (isEnemy)
+		if (isEnemy) {
+			transform.LookAt(currentWorldPosition);
 			transform.position = Vector3.Lerp(previousWorldPosition,currentWorldPosition,GetPercentCooldownFilled());
-		else
+		}
+		else {
 			transform.position = currentWorldPosition;
+		}
 	}
 
 }
