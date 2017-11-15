@@ -15,7 +15,7 @@ InputManager:
     altPositiveButton: d
     gravity: 3
     dead: 0.001
-    sensitivity: 3
+    sensitivity: 6
     snap: 1
     invert: 0
     type: 0
@@ -313,8 +313,8 @@ InputManager:
     m_Name: HTC_VIU_LeftTrackpadVertical
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 1
-    positiveButton: 2
+    negativeButton: 
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 0

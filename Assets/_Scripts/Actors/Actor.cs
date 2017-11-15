@@ -12,9 +12,7 @@ public abstract class Actor : MonoBehaviour {
 	public Vector3 previousWorldPosition;
 	public Vector3 currentWorldPosition;
   	protected Direction nextDirection;
- 	public float movementCooldown = 0.5f;
-	public float npcAttackCooldown = 6f;
-	public float npcMovementCooldown = 4f;
+ 	public float actionCooldown = 3f;
  	public float currentCooldown;
 	public bool isAttacking;
 	public int id;
@@ -29,8 +27,8 @@ public abstract class Actor : MonoBehaviour {
 
 	public virtual void Initialize() {
 		mr = GameObject.Find("MapGenerator").GetComponent<MapRepresentation>();
-		gridPosition = mr.getTile(currentCoordinate).RegisterAtTile(this);
 		if (isEnemy) {
+			gridPosition = mr.getTile(currentCoordinate).RegisterAtTile(this);
 			if (gridPosition == -1) {
 				Destroy(gameObject);
 				return;
@@ -40,10 +38,10 @@ public abstract class Actor : MonoBehaviour {
 		transform.position = currentWorldPosition = previousWorldPosition = MapUtility.ConvertCoordinateToWorldPosition(currentCoordinate, gridPosition);
 		id = uuid++;
 		if (isEnemy)
-			currentCooldown = movementCooldown;
+			currentCooldown = actionCooldown;
 	}
 	
-	void Update() {
+	protected virtual void Update() {
 
 		currentCooldown -= Time.deltaTime;		
  		if (currentCooldown > 0) {
@@ -58,7 +56,7 @@ public abstract class Actor : MonoBehaviour {
 	}
 
 	public float GetPercentCooldownFilled(){
-		return 1f - Mathf.Clamp01(currentCooldown / movementCooldown);
+		return 1f - Mathf.Clamp01(currentCooldown / actionCooldown);
 	}
 
 	void OnCollisionEnter(Collision other)
@@ -85,7 +83,7 @@ public abstract class Actor : MonoBehaviour {
  			mr.getTile(nextPosition).tree.TakeDamage();
 			isAttacking = true;
 			previousWorldPosition = currentWorldPosition;
-			currentCooldown = npcAttackCooldown;
+			currentCooldown = actionCooldown;
 			nextDirection = Direction.NONE;
 			return;
  		}		
@@ -99,7 +97,7 @@ public abstract class Actor : MonoBehaviour {
 					previousWorldPosition = currentWorldPosition;
 					currentWorldPosition = MapUtility.ConvertCoordinateToWorldPosition(currentCoordinate, gridPosition);
 					nextDirection = Direction.NONE;
-					currentCooldown = npcMovementCooldown;
+					currentCooldown = actionCooldown;
 					isAttacking = false;
 					return;
 				}
@@ -112,7 +110,7 @@ public abstract class Actor : MonoBehaviour {
 			isAttacking = false;
  		}		
  		nextDirection = Direction.NONE;
- 		currentCooldown = movementCooldown;
+ 		currentCooldown = actionCooldown;
  	}
 
 	void LerpToNextPosition(){

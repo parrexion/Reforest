@@ -16,7 +16,6 @@ public class WorldTree : BaseTree {
     }
 
     protected override void DeGrow() {
-        //transform.localPosition = new Vector3(0,(1+currentGrowthLevel)*0.25f,0);
         transform.localScale = new Vector3(startScale,((startScale / 10) * currentGrowthLevel),startScale);
 
         if (currentGrowthLevel <= 0) {

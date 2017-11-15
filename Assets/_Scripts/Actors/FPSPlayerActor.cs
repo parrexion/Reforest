@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerActor : Actor {
+public class FPSPlayerActor : Actor {
 
 	public Vector2 spawnPosition = new Vector2(0,0);
 
@@ -13,30 +13,30 @@ public class PlayerActor : Actor {
 	public float bulletSolarCost = 0f;
 	public AudioSource shoot;
 
-	[Header("Steam VR")]
-	public SteamVR_TrackedObject cameraRig;
-	public SteamVR_TrackedObject controllerRightTransform;
-	public SteamVR_TrackedController controllerLeft;
-	public SteamVR_TrackedController controllerRight;
-
-	public Gauge movementGuage;
+	[Header("Camera stuff")]
+	public Camera playerCamera;
+	public float turnSpeedMultiplier;
 
 
 	// Use this for initialization
 	public override void Initialize() {
 		base.Initialize();
 		gridPosition = -1;
-		movementGuage.maxValue = actionCooldown;
+	}
+
+	protected override void Update() {
+		float dir = Input.GetAxis("Horizontal") * turnSpeedMultiplier;
+		Vector3 rotateValue = new Vector3(0, dir * -1, 0);
+		transform.eulerAngles = transform.eulerAngles - rotateValue;
+		base.Update();
 	}
 
     protected override void GetInput() {
 
-		//Update movementGauge
-		movementGuage.UpdateVisualValue(currentCooldown);
-
-		float r = cameraRig.transform.eulerAngles.y;
+		float r = playerCamera.transform.eulerAngles.y;
 		Direction faceDirection = Direction.NONE;
-		if(controllerLeft.triggerPressed) {
+
+		if(Input.GetKeyDown(KeyCode.Joystick1Button0)) {
 			// CHECK THE ROTATION OF THE HMD
 			if(r < 45 || r > 315) {
 				faceDirection = Direction.NORTH;
@@ -47,7 +47,7 @@ public class PlayerActor : Actor {
 			} else {
 				faceDirection = Direction.WEST;
 			}
-		} else if (controllerRight.triggerPressed && bulletPrefab != null){
+		} else if (Input.GetKeyDown(KeyCode.Joystick1Button1) && bulletPrefab != null){
 			FireBullet(bulletAquaCost, bulletSolarCost);
 		}
 
@@ -73,21 +73,22 @@ public class PlayerActor : Actor {
 		if (nextDirection == Direction.NONE)
 			return;
 
-		nextPosition = new Vector2(currentCoordinate.x-1, currentCoordinate.y);
+		nextPosition = MapUtility.GetNextPositionFromDirection(currentCoordinate, nextDirection);
 
 		if (!mr.IsWalkable(nextPosition, this)){
 			nextDirection = Direction.NONE;
-			Debug.Log("Could not walk");
+			Debug.Log("Could not walk  " + nextPosition);
 		}
 	}
 
 	void FireBullet(float aquaCost, float solarCost){
-		if(Stats.instance.CanAfford(Stats.Resource.AQUA, aquaCost) && solarCost <= Stats.instance.currentRes[1] ) 
-		{
+		if(Stats.instance.CanAfford(Stats.Resource.AQUA, aquaCost) && 
+				Stats.instance.CanAfford(Stats.Resource.SUN, solarCost)) {
+
 			//FIRE A BULLET
 			GameObject bullet = Instantiate(bulletPrefab);
-			bullet.transform.position = controllerRightTransform.transform.position; 
-			bullet.transform.rotation = controllerRightTransform.transform.rotation;
+			bullet.transform.position = transform.position; 
+			bullet.transform.rotation = transform.rotation;
 			currentCooldown = 0.5f;
 
 			Stats.instance.DecreaseStat(Stats.Resource.AQUA, aquaCost);
@@ -96,8 +97,7 @@ public class PlayerActor : Actor {
 			Debug.Log("Aqua left: " + Stats.instance.currentRes[0]);
 			Debug.Log("Solar left: " + Stats.instance.currentRes[1]);
 			shoot.Play();
-		}else 
-		{
+		} else {
 			Debug.Log("Not enought resources to shoot");
 		}
 	}

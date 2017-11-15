@@ -54,4 +54,4 @@ MonoBehaviour:
   firePrefab: {fileID: 4341500246207942, guid: f06840456ff6b744b8acd0d667abfb36, type: 2}
   lumberPrefab: {fileID: 4797448755124282, guid: 0c521dfd03cc5724d89dcc70cbde407c,
     type: 2}
-  spawnInterval: 5
+  spawnInterval: 4

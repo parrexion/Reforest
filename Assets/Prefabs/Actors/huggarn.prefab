@@ -748,9 +748,7 @@ MonoBehaviour:
   currentCoordinate: {x: 0, y: 0}
   previousWorldPosition: {x: 0, y: 0, z: 0}
   currentWorldPosition: {x: 0, y: 0, z: 0}
-  movementCooldown: 0.5
-  npcAttackCooldown: 2
-  npcMovementCooldown: 2
+  actionCooldown: 3
   currentCooldown: 0
   isAttacking: 0
   id: 0

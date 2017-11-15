@@ -1316,24 +1316,22 @@ MonoBehaviour:
   currentCoordinate: {x: 6, y: 14}
   previousWorldPosition: {x: 0, y: 0, z: 0}
   currentWorldPosition: {x: 50, y: 0, z: 50}
-  movementCooldown: 0.5
+  actionCooldown: 0.5
   currentCooldown: 0
   isAttacking: 0
   id: 0
   gridPosition: -1
-  gauge: {fileID: 114157212311012814}
   spawnPosition: {x: 0, y: 0}
-  spawnHeight: 5
-  bulletAquaCost: 3
-  bulletSolarCost: 0
   bulletPrefab: {fileID: 1719288162923350, guid: 5c49d4e0c55e8ca47b4087894de70189,
     type: 2}
-  text1: {fileID: 0}
-  text2: {fileID: 0}
+  bulletAquaCost: 3
+  bulletSolarCost: 0
+  shoot: {fileID: 0}
   cameraRig: {fileID: 114403036318257812}
   controllerRightTransform: {fileID: 114624092959786028}
   controllerLeft: {fileID: 114961429113883328}
   controllerRight: {fileID: 114132532412889536}
+  movementGuage: {fileID: 0}
 --- !u!114 &114157212311012814
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1345,16 +1343,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c714edea1740420aa164447ac0cfe25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fillUpTime: 0.01
   value: 0
   maxValue: 2
   bar: {fileID: 114643748659038796}
   t: {fileID: 114677513135272412}
-  timer: 0
   normalized: 0
-  amountToFill: 0
-  visualizing: 0
-  isResourceGauge: 0
+  fillSpeed: 0
+  realValue: 0
 --- !u!114 &114179106078804562
 MonoBehaviour:
   m_ObjectHideFlags: 1

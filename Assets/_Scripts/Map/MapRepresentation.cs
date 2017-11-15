@@ -103,9 +103,9 @@ public class MapRepresentation : MonoBehaviour {
 						tree.transform.localRotation = Quaternion.Euler(0,0,0);
 					if (j == 0)
 						tree.transform.localRotation = Quaternion.Euler(0,90,0);
-					if (i == MapUtility.mapSize.x)
+					if (i == MapUtility.mapSize.x-1)
 						tree.transform.localRotation = Quaternion.Euler(0,180,0);
-					if (j == MapUtility.mapSize.y)
+					if (j == MapUtility.mapSize.y-1)
 						tree.transform.localRotation = Quaternion.Euler(0,270,0);
 				}
 			}
